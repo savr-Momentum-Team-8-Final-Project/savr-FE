@@ -41,6 +41,7 @@ export default function Homepage() {
 
     return (
         <ScrollView style={styles.scrollView}>
+            <Text>Current Trip</Text>
             <View style={styles.current}>
                 <Text>{currentTrip.city}</Text>
                 <Image source={currentTrip.photo} resizeMode="contain" style={styles.image}/>
@@ -85,7 +86,8 @@ const styles = StyleSheet.create({
         flex: 1,
       },
     scrollView: {
-        backgroundColor: '#d1d1d1'
+        backgroundColor: '#d1d1d1',
+        padding: 20
     },
     image: {
         flex: 1,
