@@ -14,16 +14,15 @@ export default function CreateATrip () {
     return (
         <>
         <Header />
-
-    <ScrollView>
-      <Text > Demo Form </Text>
+        <Text>Create a new trip</Text>
+    <ScrollView style={styles.scrollView}>
       <View>
         <Text>Start Date</Text>
         <DatePickerIOS
             date={startDate}
             onDateChange={setStartDate}
         />
-        <Text>Start Date</Text>
+        <Text>End Date</Text>
         <DatePickerIOS
             date={endDate}
             onDateChange={setEndDate}
@@ -60,3 +59,11 @@ export default function CreateATrip () {
     </>
     )
 }
+
+const styles = StyleSheet.create({
+    scrollView: {
+        backgroundColor: '#e3e3e3',
+        padding: 20
+    }
+  });
+  
