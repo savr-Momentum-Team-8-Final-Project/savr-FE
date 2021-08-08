@@ -1,6 +1,7 @@
-import { StatusBar } from 'expo-status-bar'
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
+import Homepage from './components/Homepage.js'
 import Login from './components/Login'
 
 export default function App () {
@@ -20,3 +21,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
