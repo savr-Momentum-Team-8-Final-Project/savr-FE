@@ -6,9 +6,9 @@ export default function Header() {
     return (
         <>
         <View style={styles.container}>
-            <Text>👤</Text>
-            <Text>savr</Text>
-            <Text>➕</Text>
+            <Text style={styles.profile}>🗿</Text>
+            <Text style={styles.logo}>savr</Text>
+            <Text style={styles.add}>➕</Text>
         </View>
         </>
     )
@@ -20,6 +20,18 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      backgroundColor: '#e3e3e3'
+      backgroundColor: '#e3e3e3',
+      marginBottom: 60
     },
+    logo: {
+        fontSize: 30,
+        fontWeight: '200'
+    },
+    profile: {
+        fontSize: 30
+    },
+    add: {
+        fontSize: 30
+    }
+
   })

@@ -49,7 +49,7 @@ export default function Homepage() {
                 <Text>{currentTrip.city}</Text>
                 <Image source={currentTrip.photo} resizeMode="contain" style={styles.image}/>
                 <Text>{currentTrip.startDate}</Text>
-                <Text>{currentTrip.budget}</Text>
+                <Text>${currentTrip.budget}</Text>
             </View>
             <Text>Upcoming Trips</Text>
             {upcomingTrips.map((data) => {
@@ -58,7 +58,7 @@ export default function Homepage() {
                     <Text>{data.city}</Text>
                     <Image source={data.photo} style={styles.image}/>
                     <Text>{data.startDate}</Text>
-                    <Text>{data.budget}</Text>
+                    <Text>${data.budget}</Text>
                 </View>
             )})}
             <Text>Previous Trips</Text>
@@ -68,7 +68,7 @@ export default function Homepage() {
                         <Text>{data.city}</Text>
                         <Image source={data.photo} style={styles.image}/>
                         <Text>{data.startDate}</Text>
-                        <Text>{data.budget}</Text>
+                        <Text>${data.budget}</Text>
                     </View>
                 )})}
         </ScrollView>
