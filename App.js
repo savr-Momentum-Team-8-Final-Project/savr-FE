@@ -3,20 +3,23 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
 import Homepage from './components/Homepage.js'
 import Login from './components/Login'
+import CreateATrip from './components/CreateATrip.js'
 
 export default function App () {
   return (
-    <View style={styles.container}>
-      <StatusBar style='auto' />
-      <Login style='auto' />
-    </View>
+    <>
+    <SafeAreaView style={styles.container} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#e3e3e3' }}>
+        <CreateATrip />
+    </SafeAreaView>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    flex: 0,
+    backgroundColor: '#e3e3e3',
     alignItems: 'center',
     justifyContent: 'center'
   }
