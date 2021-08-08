@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native';
 
 export default function Header() {
     return (
         <>
         <View style={styles.container}>
-            <Text style={styles.profile}>🗿</Text>
+            <TouchableOpacity><Text style={styles.profile}>🗿</Text></TouchableOpacity>
             <Text style={styles.logo}>savr</Text>
-            <Text style={styles.add}>➕</Text>
+            <TouchableOpacity><Text style={styles.add}>➕</Text></TouchableOpacity>
         </View>
         </>
     )
