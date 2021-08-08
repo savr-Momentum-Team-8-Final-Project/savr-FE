@@ -31,8 +31,14 @@ const upcomingTrips = [
     {
         city: 'New Donk City',
         photo: require('../assets/super_mario_odyssey-14.jpeg'),
-        startDate: '06/09/24',
+        startDate: '06/09/22',
         budget: 4500
+    },
+    {
+        city: 'Chicago',
+        photo: require('../assets/loop-1800x900.jpeg'),
+        startDate: '02/12/23',
+        budget: 17
     }
 ]
 
@@ -52,6 +58,8 @@ export default function Homepage() {
                 <Text>${currentTrip.budget}</Text>
             </View>
             <Text>Upcoming Trips</Text>
+
+            <View>
             {upcomingTrips.map((data) => {
             return (
                 <View style={styles.current}>
@@ -61,6 +69,9 @@ export default function Homepage() {
                     <Text>${data.budget}</Text>
                 </View>
             )})}
+            </View>
+
+            <View>
             <Text>Previous Trips</Text>
             {previousTrips.map((data) => {
                 return (
@@ -71,6 +82,7 @@ export default function Homepage() {
                         <Text>${data.budget}</Text>
                     </View>
                 )})}
+            </View>
         </ScrollView>
         </>
     ) 
