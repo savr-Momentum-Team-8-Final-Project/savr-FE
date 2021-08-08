@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS } from 'react-native';
 import Header from './Header.js'
 import Homepage from './Homepage.js';
 
@@ -8,19 +8,25 @@ export default function CreateATrip () {
     const [currency, setCurrency] = useState('US Dollar')
     const [st8te, setSt8te] = useState('')
     const [city, setCity] = useState('')
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     return (
         <>
         <Header />
 
-    <View >
+    <ScrollView>
       <Text > Demo Form </Text>
       <View>
-        <TextInput 
-          placeholder="Email" />
-        <TextInput
-          secureTextEntry={true}
-          placeholder="Password"
+        <Text>Start Date</Text>
+        <DatePickerIOS
+            date={startDate}
+            onDateChange={setStartDate}
+        />
+        <Text>Start Date</Text>
+        <DatePickerIOS
+            date={endDate}
+            onDateChange={setEndDate}
         />
         <Text>Select a State</Text>
         <Picker
@@ -50,7 +56,7 @@ export default function CreateATrip () {
           placeholder="Budget in USD"
         />
       </View>
-    </View>
+    </ScrollView>
     </>
     )
 }
