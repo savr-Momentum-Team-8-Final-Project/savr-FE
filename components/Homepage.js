@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image } from 'react-native';
+import Header from './Header.js'
 
 
 const currentTrip =
@@ -40,6 +41,8 @@ const upcomingTrips = [
 export default function Homepage() {
 
     return (
+        <>
+        <Header />
         <ScrollView style={styles.scrollView}>
             <Text>Current Trip</Text>
             <View style={styles.current}>
@@ -69,6 +72,7 @@ export default function Homepage() {
                     </View>
                 )})}
         </ScrollView>
+        </>
     ) 
 }
 
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
         flex: 1,
       },
     scrollView: {
-        backgroundColor: '#d1d1d1',
+        backgroundColor: '#e3e3e3',
         padding: 20
     },
     image: {

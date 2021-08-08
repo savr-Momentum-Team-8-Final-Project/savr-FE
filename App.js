@@ -5,14 +5,18 @@ import Homepage from './components/Homepage.js'
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
+      <>
+    <SafeAreaView style={styles.container} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#e3e3e3' }}>
         <Homepage />
     </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
+    backgroundColor: '#e3e3e3'
   },
 });
