@@ -1,8 +1,9 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import Profile from './components/Profile'
-import { StatusBar } from 'expo-status-bar'
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
+import Homepage from './components/Homepage.js'
 import Login from './components/Login'
+import Profile from './components/Profile'
 
 export default function App () {
   return (
@@ -10,6 +11,7 @@ export default function App () {
       <StatusBar style='auto' />
       <Login style='auto' />
       <Profile />
+      <Homepage />
     </View>
   )
 }
@@ -22,3 +24,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
