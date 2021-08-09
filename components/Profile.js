@@ -130,14 +130,15 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: 300,
-    height: 100,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     marginTop: 5
   },
   scrollView: {
     display: 'flex',
     flex: 1,
     backgroundColor: 'white',
-    padding: 20
+    padding: 20,
+    paddingBottom: 60,
+    height: 200
   }
 })
