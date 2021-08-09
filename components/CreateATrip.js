@@ -2,9 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator } from 'react-native';
 import Header from './Header.js'
+import HomeHeader from './HomeHeader.js'
 import Homepage from './Homepage.js';
 
-export default function CreateATrip () {
+export default function CreateATrip ({ navigation }) {
     const [currency, setCurrency] = useState('US Dollar')
     const [st8te, setSt8te] = useState('')
     const [city, setCity] = useState('')
@@ -13,7 +14,7 @@ export default function CreateATrip () {
 
     return (
         <>
-        <Header />
+        <HomeHeader navigation={navigation}/>
         <Text>Create a new trip</Text>
     <ScrollView style={styles.scrollView}>
       <View>
