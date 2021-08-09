@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native';
 
-export default function HomeHeader() {
+export default function HomeHeader({navigation}) {
     return (
         <>
         <View style={styles.container}>
