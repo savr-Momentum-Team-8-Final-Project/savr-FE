@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { StatusBar } from 'expo-status-bar'
+import React from 'react'
 import {
   StyleSheet,
   Text,
@@ -8,8 +8,8 @@ import {
   SafeAreaView,
   ScrollView,
   Image
-} from 'react-native';
-import Header from './Header.js';
+} from 'react-native'
+import Header from './Header.js'
 
 const currentTrip = {
   city: 'Seattle',
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
     backgroundColor: 'white',
-    borderRadius: 10
+    borderRadius: 10,
+    fontSize: 16
   },
   container: {
     flex: 1
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    width: 200,
+    width: 210,
     height: 100,
     resizeMode: 'contain'
   }

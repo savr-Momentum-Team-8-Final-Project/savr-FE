@@ -34,9 +34,7 @@ export default class Profile extends Component {
               <View style={styles.bodyContent}>
                 <Text style={styles.name}>Mantis Toboggan, M.D.</Text>
                 <Text style={styles.info}>$9,003.45</Text>
-                <Text style={styles.trips}>Previous Trips</Text>
                 <View>
-                  <Text>Previous Trips</Text>
                   {previousTrips.map((data) => {
                     return (
                       <View style={styles.current}>
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   name: {
-    fontSize: 22,
+    fontSize: 28,
     color: 'black',
     fontWeight: '600',
     height: '200'
@@ -87,7 +85,7 @@ const styles = StyleSheet.create({
     padding: 30
   },
   info: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     color: 'black',
     marginTop: 10
@@ -116,15 +114,30 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   current: {
-    flex: 1,
-    backgroundColor: 'grey',
+    flex: 10,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 20,
     backgroundColor: 'white',
-    borderRadius: 10
+    borderRadius: 0
   },
   trips: {
-    marginTop: 10
+    marginTop: 10,
+    fontWeight: 'bold',
+    fontSize: 26
+  },
+  image: {
+    flex: 1,
+    width: 300,
+    height: 100,
+    resizeMode: 'contain',
+    marginTop: 5
+  },
+  scrollView: {
+    display: 'flex',
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 20
   }
 })
