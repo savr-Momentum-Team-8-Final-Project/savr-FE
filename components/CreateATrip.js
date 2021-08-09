@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator } from 'react-native';
 import Header from './Header.js'
 import Homepage from './Homepage.js';
 
@@ -60,10 +60,10 @@ export default function CreateATrip () {
         <Button
             title='Create Trip'
             onPress={() => Alert.alert('Hey! Your button works!')}
-            color='white'
+            color="#000000"
+            type= 'outline'
             />
      </View>
-      
     </ScrollView>
     
     </>
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
         padding: 20
     },
     submit: {
-        color: 'black'
+        color: 'black',
+        padding: 60
     }
   });
   
