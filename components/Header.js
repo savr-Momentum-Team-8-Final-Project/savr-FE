@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      backgroundColor: '#e3e3e3',
-      marginBottom: 10
+      backgroundColor: '#e3e3e3'
     },
     logo: {
         fontSize: 30,
