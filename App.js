@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
 import Homepage from './components/Homepage.js'
 import Login from './components/Login'
 import CreateATrip from './components/CreateATrip.js'
+import Register from './components/Register.js'
 
 export default function App () {
   return (
