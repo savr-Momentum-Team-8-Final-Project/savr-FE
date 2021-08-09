@@ -7,16 +7,21 @@ import {
   FlatList,
   SafeAreaView,
   ScrollView,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 export default function Header () {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.profile}>🗿</Text>
+        <TouchableOpacity>
+          <Text style={styles.profile}>🗿</Text>
+        </TouchableOpacity>
         <Text style={styles.logo}>savr</Text>
-        <Text style={styles.add}>➕</Text>
+        <TouchableOpacity>
+          <Text style={styles.add}>➕</Text>
+        </TouchableOpacity>
       </View>
     </>
   )
@@ -29,7 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#e3e3e3',
-    paddingBottom: 60
+    marginBottom: 10
   },
   logo: {
     fontSize: 30,
