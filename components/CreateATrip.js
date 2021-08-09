@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS } from 'react-native';
+import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert } from 'react-native';
 import Header from './Header.js'
 import Homepage from './Homepage.js';
 
@@ -54,8 +54,18 @@ export default function CreateATrip () {
           secureTextEntry={false}
           placeholder="Budget in USD"
         />
+        
       </View>
+    <View style={styles.submit}>
+        <Button
+            title='Create Trip'
+            onPress={() => Alert.alert('Hey! Your button works!')}
+            color='white'
+            />
+     </View>
+      
     </ScrollView>
+    
     </>
     )
 }
@@ -64,6 +74,9 @@ const styles = StyleSheet.create({
     scrollView: {
         backgroundColor: '#e3e3e3',
         padding: 20
+    },
+    submit: {
+        color: 'black'
     }
   });
   
