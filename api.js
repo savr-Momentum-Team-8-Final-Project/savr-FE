@@ -42,3 +42,14 @@ export function requestStates () {
     )
     .then((response) => response)
 }
+
+export function requestCities (state) {
+    return axios.get(`https://api.countrystatecity.in/v1/countries/US/states/${state}/cities`,
+    {
+        headers: {
+            'X-CSCAPI-KEY': 'UW9CcHFJUUFmb0dFYXhUbXA2RVE1akIwaENjVFZGZkVrNkNRd0VzTQ==' 
+        }
+    }
+    )
+    .then((response) => response)
+}

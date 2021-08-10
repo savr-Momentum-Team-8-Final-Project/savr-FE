@@ -4,7 +4,6 @@ import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { requestStates } from './api.js'
 import Homepage from './components/Homepage.js'
 import Login from './components/Login'
 import CreateATrip from './components/CreateATrip.js'
@@ -15,23 +14,6 @@ const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71'
 
 
 export default function App () {
-    const [states, setStates] = useState([])
-
-
-useEffect(() => {
-        requestStates()
-        .then(data => {
-        let names = []
-        data.data.map((st) => {
-            if (!stopWords.includes(st.iso2)) {
-                names.push(st.iso2)
-            }
-        })
-        setStates(names)
-        })
-    }, [])
-
-console.log(states)
 
 
   return (

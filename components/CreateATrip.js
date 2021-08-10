@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator } from 'react-native';
+import { requestStates, requestCities } from '../api.js'
 import Header from './Header.js'
 import HomeHeader from './HomeHeader.js'
 import Homepage from './Homepage.js';
@@ -11,6 +12,40 @@ export default function CreateATrip ({ navigation }) {
     const [city, setCity] = useState('')
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [states, setStates] = useState([])
+    const [cities, setCities] = useState([])
+
+
+useEffect(() => {
+        requestStates()
+        .then(data => {
+        let names = []
+        data.data.map((st) => {
+            if (!stopWords.includes(st.iso2)) {
+                names.push(st.iso2)
+            }
+        })
+        setStates(names)
+        })
+    }, [])
+
+useEffect(() => {
+    requestCities('NC')
+    .then(data => {
+        let names = []
+        data.data.map((city) => {
+            names.push(city.name)
+        })
+        setCities(names)
+    })
+}, [states])
+
+
+console.log(cities)
+
+
+
+
 
     return (
         <>
