@@ -1,19 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Homepage from './components/Homepage.js'
 import Login from './components/Login'
 import CreateATrip from './components/CreateATrip.js'
 import Register from './components/Register.js'
 
+const Stack = createStackNavigator();
+
 export default function App () {
   return (
-    <>
-    <SafeAreaView style={styles.container} />
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#e3e3e3' }}>
-        <CreateATrip />
-    </SafeAreaView>
-    </>
+    <NavigationContainer>
+        <SafeAreaView style={styles.container} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#e3e3e3' }}>
+            <Stack.Navigator screenOptions={{
+                headerShown: false
+            }}>
+                <Stack.Screen name="Home" component={Homepage} />
+                <Stack.Screen name="CreateATrip" component={CreateATrip} />
+            </Stack.Navigator>
+        </SafeAreaView>
+    </NavigationContainer>
   )
 }
 

@@ -44,11 +44,11 @@ const upcomingTrips = [
 
 
 
-export default function Homepage() {
+export default function Homepage({navigation}) {
 
     return (
         <>
-        <Header />
+        <Header navigation={navigation}/>
         <ScrollView style={styles.scrollView}>
             <Text style={styles.current1}>Current Trip</Text>
             <TouchableOpacity style={styles.current}>
