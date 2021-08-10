@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,7 +12,10 @@ import Profile from './components/Profile.js'
 
 const Stack = createStackNavigator();
 
+
 export default function App () {
+
+
   return (
     <NavigationContainer>
         <SafeAreaView style={styles.container} />

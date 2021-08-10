@@ -31,3 +31,25 @@ export function requestRegistration (name, username, email, password) {
   )
     .then((response) => response)
 }
+
+export function requestStates () {
+    return axios.get('https://api.countrystatecity.in/v1/countries/US/states',
+    {
+        headers: {
+            'X-CSCAPI-KEY': 'UW9CcHFJUUFmb0dFYXhUbXA2RVE1akIwaENjVFZGZkVrNkNRd0VzTQ==' 
+        }
+    }
+    )
+    .then((response) => response)
+}
+
+export function requestCities (state) {
+    return axios.get(`https://api.countrystatecity.in/v1/countries/US/states/${state}/cities`,
+    {
+        headers: {
+            'X-CSCAPI-KEY': 'UW9CcHFJUUFmb0dFYXhUbXA2RVE1akIwaENjVFZGZkVrNkNRd0VzTQ==' 
+        }
+    }
+    )
+    .then((response) => response)
+}
