@@ -23,18 +23,16 @@ const RegisterForm = () => {
         password: '',
         password2: ''
       }}
-      onSubmit={async (values, { setSubmitting }) => {
-        console.log(values)
-        setSubmitting(false)
-        return requestRegistration(
+      onSubmit={(values) => {
+        requestRegistration(
           values.username,
           values.email,
           values.password,
           values.password2
-        ).then((res) => console.log(res))
+        )
       }}
     >
-      {({ touched, handleSubmit, values, handleChange, setFieldValue }) => (
+      {({ handleSubmit, values, handleChange }) => (
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}
@@ -48,7 +46,7 @@ const RegisterForm = () => {
             placeholder='Enter User Name'
             autoCapitalize='none'
             autoCorrect={false}
-            onChange={handleChange('username')}
+            onChangeText={handleChange('username')}
             value={values.username}
             style={styles.inputStyle}
           />
@@ -59,7 +57,7 @@ const RegisterForm = () => {
             keyboardType='email-address'
             name='email'
             textContentType='emailAddress'
-            onChange={handleChange('email')}
+            onChangeText={handleChange('email')}
             value={values.email}
             style={styles.inputStyle}
           />
@@ -70,7 +68,7 @@ const RegisterForm = () => {
             autoCorrect={false}
             name='password'
             textContentType='password'
-            onChange={handleChange('password')}
+            onChangeText={handleChange('password')}
             value={values.password}
             style={styles.inputStyle}
           />
@@ -81,14 +79,14 @@ const RegisterForm = () => {
             autoCorrect={false}
             name='password'
             textContentType='password'
-            onChange={handleChange('password2')}
+            onChangeText={handleChange('password2')}
             value={values.password2}
             style={styles.inputStyle}
           />
           <View style={styles.button}>
             <Button
               title='Create Account'
-              onPress={handleSubmit}
+              onPress={() => handleSubmit(values)}
               color='white'
             />
           </View>

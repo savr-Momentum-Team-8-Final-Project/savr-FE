@@ -23,13 +23,13 @@ export function requestLogout(token) {
 }
 
 export function requestRegistration(username, email, password, password2) {
-  console.log(username);
+  // console.log(username);
   return axios
     .post("https://savr-travel.herokuapp.com/api/accounts/signup", {
-      username: username,
+      name: username,
       email: email,
       password: password,
       password2: password2,
     })
-    .then((response) => response);
+    .then((response) => console.log(response.data));
 }
