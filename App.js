@@ -1,14 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
-import Homepage from './components/Homepage.js'
-import Login from './components/Login'
+import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
+import Register from './components/Register';
 
 export default function App () {
   return (
     <View style={styles.container}>
       <StatusBar style='auto' />
-      <Login style='auto' />
+      <Register style='auto' />
     </View>
   )
 }
@@ -21,4 +20,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
-
