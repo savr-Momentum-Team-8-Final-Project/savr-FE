@@ -8,7 +8,7 @@ import Homepage from './components/Homepage.js'
 import Login from './components/Login'
 import CreateATrip from './components/CreateATrip.js'
 import Register from './components/Register.js'
-import Profile from './components/Profile'
+import Profile from './components/Profile.js'
 
 const Stack = createStackNavigator();
 

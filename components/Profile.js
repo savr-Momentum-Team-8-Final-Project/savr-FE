@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
-import Header from './Header.js'
+import ProfileHeader from './ProfileHeader'
 
 const previousTrips = [
   {
@@ -16,43 +16,41 @@ const previousTrips = [
     budget: 8000
   }
 ]
-export default class Profile extends Component {
-  render () {
-    return (
-      <>
-        <Header />
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.container}>
-            <View style={styles.avatar} />
-            <Image
-              style={styles.avatar}
-              source={{
-                uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
-              }}
-            />
-            <View style={styles.body}>
-              <View style={styles.bodyContent}>
-                <Text style={styles.name}>Mantis Toboggan, M.D.</Text>
-                <Text style={styles.info}>$9,003.45</Text>
-                <View>
-                  {previousTrips.map((data) => {
-                    return (
-                      <View style={styles.current}>
-                        <Text>{data.city}</Text>
-                        <Image source={data.photo} style={styles.image} />
-                        <Text>{data.startDate}</Text>
-                        <Text>${data.budget}</Text>
-                      </View>
-                    )
-                  })}
-                </View>
+export default function Profile ({ navigation }) {
+  return (
+    <>
+      <ProfileHeader navigation={navigation} />
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <View style={styles.avatar} />
+          <Image
+            style={styles.avatar}
+            source={{
+              uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
+            }}
+          />
+          <View style={styles.body}>
+            <View style={styles.bodyContent}>
+              <Text style={styles.name}>Mantis Toboggan, M.D.</Text>
+              <Text style={styles.info}>$9,003.45</Text>
+              <View>
+                {previousTrips.map((data) => {
+                  return (
+                    <View style={styles.current}>
+                      <Text>{data.city}</Text>
+                      <Image source={data.photo} style={styles.image} />
+                      <Text>{data.startDate}</Text>
+                      <Text>${data.budget}</Text>
+                    </View>
+                  )
+                })}
               </View>
             </View>
           </View>
-        </ScrollView>
-      </>
-    )
-  }
+        </View>
+      </ScrollView>
+    </>
+  )
 }
 
 const styles = StyleSheet.create({
