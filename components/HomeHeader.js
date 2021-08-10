@@ -6,7 +6,7 @@ export default function HomeHeader({navigation}) {
     return (
         <>
         <View style={styles.container}>
-            <TouchableOpacity><Text style={styles.profile}>🗿</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')}><Text style={styles.profile}>👤</Text></TouchableOpacity>
             <Text style={styles.logo}>savr</Text>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}><Text style={styles.add}>🏠</Text></TouchableOpacity>
         </View>

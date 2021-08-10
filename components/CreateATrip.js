@@ -99,24 +99,22 @@ useEffect(() => {
         <Button
             title='Create Trip'
             onPress={() => Alert.alert('Hey! Your button works!')}
-            color="#000000"
-            type= 'outline'
-            />
-     </View>
-    </ScrollView>
-    
+            color='#000000'
+            type='outline'
+          />
+        </View>
+      </ScrollView>
     </>
-    )
+  )
 }
 
 const styles = StyleSheet.create({
-    scrollView: {
-        backgroundColor: '#e3e3e3',
-        padding: 20
-    },
-    submit: {
-        color: 'black',
-        padding: 60
-    }
-  });
-  
+  scrollView: {
+    backgroundColor: '#e3e3e3',
+    padding: 20
+  },
+  submit: {
+    color: 'black',
+    padding: 60
+  }
+})
