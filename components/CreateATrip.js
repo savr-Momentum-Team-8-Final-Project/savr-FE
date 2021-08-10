@@ -34,7 +34,9 @@ useEffect(() => {
     .then(data => {
         let names = []
         data.data.map((city) => {
-            names.push(city.name)
+            if (city.name.includes("County") === false) {
+                names.push(city.name)
+            }
         })
         setCities(names)
     })
