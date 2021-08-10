@@ -9,7 +9,6 @@ import Homepage from './Homepage.js';
 const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
 
 export default function CreateATrip ({ navigation }) {
-    const [currency, setCurrency] = useState('US Dollar')
     const [chosenState, setChosenState] = useState('')
     const [city, setCity] = useState('')
     const [startDate, setStartDate] = useState(new Date());
@@ -36,17 +35,19 @@ useEffect(() => {
     .then(data => {
         let names = []
         data.data.map((city) => {
-            if (city.name.includes("County") === false) {
+            if (city.name.includes("County") === false && city.name.includes("City of ") === false) {
                 names.push(city.name)
             }
         })
         setCities(names)
     })
-}, [states])
+}, [chosenState])
 
 
-console.log(cities)
+
 console.log(chosenState)
+console.log(cities)
+
 
 
 
