@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import {
   Text,
   StyleSheet,
@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { requestRegistration } from '../api.js';
+import axios from 'axios';
 
 const RegisterForm = () => {
   return (
@@ -22,8 +23,18 @@ const RegisterForm = () => {
         password: '',
         password2: ''
       }}
+      onSubmit={async (values, { setSubmitting }) => {
+        console.log(values)
+        setSubmitting(false)
+        return requestRegistration(
+          values.username,
+          values.email,
+          values.password,
+          values.password2
+        ).then((res) => console.log(res))
+      }}
     >
-      {({ handleSubmit, values, handleChange }) => (
+      {({ touched, handleSubmit, values, handleChange, setFieldValue }) => (
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}
@@ -77,7 +88,7 @@ const RegisterForm = () => {
           <View style={styles.button}>
             <Button
               title='Create Account'
-              onPress={(handleSubmit) => console.log(JSON.stringify(values))}
+              onPress={handleSubmit}
               color='white'
             />
           </View>
