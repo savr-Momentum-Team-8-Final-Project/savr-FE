@@ -10,7 +10,6 @@ import CreateATrip from './components/CreateATrip.js'
 import Register from './components/Register.js'
 
 const Stack = createStackNavigator();
-const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
 
 
 export default function App () {

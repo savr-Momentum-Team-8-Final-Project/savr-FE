@@ -6,9 +6,11 @@ import Header from './Header.js'
 import HomeHeader from './HomeHeader.js'
 import Homepage from './Homepage.js';
 
+const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
+
 export default function CreateATrip ({ navigation }) {
     const [currency, setCurrency] = useState('US Dollar')
-    const [st8te, setSt8te] = useState('')
+    const [chosenState, setChosenState] = useState('')
     const [city, setCity] = useState('')
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -30,7 +32,7 @@ useEffect(() => {
     }, [])
 
 useEffect(() => {
-    requestCities('NC')
+    requestCities(chosenState)
     .then(data => {
         let names = []
         data.data.map((city) => {
@@ -44,7 +46,7 @@ useEffect(() => {
 
 
 console.log(cities)
-
+console.log(chosenState)
 
 
 
@@ -67,14 +69,14 @@ console.log(cities)
         />
         <Text>Select a State</Text>
         <Picker
-          selectedValue={st8te}
-          onValueChange={currentSt8te => setSt8te(currentSt8te)}>
+          selectedValue={chosenState}
+          onValueChange={picked => setChosenState(picked)}>
           <Picker.Item label="NC" value="NC" />
           <Picker.Item label="VA" value="VA" />
           <Picker.Item label="CA" value="CA" />
         </Picker>
         <Text>
-          Selected state: {st8te}
+          Selected state: {chosenState}
         </Text>
 
         <Text>Select a State</Text>
