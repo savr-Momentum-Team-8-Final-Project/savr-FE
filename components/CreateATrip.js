@@ -9,7 +9,7 @@ import Homepage from './Homepage.js';
 const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
 
 export default function CreateATrip ({ navigation }) {
-    const [chosenState, setChosenState] = useState('')
+    const [chosenState, setChosenState] = useState('NC')
     const [city, setCity] = useState('')
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
@@ -79,10 +79,12 @@ useEffect(() => {
         <Text>Select a State</Text>
         <Picker
           selectedValue={city}
-          onValueChange={currentCity => setCity(currentCity)}>
-          <Picker.Item label="Durham" value="Durham" />
-          <Picker.Item label="Asheville" value="Asheville" />
-          <Picker.Item label="Chapel Hill" value="Chapel Hill" />
+          onValueChange={picked => setCity(picked)}>
+            {cities.map((city) => {
+                return (
+                    <Picker.Item label={city} value={city} />
+                )
+            })}
         </Picker>
         <Text>
           Selected state: {city}
