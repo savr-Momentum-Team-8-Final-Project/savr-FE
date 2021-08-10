@@ -45,12 +45,6 @@ useEffect(() => {
 
 
 
-console.log(chosenState)
-console.log(cities)
-
-
-
-
 
     return (
         <>
@@ -72,9 +66,11 @@ console.log(cities)
         <Picker
           selectedValue={chosenState}
           onValueChange={picked => setChosenState(picked)}>
-          <Picker.Item label="NC" value="NC" />
-          <Picker.Item label="VA" value="VA" />
-          <Picker.Item label="CA" value="CA" />
+            {states.map((st) => {
+                return (
+                    <Picker.Item label={st} value={st} />
+                )
+            })}
         </Picker>
         <Text>
           Selected state: {chosenState}
