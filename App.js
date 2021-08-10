@@ -8,6 +8,7 @@ import Homepage from './components/Homepage.js'
 import Login from './components/Login'
 import CreateATrip from './components/CreateATrip.js'
 import Register from './components/Register.js'
+import Profile from './components/Profile.js'
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App () {
             }}>
                 <Stack.Screen name="Home" component={Homepage} />
                 <Stack.Screen name="CreateATrip" component={CreateATrip} />
+                <Stack.Screen name="Profile" component={Profile} />
             </Stack.Navigator>
         </SafeAreaView>
     </NavigationContainer>
@@ -30,9 +32,9 @@ export default function App () {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
+    backgroundColor: 'tan',
     backgroundColor: '#e3e3e3',
     alignItems: 'center',
     justifyContent: 'center'
   }
 })
-
