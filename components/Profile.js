@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: 'black',
     fontWeight: '600',
-    height: '200'
+    height: 200
   },
   body: {
     marginTop: 110
