@@ -66,9 +66,9 @@ useEffect(() => {
         <Picker
           selectedValue={chosenState}
           onValueChange={picked => setChosenState(picked)}>
-            {states.map((st) => {
+            {states.map((st, index) => {
                 return (
-                    <Picker.Item label={st} value={st} />
+                    <Picker.Item label={st} value={st} key={index} />
                 )
             })}
         </Picker>
@@ -80,9 +80,9 @@ useEffect(() => {
         <Picker
           selectedValue={city}
           onValueChange={picked => setCity(picked)}>
-            {cities.map((city) => {
+            {cities.map((city, index) => {
                 return (
-                    <Picker.Item label={city} value={city} />
+                    <Picker.Item label={city} value={city} key={index} />
                 )
             })}
         </Picker>
