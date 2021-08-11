@@ -50,32 +50,33 @@ const upcomingTrips = [
 ]
 
 export default function Homepage ({ navigation }) {
+
   return (
-    <>
-      <Header navigation={navigation} />
+      <>
+      <Text style={styles.logo}>s a v r</Text>
       <ScrollView style={styles.scrollView}>
         <Text style={styles.current1}>Current Trip</Text>
         <TouchableOpacity style={styles.current}>
-          <Text>{currentTrip.city}</Text>
+          <Text style={styles.text}>{currentTrip.city}</Text>
           <Image
             source={currentTrip.photo}
             resizeMode='contain'
             style={styles.image}
           />
-          <Text>{currentTrip.startDate}</Text>
-          <Text>${currentTrip.budget}</Text>
+          <Text style={styles.text}>{currentTrip.startDate}</Text>
+          <Text style={styles.text}>${currentTrip.budget}</Text>
         </TouchableOpacity>
 
         <Text style={styles.current1}>Upcoming Trips</Text>
 
         <View>
-          {upcomingTrips.map((data) => {
+          {upcomingTrips.map((data, index) => {
             return (
-              <TouchableOpacity style={styles.current}>
-                <Text>{data.city}</Text>
+              <TouchableOpacity style={styles.current} key={index}>
+                <Text style={styles.text}>{data.city}</Text>
                 <Image source={data.photo} style={styles.image} />
-                <Text>{data.startDate}</Text>
-                <Text>${data.budget}</Text>
+                <Text style={styles.text}>{data.startDate}</Text>
+                <Text style={styles.text}>${data.budget}</Text>
               </TouchableOpacity>
             )
           })}
@@ -83,24 +84,26 @@ export default function Homepage ({ navigation }) {
 
         <View style={styles.previous}>
           <Text style={styles.current1}>Previous Trips</Text>
-          {previousTrips.map((data) => {
+          {previousTrips.map((data, index) => {
             return (
-              <TouchableOpacity style={styles.current}>
-                <Text>{data.city}</Text>
+              <TouchableOpacity style={styles.current} key={index}>
+                <Text style={styles.text}>{data.city}</Text>
                 <Image source={data.photo} style={styles.image} />
-                <Text>{data.startDate}</Text>
-                <Text>${data.budget}</Text>
+                <Text style={styles.text}>{data.startDate}</Text>
+                <Text style={styles.text}>${data.budget}</Text>
               </TouchableOpacity>
             )
           })}
         </View>
       </ScrollView>
+      <Header navigation={navigation} />
     </>
   )
 }
 
 const styles = StyleSheet.create({
   current: {
+    fontFamily: 'GilroyLight',
     display: 'flex',
     flex: 1,
     backgroundColor: 'grey',
@@ -112,13 +115,10 @@ const styles = StyleSheet.create({
   },
   current1: {
     marginTop: 70,
-    fontWeight: '500'
-  },
-  container: {
-    flex: 1
+    fontFamily: 'GilroyBold'
   },
   scrollView: {
-    backgroundColor: '#e3e3e3',
+    backgroundColor: '#fffcf5',
     padding: 20
   },
   image: {
@@ -129,5 +129,16 @@ const styles = StyleSheet.create({
   },
   previous: {
     marginBottom: 60
+  },
+  logo: {
+    fontSize: 30,
+    fontWeight: '200',
+    backgroundColor: '#fffcf5',
+    paddingLeft: 150,
+    paddingRight: 150,
+    fontFamily: 'GilroyLight'
+  },
+  text: {
+    fontFamily: 'GilroyLight'
   }
 })

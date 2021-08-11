@@ -25,7 +25,8 @@
     "react-native-screens": "~3.0.0",
     "react-native-web": "~0.13.12",
     "react-router-native": "^5.2.0",
-    "yarn": "^1.22.11"
+    "yarn": "^1.22.11",
+    "expo-font": "~9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

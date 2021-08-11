@@ -18,7 +18,7 @@ export default function Header ({ navigation }) {
         <TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}><Text style={styles.profile}>👤</Text></TouchableOpacity>
         </TouchableOpacity>
-        <Text style={styles.logo}>savr</Text>
+        <Text style={styles.logo}>      </Text>
         <TouchableOpacity onPress={() => navigation.navigate('CreateATrip')}><Text style={styles.add}>➕</Text></TouchableOpacity>
       </View>
     </>
@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#e3e3e3',
-    marginBottom: 10
+    backgroundColor: '#fffcf5'
   },
   logo: {
     fontSize: 30,
