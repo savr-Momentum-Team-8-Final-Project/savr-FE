@@ -36,10 +36,11 @@ export default function App () {
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fffcf5' }}>
             <Tab.Navigator screenOptions={{
                 headerShown: false,
-                'tabBarActiveTintColor': '#A0C1F5',
+                'tabBarActiveTintColor': '#60D1FA',
                 'tabBarStyle': [
                     {
-                        display: 'flex'
+                        display: 'flex',
+                        backgroundColor: '#fffcf5'
                     },
                     null
                 ]
