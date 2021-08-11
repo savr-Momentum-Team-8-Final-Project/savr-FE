@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import ProfileHeader from './ProfileHeader'
+import ImagePicker from './ImagePicker'
 
 const previousTrips = [
   {
@@ -20,15 +21,11 @@ export default function Profile ({ navigation }) {
   return (
     <>
       <ProfileHeader navigation={navigation} />
-      <ScrollView style={styles.scrollView}>
+      <ScrollView>
         <View style={styles.container}>
           <View style={styles.avatar} />
-          <Image
-            style={styles.avatar}
-            source={{
-              uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
-            }}
-          />
+          <ImagePicker style={styles.container} />
+
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.name}>Mantis Toboggan, M.D.</Text>
@@ -59,23 +56,25 @@ const styles = StyleSheet.create({
   },
   avatar: {
     width: 130,
-    height: 120,
+    height: 40,
     borderRadius: 63,
     borderWidth: 4,
     borderColor: 'white',
     marginBottom: 10,
     alignSelf: 'center',
     position: 'absolute',
-    marginTop: 5
+    marginTop: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   name: {
     fontSize: 28,
     color: 'black',
     fontWeight: '600',
-    height: '200'
+    height: '100'
   },
   body: {
-    marginTop: 110
+    marginTop: 20
   },
   bodyContent: {
     // flex: 1,
@@ -117,7 +116,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
-    backgroundColor: 'white',
     borderRadius: 0
   },
   trips: {
@@ -138,5 +136,19 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 60,
     height: 200
+  },
+  container: {
+    width: 130,
+    height: 40,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: 'white',
+    marginBottom: 10,
+    alignSelf: 'center',
+    position: 'absolute',
+    marginTop: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
+
 })
