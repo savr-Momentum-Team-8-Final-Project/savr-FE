@@ -11,15 +11,20 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Homepage from './Homepage.js';
+import Profile from './Profile.js'
+
+const Tab = createBottomTabNavigator();
+
 export default function Header ({ navigation }) {
   return (
     <>
       <View style={styles.container}>
-        <TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}><Text style={styles.profile}>👤</Text></TouchableOpacity>
-        </TouchableOpacity>
-        <Text style={styles.logo}>      </Text>
         <TouchableOpacity onPress={() => navigation.navigate('CreateATrip')}><Text style={styles.add}>➕</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}><Text style={styles.add}>🏠</Text></TouchableOpacity>
       </View>
     </>
   )

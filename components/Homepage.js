@@ -57,14 +57,16 @@ export default function Homepage ({ navigation }) {
       <ScrollView style={styles.scrollView}>
         <Text style={styles.current1}>Current Trip</Text>
         <TouchableOpacity style={styles.current}>
-          <Text style={styles.text}>{currentTrip.city}</Text>
+        <Text style={styles.text}>{currentTrip.city}</Text>
           <Image
             source={currentTrip.photo}
             resizeMode='contain'
             style={styles.image}
           />
-          <Text style={styles.text}>{currentTrip.startDate}</Text>
-          <Text style={styles.text}>${currentTrip.budget}</Text>
+          <View style={styles.coverText}>
+            <Text style={styles.text}>{currentTrip.startDate}</Text>
+            <Text style={styles.text}>${currentTrip.budget}</Text>
+          </View>
         </TouchableOpacity>
 
         <Text style={styles.current1}>Upcoming Trips</Text>
@@ -75,8 +77,10 @@ export default function Homepage ({ navigation }) {
               <TouchableOpacity style={styles.current} key={index}>
                 <Text style={styles.text}>{data.city}</Text>
                 <Image source={data.photo} style={styles.image} />
-                <Text style={styles.text}>{data.startDate}</Text>
-                <Text style={styles.text}>${data.budget}</Text>
+                <View style={styles.coverText}>
+                    <Text style={styles.text}>{data.startDate}</Text>
+                    <Text style={styles.text}>${data.budget}</Text>
+                </View>
               </TouchableOpacity>
             )
           })}
@@ -89,14 +93,15 @@ export default function Homepage ({ navigation }) {
               <TouchableOpacity style={styles.current} key={index}>
                 <Text style={styles.text}>{data.city}</Text>
                 <Image source={data.photo} style={styles.image} />
-                <Text style={styles.text}>{data.startDate}</Text>
-                <Text style={styles.text}>${data.budget}</Text>
+                <View style={styles.coverText}>
+                    <Text style={styles.text}>{data.startDate}</Text>
+                    <Text style={styles.text}>${data.budget}</Text>
+                </View>
               </TouchableOpacity>
             )
           })}
         </View>
       </ScrollView>
-      <Header navigation={navigation} />
     </>
   )
 }
@@ -106,12 +111,12 @@ const styles = StyleSheet.create({
     fontFamily: 'GilroyLight',
     display: 'flex',
     flex: 1,
-    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
-    backgroundColor: 'white',
-    borderRadius: 10
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    borderWidth: 0.5
   },
   current1: {
     marginTop: 70,
@@ -123,9 +128,11 @@ const styles = StyleSheet.create({
   },
   image: {
     display: 'flex',
-    width: 350,
+    width: 340,
     height: 100,
-    resizeMode: 'cover'
+    resizeMode: 'cover',
+    borderRadius: 11,
+    paddingTop: 10
   },
   previous: {
     marginBottom: 60
@@ -140,5 +147,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'GilroyLight'
+  },
+  coverText: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    paddingTop: 10,
+    paddingBottom: 10
   }
 })
