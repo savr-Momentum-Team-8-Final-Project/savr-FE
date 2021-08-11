@@ -13,8 +13,8 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homepage from './Homepage.js';
-import Profile from './Profile.js'
+// import Homepage from './Homepage.js';
+// import Profile from './Profile.js'
 
 const Tab = createBottomTabNavigator();
 

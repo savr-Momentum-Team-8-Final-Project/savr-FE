@@ -28,6 +28,7 @@ export default function App () {
       if (!loaded) {
         return null;
       }
+    
 
   return (
       <>
@@ -36,7 +37,7 @@ export default function App () {
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fffcf5' }}>
             <Tab.Navigator screenOptions={{
                 headerShown: false,
-                'tabBarActiveTintColor': '#60D1FA',
+                'tabBarActiveTintColor': 'black',
                 'tabBarStyle': [
                     {
                         display: 'flex',

@@ -11,6 +11,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Header from './Header.js';
+import { useFonts } from 'expo-font';
 
 const currentTrip = {
   city: 'Seattle',
@@ -50,6 +51,16 @@ const upcomingTrips = [
 ]
 
 export default function Homepage ({ navigation }) {
+
+    const [loaded] = useFonts({
+        GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
+        GilroyBold: require('../assets/fonts/Gilroy-ExtraBold.otf')
+      })
+
+      if (!loaded) {
+        return null;
+      }
+    
 
   return (
       <>
@@ -116,11 +127,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
-    borderWidth: 0.5
+    marginBottom: 30
   },
   current1: {
     marginTop: 70,
-    fontFamily: 'GilroyBold'
+    fontFamily: 'GilroyBold',
+    fontSize: 30,
+    marginBottom: 30
   },
   scrollView: {
     backgroundColor: '#fffcf5',
@@ -138,7 +151,7 @@ const styles = StyleSheet.create({
     marginBottom: 60
   },
   logo: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: '200',
     backgroundColor: '#fffcf5',
     paddingLeft: 150,
@@ -146,7 +159,9 @@ const styles = StyleSheet.create({
     fontFamily: 'GilroyLight'
   },
   text: {
-    fontFamily: 'GilroyLight'
+    fontFamily: 'GilroyLight',
+    fontSize: 20,
+    padding: 10
   },
   coverText: {
     flexDirection: 'row',
