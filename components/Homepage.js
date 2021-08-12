@@ -70,7 +70,7 @@ export default function Homepage ({ navigation }) {
 
       function tripDetails (trip) {
         setSelectedTrip(trip)
-        // console.log(trip)
+        console.log(trip)
       } 
 
       if (!loaded) {
@@ -81,7 +81,7 @@ export default function Homepage ({ navigation }) {
 
   return selectedTrip
         ? (
-            <Trip setSelectedTrip={setSelectedTrip}/>
+            <Trip setSelectedTrip={setSelectedTrip} selectedTrip={selectedTrip}/>
         )
         : (
       <>
