@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     resizeMode: 'contain',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    position: 'absolute',
+    left: 85
 
   }
 })
