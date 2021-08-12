@@ -1,35 +1,37 @@
-import axios from 'axios'
+import axios from "axios";
 
-export function requestLogin (username, password) {
-  return axios.post('https://savr-travel.herokuapp.com/auth/token/login', {
+export function requestLogin(username, password) {
+  return axios.post("https://savr-travel.herokuapp.com/auth/token/login", {
     username: username,
-    password: password
-  })
+    password: password,
+  });
 }
 
-export function requestLogout (token) {
-  return axios.post('https://savr-travel.herokuapp.com/auth/token/logout',
-    {},
-    {
-      headers: {
-        Authorization: `Token ${token}`,
-        'Content-Type': 'application/json'
+export function requestLogout(token) {
+  return axios
+    .post(
+      "https://savr-travel.herokuapp.com/auth/token/logout",
+      {},
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    })
-    .then((response) => response)
+    )
+    .then((response) => response);
 }
 
-export function requestRegistration (name, username, email, password) {
-  return axios.post('https://savr-travel.herokuapp.com/api/accounts/signup',
-    {
-      name: name,
-      username: username,
+export function requestRegistration(username, email, password, password2) {
+  // console.log(username);
+  return axios
+    .post("https://savr-travel.herokuapp.com/api/accounts/signup", {
+      name: username,
       email: email,
-      password: password
-    },
-    {}
-  )
-    .then((response) => response)
+      password: password,
+      password2: password2,
+    })
+    .then((response) => console.log(response.data));
 }
 
 export function requestStates () {

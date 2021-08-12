@@ -1,5 +1,15 @@
-import React, { useState } from 'react'
-import { Text, StyleSheet, View, TextInput, Button, Image, Alert, Platform, KeyboardAvoidingView } from 'react-native'
+import React, { useState } from 'react';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Image,
+  Alert,
+  Platform,
+  KeyboardAvoidingView
+} from 'react-native';
 
 const LoginForm = () => {
   return (
@@ -23,8 +33,7 @@ const LoginForm = () => {
         />
       </View>
       <View style={styles.register}>
-        <Text>Don't have an account?
-        </Text>
+        <Text>Don't have an account?</Text>
         <Button
           title='Sign Up'
           onPress={() => Alert.alert('Hey! Cant see me!')}
@@ -38,9 +47,8 @@ const LoginForm = () => {
         />
       </View>
     </KeyboardAvoidingView>
-
   )
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +56,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 50
-
   },
   formLabel: {
     fontSize: 40,
@@ -75,7 +82,6 @@ const styles = StyleSheet.create({
 
   register: {
     paddingVertical: 25
-
   },
 
   logo: {

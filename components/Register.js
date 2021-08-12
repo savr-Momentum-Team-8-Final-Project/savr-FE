@@ -1,46 +1,107 @@
-import React, { useState } from 'react'
-import { Text, StyleSheet, View, TextInput, Button, Image, Alert, Platform, KeyboardAvoidingView } from 'react-native'
+import React from 'react';
+import { Formik, Field } from 'formik';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Image,
+  Alert,
+  Platform,
+  KeyboardAvoidingView
+} from 'react-native';
+import { requestRegistration } from '../api.js';
+import axios from 'axios';
 
-const LoginForm = () => {
+const RegisterForm = () => {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
+    <Formik
+      initialValues={{
+        username: '',
+        email: '',
+        password: '',
+        password2: ''
+      }}
+      onSubmit={(values) => {
+        requestRegistration(
+          values.username,
+          values.email,
+          values.password,
+          values.password2
+        )
+      }}
     >
-      <Image style={styles.logo} source={require('../assets/favicon.png')} />
-      <Text style={styles.formLabel}> SAVR </Text>
-      <TextInput placeholder='Enter Email' style={styles.inputStyle} />
-      <TextInput
-        secureTextEntry
-        placeholder='Enter Password'
-        style={styles.inputStyle}
-      />
-      <View style={styles.button}>
-        <Button
-          title='Login'
-          onPress={() => Alert.alert('Hey! Your button works!')}
-          color='white'
-        />
-      </View>
-      <View style={styles.register}>
-        <Text>Don't have an account?
-        </Text>
-        <Button
-          title='Sign Up'
-          onPress={() => Alert.alert('Hey! Cant see me!')}
-        />
-      </View>
-      <View style={styles.forgot}>
-        <Button
-          title='Forgot Password?'
-          onPress={() => Alert.alert('Hey! Your button works!')}
-          color='blue'
-        />
-      </View>
-    </KeyboardAvoidingView>
-
+      {({ handleSubmit, values, handleChange }) => (
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}
+        >
+          <Image
+            style={styles.logo}
+            source={require('../assets/favicon.png')}
+          />
+          <Text style={styles.formLabel}> SAVR </Text>
+          <TextInput
+            placeholder='Enter User Name'
+            autoCapitalize='none'
+            autoCorrect={false}
+            onChangeText={handleChange('username')}
+            value={values.username}
+            style={styles.inputStyle}
+          />
+          <TextInput
+            placeholder='Enter Email'
+            autoCapitalize='none'
+            autoCorrect={false}
+            keyboardType='email-address'
+            name='email'
+            textContentType='emailAddress'
+            onChangeText={handleChange('email')}
+            value={values.email}
+            style={styles.inputStyle}
+          />
+          <TextInput
+            secureTextEntry
+            placeholder='Enter Password'
+            autoCapitalize='none'
+            autoCorrect={false}
+            name='password'
+            textContentType='password'
+            onChangeText={handleChange('password')}
+            value={values.password}
+            style={styles.inputStyle}
+          />
+          <TextInput
+            secureTextEntry
+            placeholder='Repeat Password'
+            autoCapitalize='none'
+            autoCorrect={false}
+            name='password'
+            textContentType='password'
+            onChangeText={handleChange('password2')}
+            value={values.password2}
+            style={styles.inputStyle}
+          />
+          <View style={styles.button}>
+            <Button
+              title='Create Account'
+              onPress={() => handleSubmit(values)}
+              color='white'
+            />
+          </View>
+          <View style={styles.register}>
+            <Text>Have an account?</Text>
+            <Button
+              title='Sign In'
+              onPress={() => Alert.alert('Hey! Cant see me!')}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      )}
+    </Formik>
   )
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +109,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 50
-
   },
   formLabel: {
     fontSize: 40,
@@ -75,7 +135,6 @@ const styles = StyleSheet.create({
 
   register: {
     paddingVertical: 25
-
   },
 
   logo: {
@@ -89,4 +148,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LoginForm
+export default RegisterForm
