@@ -9,8 +9,9 @@ import {
   ScrollView,
   Image,
   TouchableOpacity
-} from 'react-native'
-import Header from './Header.js'
+} from 'react-native';
+import Header from './Header.js';
+import { useFonts } from 'expo-font';
 
 const currentTrip = {
   city: 'Seattle',
@@ -50,32 +51,47 @@ const upcomingTrips = [
 ]
 
 export default function Homepage ({ navigation }) {
+
+    const [loaded] = useFonts({
+        GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
+        GilroyBold: require('../assets/fonts/Gilroy-ExtraBold.otf')
+      })
+
+      if (!loaded) {
+        return null;
+      }
+    
+
   return (
-    <>
-      <Header navigation={navigation} />
+      <>
+      <Text style={styles.logo}>s a v r</Text>
       <ScrollView style={styles.scrollView}>
         <Text style={styles.current1}>Current Trip</Text>
         <TouchableOpacity style={styles.current}>
-          <Text>{currentTrip.city}</Text>
+        <Text style={styles.text}>{currentTrip.city}</Text>
           <Image
             source={currentTrip.photo}
             resizeMode='contain'
             style={styles.image}
           />
-          <Text>{currentTrip.startDate}</Text>
-          <Text>${currentTrip.budget}</Text>
+          <View style={styles.coverText}>
+            <Text style={styles.text}>{currentTrip.startDate}</Text>
+            <Text style={styles.text}>${currentTrip.budget}</Text>
+          </View>
         </TouchableOpacity>
 
         <Text style={styles.current1}>Upcoming Trips</Text>
 
         <View>
-          {upcomingTrips.map((data) => {
+          {upcomingTrips.map((data, index) => {
             return (
-              <TouchableOpacity style={styles.current}>
-                <Text>{data.city}</Text>
+              <TouchableOpacity style={styles.current} key={index}>
+                <Text style={styles.text}>{data.city}</Text>
                 <Image source={data.photo} style={styles.image} />
-                <Text>{data.startDate}</Text>
-                <Text>${data.budget}</Text>
+                <View style={styles.coverText}>
+                    <Text style={styles.text}>{data.startDate}</Text>
+                    <Text style={styles.text}>${data.budget}</Text>
+                </View>
               </TouchableOpacity>
             )
           })}
@@ -83,13 +99,15 @@ export default function Homepage ({ navigation }) {
 
         <View style={styles.previous}>
           <Text style={styles.current1}>Previous Trips</Text>
-          {previousTrips.map((data) => {
+          {previousTrips.map((data, index) => {
             return (
-              <TouchableOpacity style={styles.current}>
-                <Text>{data.city}</Text>
+              <TouchableOpacity style={styles.current} key={index}>
+                <Text style={styles.text}>{data.city}</Text>
                 <Image source={data.photo} style={styles.image} />
-                <Text>{data.startDate}</Text>
-                <Text>${data.budget}</Text>
+                <View style={styles.coverText}>
+                    <Text style={styles.text}>{data.startDate}</Text>
+                    <Text style={styles.text}>${data.budget}</Text>
+                </View>
               </TouchableOpacity>
             )
           })}
@@ -101,32 +119,56 @@ export default function Homepage ({ navigation }) {
 
 const styles = StyleSheet.create({
   current: {
+    fontFamily: 'GilroyLight',
     display: 'flex',
     flex: 1,
-    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
-    borderRadius: 10
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    marginBottom: 30
   },
   current1: {
     marginTop: 70,
-    fontWeight: '500'
-  },
-  container: {
-    flex: 1
+    fontFamily: 'GilroyBold',
+    fontSize: 30,
+    marginBottom: 30
   },
   scrollView: {
-    backgroundColor: '#e3e3e3',
+    backgroundColor: '#fffcf5',
     padding: 20
   },
   image: {
     display: 'flex',
-    width: 350,
+    width: 340,
     height: 100,
-    resizeMode: 'cover'
+    resizeMode: 'cover',
+    borderRadius: 11,
+    paddingTop: 10
   },
   previous: {
     marginBottom: 60
+  },
+  logo: {
+    fontSize: 32,
+    fontWeight: '200',
+    backgroundColor: '#fffcf5',
+    paddingLeft: 150,
+    paddingRight: 150,
+    fontFamily: 'GilroyLight'
+  },
+  text: {
+    fontFamily: 'GilroyLight',
+    fontSize: 20,
+    padding: 10
+  },
+  coverText: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    paddingTop: 10,
+    paddingBottom: 10
   }
 })
