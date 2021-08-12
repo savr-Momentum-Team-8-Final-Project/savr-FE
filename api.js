@@ -55,3 +55,8 @@ export function requestCities (state) {
     )
     .then((response) => response)
 }
+
+export function requestTrips () {
+    return axios.get('https://savr-travel.herokuapp.com/api/trip/')
+    .then(response => response)
+}

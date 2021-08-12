@@ -21,18 +21,6 @@ const expenses = [
         "date": "2021-08-07"
     },
     {
-        "id": 1,
-        "user": "admin",
-        "trip": 1,
-        "expense_title": "Uber",
-        "amount": 1,
-        "price": "50.00",
-        "total_cost": 50.0,
-        "category": "ticket",
-        "note": "note1",
-        "date": "2021-08-07"
-    },
-    {
         "id": 2,
         "user": "admin",
         "trip": 1,
@@ -42,7 +30,7 @@ const expenses = [
         "total_cost": 100.0,
         "category": "grocery",
         "note": "note2",
-        "date": "2021-08-17"
+        "date": "2021-08-08"
     }
 ]
 
@@ -80,7 +68,7 @@ export default function Trip (props) {
 
             <View style={styles.expense}>
             {expenses.map((expense, index) => {
-                if (expense.date === "2021-08-17"){
+                if (expense.date === "2021-08-08"){
                     return (
                         <View key={index}>
                         <Text>{expense.date}</Text>
