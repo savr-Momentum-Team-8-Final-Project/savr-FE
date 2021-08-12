@@ -12,7 +12,19 @@ const expenses = [
         "id": 1,
         "user": "admin",
         "trip": 1,
-        "expense_title": "expense1",
+        "expense_title": "Uber",
+        "amount": 1,
+        "price": "50.00",
+        "total_cost": 50.0,
+        "category": "ticket",
+        "note": "note1",
+        "date": "2021-08-07"
+    },
+    {
+        "id": 1,
+        "user": "admin",
+        "trip": 1,
+        "expense_title": "Uber",
         "amount": 1,
         "price": "50.00",
         "total_cost": 50.0,
@@ -24,7 +36,7 @@ const expenses = [
         "id": 2,
         "user": "admin",
         "trip": 1,
-        "expense_title": "expense2",
+        "expense_title": "Museum Tickets",
         "amount": 4,
         "price": "25.00",
         "total_cost": 100.0,
@@ -53,20 +65,31 @@ export default function Trip (props) {
             <Image source={require('../assets/1024px-Donut-Chart.svg.png')} style={styles.graph}></Image>
             <Text>60% of your budget went to food. Yum!</Text>
 
-            
+            <View style={styles.expense}>
             {expenses.map((expense, index) => {
-                return (
-                    <View style={styles.expense}>
-                    <Text>{expense.date}</Text>
-                    <Text>{expense.expense_title}</Text>
-                    <Text>{expense.amount}</Text>
-                    <Text>{expense.price}</Text>
-                    <Text>{expense.total_cost}</Text>
-                    <Text>{expense.category}</Text>
-                    </View>
-                )
+                if (expense.date === "2021-08-07"){
+                    return (
+                        <>
+                        <Text>{expense.date}</Text>
+                        <Text>{expense.expense_title} ${expense.total_cost}</Text>
+                        </>
+                    )
+                }
             })}
-            
+            </View>
+
+            <View style={styles.expense}>
+            {expenses.map((expense, index) => {
+                if (expense.date === "2021-08-17"){
+                    return (
+                        <>
+                        <Text>{expense.date}</Text>
+                        <Text>{expense.expense_title} ${expense.total_cost}</Text>
+                        </>
+                    )
+                }
+            })}
+            </View>
         <Pressable style={styles.button} title='go back' onPress={() => setSelectedTrip(null)}>
             <Text style={styles.buttonText}>go back</Text>
         </Pressable>
