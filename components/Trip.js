@@ -69,10 +69,10 @@ export default function Trip (props) {
             {expenses.map((expense, index) => {
                 if (expense.date === "2021-08-07"){
                     return (
-                        <>
+                        <View key={index}>
                         <Text>{expense.date}</Text>
                         <Text>{expense.expense_title} ${expense.total_cost}</Text>
-                        </>
+                        </View>
                     )
                 }
             })}
@@ -82,10 +82,10 @@ export default function Trip (props) {
             {expenses.map((expense, index) => {
                 if (expense.date === "2021-08-17"){
                     return (
-                        <>
+                        <View key={index}>
                         <Text>{expense.date}</Text>
                         <Text>{expense.expense_title} ${expense.total_cost}</Text>
-                        </>
+                        </View>
                     )
                 }
             })}
