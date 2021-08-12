@@ -2,7 +2,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import ProfileHeader from './ProfileHeader'
-import ImagePicker from './ImagePicker'
+
 const previousTrips = [
   {
     city: 'Seattle',
@@ -24,7 +24,12 @@ export default function Profile ({ navigation }) {
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <View style={styles.avatar} />
-          <ImagePicker style={styles.container} />
+          <Image
+            style={styles.avatar}
+            source={{
+              uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
+            }}
+          />
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.name}>Mantis Toboggan, M.D.</Text>
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: 110
   },
   bodyContent: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     padding: 30
   },
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     color: 'black',
-    marginTop: 20
+    marginTop: 10
   },
   description: {
     fontSize: 16,
