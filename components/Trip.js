@@ -45,8 +45,8 @@ export default function Trip (props) {
             <View>
                 <Text>{selectedTrip.city}</Text>
                 <View>
-                    <Text>{selectedTrip.startDate}</Text>
-                    <Text>{selectedTrip.endDate}</Text>
+                    <Text>{selectedTrip.start_date}</Text>
+                    <Text>{selectedTrip.end_date}</Text>
                 </View>
             </View>
             <Text>${selectedTrip.budget}</Text>
