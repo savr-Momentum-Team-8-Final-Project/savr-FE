@@ -19,47 +19,6 @@ import Trip from './Trip.js'
 import {requestTrips} from '../api.js'
 import moment from 'moment';
 
-const currentTrip = {
-  city: 'Seattle',
-  photo: require('../assets/JL09SeattleSkylinePD.jpeg'),
-  startDate: '08/7/21',
-  endDate: '08/16/21',
-  budget: 1000
-}
-
-const previousTrips = [
-  {
-    city: 'Seattle',
-    photo: require('../assets/JL09SeattleSkylinePD.jpeg'),
-    startDate: '11/02/19',
-    endDate: '11/16/19',
-    budget: 400
-  },
-  {
-    city: 'New York City',
-    photo: require('../assets/photo-1609945648638-cefddce6e6d8.jpeg'),
-    startDate: '11/02/18',
-    endDate: '11/21/18',
-    budget: 8000
-  }
-]
-
-const upcomingTrips = [
-  {
-    city: 'New Donk City',
-    photo: require('../assets/super_mario_odyssey-14.jpeg'),
-    startDate: '06/09/22',
-    endDate: '06/16/22',
-    budget: 4500
-  },
-  {
-    city: 'Chicago',
-    photo: require('../assets/loop-1800x900.jpeg'),
-    startDate: '02/12/23',
-    endDate: '02/16/23',
-    budget: 17
-  }
-]
 
 export default function Homepage ({ navigation }) {
 
@@ -103,13 +62,14 @@ export default function Homepage ({ navigation }) {
       <View style={styles.previous}>
       <Text style={styles.current1}>Current Trip</Text>
         {trips.map((trip, index) => {
-            if (moment(trip.start_date).format('MM/DD/YYYY') < today && moment(trip.end_date).format('MM/DD/YYYY') > today) {
+            if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
                 return (
                     <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{trip.start_date}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -122,13 +82,14 @@ export default function Homepage ({ navigation }) {
       <View style={styles.previous}>
       <Text style={styles.current1}>Upcoming Trips</Text>
         {trips.map((trip, index) => {
-            if (moment(trip.start_date).format('MM/DD/YYYY') > today) {
+            if (moment(trip.start_date).isAfter(today)) {
                 return (
                     <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{trip.start_date}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -141,13 +102,14 @@ export default function Homepage ({ navigation }) {
       <View style={styles.previous}>
       <Text style={styles.current1}>Previous Trips</Text>
         {trips.map((trip, index) => {
-            if (moment(trip.end_date).format('MM/DD/YYYY') < today) {
+            if (moment(trip.end_date).isBefore(today)) {
                 return (
                     <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{trip.start_date}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
