@@ -2,9 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator } from 'react-native';
 import { requestStates, requestCities } from '../api.js'
-import Header from './Header.js'
-import HomeHeader from './HomeHeader.js'
 import Homepage from './Homepage.js';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
 
@@ -15,6 +14,24 @@ export default function CreateATrip ({ navigation }) {
     const [endDate, setEndDate] = useState(new Date());
     const [states, setStates] = useState([])
     const [cities, setCities] = useState([])
+
+    const [date, setDate] = useState(new Date(1598051730000));
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
 
 
 useEffect(() => {
@@ -48,47 +65,47 @@ useEffect(() => {
 
     return (
         <>
-        <HomeHeader navigation={navigation}/>
-        <Text>Create a new trip</Text>
-    <ScrollView style={styles.scrollView}>
-      <View>
-        <Text>Start Date</Text>
-        <DatePickerIOS
-            date={startDate}
-            onDateChange={setStartDate}
-        />
-        <Text>End Date</Text>
-        <DatePickerIOS
-            date={endDate}
-            onDateChange={setEndDate}
-        />
+        <Text style={styles.logo}>s a v r</Text>
+        <Text style={styles.start}>Create a new trip</Text>
+    <ScrollView contentContainerStyle={styles.scrollView}>
+        <View>
+            <View style={styles.datePicker}>
+            <Text>Start Date</Text>
+            <DateTimePicker
+            testID="dateTimePicker"
+            value={startDate}
+            display="default"
+            onChange={onChange}
+            />
+            <Text>End Date</Text>
+            <DateTimePicker
+            testID="dateTimePicker"
+            value={endDate}
+            display="default"
+            onChange={onChange}
+            />
+        </View>
         <Text>Select a State</Text>
         <Picker
-          selectedValue={chosenState}
-          onValueChange={picked => setChosenState(picked)}>
+        selectedValue={chosenState}
+        onValueChange={picked => setChosenState(picked)}>
             {states.map((st, index) => {
                 return (
                     <Picker.Item label={st} value={st} key={index} />
                 )
             })}
         </Picker>
-        <Text>
-          Selected state: {chosenState}
-        </Text>
 
         <Text>Select a State</Text>
         <Picker
-          selectedValue={city}
-          onValueChange={picked => setCity(picked)}>
+        selectedValue={city}
+        onValueChange={picked => setCity(picked)}>
             {cities.map((city, index) => {
                 return (
                     <Picker.Item label={city} value={city} key={index} />
                 )
             })}
         </Picker>
-        <Text>
-          Selected state: {city}
-        </Text>
         <TextInput
           secureTextEntry={false}
           placeholder="Budget in USD"
@@ -109,12 +126,24 @@ useEffect(() => {
 }
 
 const styles = StyleSheet.create({
+logo: {
+    fontSize: 32,
+    fontWeight: '200',
+    backgroundColor: '#fffcf5',
+    paddingLeft: 150,
+    paddingRight: 150,
+    fontFamily: 'GilroyLight'
+    },
   scrollView: {
-    backgroundColor: '#e3e3e3',
+    backgroundColor: '#fffcf5',
     padding: 20
   },
   submit: {
     color: 'black',
     padding: 60
+  },
+  start: {
+      backgroundColor: '#fffcf5',
+      fontFamily: 'GilroyLight'
   }
 })
