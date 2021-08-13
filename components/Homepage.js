@@ -99,7 +99,25 @@ export default function Homepage ({ navigation }) {
       <>
       <Text style={styles.logo}>s a v r</Text>
       <ScrollView style={styles.scrollView}>
-
+        
+      <View style={styles.previous}>
+      <Text style={styles.current1}>Current Trip</Text>
+        {trips.map((trip, index) => {
+            if (moment(trip.start_date).format('MM/DD/YYYY') < today && moment(trip.end_date).format('MM/DD/YYYY') > today) {
+                return (
+                    <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
+                        <Text style={styles.text}>{trip.city}</Text>
+                        {/* <Image source={data.photo} style={styles.image} /> */}
+                        <View style={styles.coverText}>
+                            <Text style={styles.text}>{trip.start_date}</Text>
+                            <Text style={styles.text}>${trip.budget}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )
+            }
+            
+        })}
+        </View>
 
       <View style={styles.previous}>
       <Text style={styles.current1}>Upcoming Trips</Text>
@@ -137,37 +155,6 @@ export default function Homepage ({ navigation }) {
             }
             
         })}
-        </View>
-
-        <Text style={styles.current1}>Current Trip</Text>
-        <TouchableOpacity style={styles.current} onPress={() => tripDetails(currentTrip)}>
-        <Text style={styles.text}>{currentTrip.city}</Text>
-          <Image
-            source={currentTrip.photo}
-            resizeMode='contain'
-            style={styles.image}
-          />
-          <View style={styles.coverText}>
-            <Text style={styles.text}>{currentTrip.startDate}</Text>
-            <Text style={styles.text}>${currentTrip.budget}</Text>
-          </View>
-        </TouchableOpacity>
-
-        <Text style={styles.current1}>Upcoming Trips</Text>
-
-        <View>
-          {upcomingTrips.map((data, index) => {
-            return (
-              <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(data)}>
-                <Text style={styles.text}>{data.city}</Text>
-                <Image source={data.photo} style={styles.image} />
-                <View style={styles.coverText}>
-                    <Text style={styles.text}>{data.startDate}</Text>
-                    <Text style={styles.text}>${data.budget}</Text>
-                </View>
-              </TouchableOpacity>
-            )
-          })}
         </View>
       </ScrollView>
       
