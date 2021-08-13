@@ -1,7 +1,9 @@
+
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import ProfileHeader from './ProfileHeader'
-
+import ImagePicker from './ImagePicker'
+import { grey } from 'ansi-colors'
 const previousTrips = [
   {
     city: 'Seattle',
@@ -23,12 +25,7 @@ export default function Profile ({ navigation }) {
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <View style={styles.avatar} />
-          <Image
-            style={styles.avatar}
-            source={{
-              uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'
-            }}
-          />
+          <ImagePicker style={styles.container1} />
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.name}>Mantis Toboggan, M.D.</Text>
@@ -78,15 +75,17 @@ const styles = StyleSheet.create({
     marginTop: 110
   },
   bodyContent: {
-    // flex: 1,
+    flex: 1,
     alignItems: 'center',
-    padding: 30
+    padding: 30,
+    marginBottom: 10
   },
   info: {
     fontSize: 28,
-    fontWeight: 'bold',
     color: 'black',
-    marginTop: 10
+    fontWeight: '600',
+    height: 200,
+    marginTop: 40
   },
   description: {
     fontSize: 16,
@@ -138,5 +137,19 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 60,
     height: 200
+  },
+  container1: {
+    width: 130,
+    height: 40,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: 'white',
+    marginBottom: 10,
+    alignSelf: 'center',
+    marginTop: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey'
+
   }
 })
