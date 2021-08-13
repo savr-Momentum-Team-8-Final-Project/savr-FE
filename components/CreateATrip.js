@@ -61,9 +61,8 @@ useEffect(() => {
     return (
         <>
         <Text style={styles.logo}>s a v r</Text>
-        <Text style={styles.start}>Create a new trip</Text>
     <ScrollView contentContainerStyle={styles.scrollView}>
-        <View>
+        <Text style={styles.start}>Create a new trip</Text>
             <View style={styles.datePicker}>
             <Text>Start Date</Text>
             <DateTimePicker
@@ -73,6 +72,7 @@ useEffect(() => {
             display="inline"
             onChange={newStart}
             />
+
             <Text>End Date</Text>
             <DateTimePicker
             testID="dateTimePicker"
@@ -81,7 +81,6 @@ useEffect(() => {
             display="inline"
             onChange={newEnd}
             />
-        </View>
         <Text>Select a State</Text>
         <Picker
         selectedValue={chosenState}
@@ -105,7 +104,9 @@ useEffect(() => {
         </Picker>
         <TextInput
           secureTextEntry={false}
-          placeholder="Budget in USD"
+          keyboardType='numeric'
+          maxLength={10}
+          placeholder="Budget in USD ex. $1000"
         />
         
       </View>

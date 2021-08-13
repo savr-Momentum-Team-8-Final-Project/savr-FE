@@ -22,7 +22,7 @@ import moment from 'moment';
 
 export default function Homepage ({ navigation }) {
 
-    const today = moment().format('MM/DD/YYYY')
+    const today = moment().format('YYYY-MM-DD')
 
     const [loaded] = useFonts({
         GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
@@ -68,8 +68,8 @@ export default function Homepage ({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -88,8 +88,8 @@ export default function Homepage ({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -108,8 +108,8 @@ export default function Homepage ({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
