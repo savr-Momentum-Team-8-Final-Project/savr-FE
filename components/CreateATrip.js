@@ -4,33 +4,28 @@ import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, Text
 import { requestStates, requestCities } from '../api.js'
 import Homepage from './Homepage.js';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
 
 export default function CreateATrip ({ navigation }) {
     const [chosenState, setChosenState] = useState('NC')
     const [city, setCity] = useState('')
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
     const [states, setStates] = useState([])
     const [cities, setCities] = useState([])
 
     const [date, setDate] = useState(new Date(1598051730000));
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-    };
-
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
-
-    const showDatepicker = () => {
-        showMode('date');
-    };
+    const newStart = (event, selectedDate) => {
+        // setEndDate(moment(selectedDate).format('YYYY-MM-DD'))
+        setStartDate(selectedDate)
+    }
+    const newEnd = (event, selectedDate) => {
+        // setEndState(moment(selectedDate).format('YYYY-MM-DD'))
+        setEndDate(selectedDate)
+    }
 
 
 
@@ -74,15 +69,17 @@ useEffect(() => {
             <DateTimePicker
             testID="dateTimePicker"
             value={startDate}
-            display="default"
-            onChange={onChange}
+            mode="date"
+            display="inline"
+            onChange={newStart}
             />
             <Text>End Date</Text>
             <DateTimePicker
             testID="dateTimePicker"
             value={endDate}
-            display="default"
-            onChange={onChange}
+            mode="date"
+            display="inline"
+            onChange={newEnd}
             />
         </View>
         <Text>Select a State</Text>
