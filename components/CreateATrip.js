@@ -69,7 +69,8 @@ useEffect(() => {
             testID="dateTimePicker"
             value={startDate}
             mode="date"
-            display="inline"
+            display="compact"
+            // textColor="#00C244"
             onChange={newStart}
             />
 
@@ -78,9 +79,11 @@ useEffect(() => {
             testID="dateTimePicker"
             value={endDate}
             mode="date"
-            display="inline"
+            display="compact"
+            // textColor="#00C244"
             onChange={newEnd}
             />
+            </View>
         <Text>Select a State</Text>
         <Picker
         selectedValue={chosenState}
@@ -109,7 +112,6 @@ useEffect(() => {
           placeholder="Budget in USD ex. $1000"
         />
         
-      </View>
     <View style={styles.submit}>
         <Button
             title='Create Trip'
@@ -143,5 +145,9 @@ logo: {
   start: {
       backgroundColor: '#fffcf5',
       fontFamily: 'GilroyLight'
-  }
+  },
+  datePickerStyle: {
+    marginTop: 20,
+    color: 'black'
+  },
 })

@@ -31,6 +31,7 @@ export default function Homepage ({ navigation }) {
 
     const [selectedTrip, setSelectedTrip] = useState(null)
     const [trips, setTrips] = useState([])
+    const Stack = createStackNavigator();
 
     useEffect(() => {
         requestTrips()
