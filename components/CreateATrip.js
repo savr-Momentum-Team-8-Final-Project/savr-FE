@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator } from 'react-native';
+import { StyleSheet, Text, View, Keyboard, FlatList, SafeAreaView, Platform, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator, KeyboardAvoidingView } from 'react-native';
 import { requestStates, requestCities } from '../api.js'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
@@ -58,13 +58,14 @@ useEffect(() => {
 
 
     return (
-        <>
-        <Text style={styles.logo}>s a v r</Text>
-    <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.start}>Create a new trip</Text>
+    <>
+    <Text style={styles.logo}>s a v r</Text>
+    <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
             <View style={styles.datePicker}>
-                <Text>Start Date</Text>
+                <View style={{width:130}}>
+                <Text style={{fontFamily: 'GilroyLight'}}>Start Date</Text>
                 <DateTimePicker
+                style={{flex: 1}}
                 testID="dateTimePicker"
                 value={startDate}
                 mode="date"
@@ -72,9 +73,12 @@ useEffect(() => {
                 // textColor="#00C244"
                 onChange={newStart}
                 />
+                </View>
 
-                <Text>End Date</Text>
+                <View style={{width:130}}>
+                <Text style={{fontFamily: 'GilroyLight'}}>End Date</Text>
                 <DateTimePicker
+                style={{flex: 1}}
                 testID="dateTimePicker"
                 value={endDate}
                 mode="date"
@@ -82,8 +86,21 @@ useEffect(() => {
                 // textColor="#00C244"
                 onChange={newEnd}
                 />
+                </View>
             </View>
-        <Text>Select a State</Text>
+
+
+            <TextInput
+          secureTextEntry={false}
+          keyboardType='numeric'
+          maxLength={10}
+          placeholder="Budget in USD ex. $1000"
+          style={styles.textInput}
+        />
+
+
+    
+        <Text style={{fontFamily: 'GilroyLight'}}>Select a State</Text>
         <Picker
         selectedValue={chosenState}
         onValueChange={picked => setChosenState(picked)}>
@@ -93,8 +110,9 @@ useEffect(() => {
                 )
             })}
         </Picker>
+        
 
-        <Text>Select a State</Text>
+        <Text style={{fontFamily: 'GilroyLight'}}>Select a City</Text>
         <Picker
         selectedValue={city}
         onValueChange={picked => setCity(picked)}>
@@ -104,12 +122,8 @@ useEffect(() => {
                 )
             })}
         </Picker>
-        <TextInput
-          secureTextEntry={false}
-          keyboardType='numeric'
-          maxLength={10}
-          placeholder="Budget in USD ex. $1000"
-        />
+
+
         
     <View style={styles.submit}>
         <Button
@@ -120,7 +134,7 @@ useEffect(() => {
           />
         </View>
       </ScrollView>
-    </>
+      </>
   )
 }
 
@@ -141,15 +155,22 @@ logo: {
     color: 'black',
     padding: 60
   },
-  start: {
-      backgroundColor: '#fffcf5',
-      fontFamily: 'GilroyLight'
-  },
-  datePickerStyle: {
-    marginTop: 20,
-    color: 'black'
-  },
   datePicker: {
-      width: '100%',
-  }
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      marginTop: 40,
+      marginBottom: 60,
+  },
+  textInput: {
+      marginTop: 50,
+      marginBottom: 80,
+      borderColor: '#00C244',
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 10,
+      width: 200,
+  },
+  container: {
+    flex: 1,
+  },
 })

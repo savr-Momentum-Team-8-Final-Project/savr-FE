@@ -54,7 +54,7 @@ export default function Homepage ({ navigation }) {
 
       if (creating) {
           return (
-              <CreateATrip />
+              <CreateATrip setCreating={setCreating} />
           )
       }
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   current1: {
-    marginTop: 70,
+    marginTop: 30,
     fontFamily: 'GilroyBold',
     fontSize: 30,
     marginBottom: 30
