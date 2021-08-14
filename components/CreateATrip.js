@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator } from 'react-native';
 import { requestStates, requestCities } from '../api.js'
-import Homepage from './Homepage.js';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
@@ -64,25 +63,25 @@ useEffect(() => {
     <ScrollView contentContainerStyle={styles.scrollView}>
         <Text style={styles.start}>Create a new trip</Text>
             <View style={styles.datePicker}>
-            <Text>Start Date</Text>
-            <DateTimePicker
-            testID="dateTimePicker"
-            value={startDate}
-            mode="date"
-            display="compact"
-            // textColor="#00C244"
-            onChange={newStart}
-            />
+                <Text>Start Date</Text>
+                <DateTimePicker
+                testID="dateTimePicker"
+                value={startDate}
+                mode="date"
+                display="compact"
+                // textColor="#00C244"
+                onChange={newStart}
+                />
 
-            <Text>End Date</Text>
-            <DateTimePicker
-            testID="dateTimePicker"
-            value={endDate}
-            mode="date"
-            display="compact"
-            // textColor="#00C244"
-            onChange={newEnd}
-            />
+                <Text>End Date</Text>
+                <DateTimePicker
+                testID="dateTimePicker"
+                value={endDate}
+                mode="date"
+                display="compact"
+                // textColor="#00C244"
+                onChange={newEnd}
+                />
             </View>
         <Text>Select a State</Text>
         <Picker
@@ -150,4 +149,7 @@ logo: {
     marginTop: 20,
     color: 'black'
   },
+  datePicker: {
+      width: '100%',
+  }
 })
