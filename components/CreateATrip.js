@@ -22,13 +22,18 @@ import moment from 'moment';
 
 const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
 
-export default function CreateATrip ({ navigation }) {
+export default function CreateATrip (props) {
+
+    const { setCreating } = props 
+
     const [chosenState, setChosenState] = useState('NC')
     const [city, setCity] = useState('')
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     const [states, setStates] = useState([])
     const [cities, setCities] = useState([])
+    const [title, setTitle] = useState('')
+    const [budget, setBudget] = useState('')
 
     const [date, setDate] = useState(new Date(1598051730000));
 
@@ -75,7 +80,22 @@ useEffect(() => {
     return (
     <>
     <Text style={styles.logo}>s a v r</Text>
-    <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
+    <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+
+        <TouchableOpacity style={styles.button} onPress={() => setCreating(false)}>
+            <Text style={styles.text1}>←</Text>
+        </TouchableOpacity>
+
+        <TextInput
+                secureTextEntry={false}
+                maxLength={10}
+                placeholder="Name of your trip"
+                placeholderTextColor='grey'
+                onChangeText={text => setTitle(text)}
+                defaultValue={title}
+                style={styles.textInput}
+            />
+    
             <View style={styles.datePicker}>
                 <View style={{width:230}}>
                 <Text style={{fontFamily: 'GilroyLight'}}>Start Date</Text>
@@ -105,13 +125,15 @@ useEffect(() => {
             </View>
 
 
-            <TextInput
-          secureTextEntry={false}
-          keyboardType='numeric'
-          maxLength={10}
-          placeholder="Budget in USD"
-          placeholderTextColor='grey'
-          style={styles.textInput}
+        <TextInput
+            secureTextEntry={false}
+            keyboardType='numeric'
+            maxLength={10}
+            placeholder="Budget in USD"
+            placeholderTextColor='grey'
+            onChangeText={text => setBudget(text)}
+            defaultValue={budget}
+            style={styles.textInput}
         />
 
 
@@ -140,7 +162,7 @@ useEffect(() => {
         </Picker>
 
 
-        <TouchableOpacity style={styles.submit} onPress={() => Alert.alert('Hey! Your button works!')}>
+        <TouchableOpacity style={styles.submit} onPress={() => setCreating(false)}>
             <Text style={styles.create}>Create Trip</Text>
         </TouchableOpacity>
         
@@ -197,6 +219,19 @@ logo: {
       backgroundColor: '#00D64B',
       color: 'white',
       fontSize: 20,
+  },
+  button: {
+    width: 70,  
+    height: 30,   
+    borderRadius: 30,            
+    backgroundColor: '#00D64B',                                                                         
+    top: 0,                                                   
+    left: 0, 
+    alignItems: 'center'
+  },
+  text1: {
+      color: 'white',
+      fontSize: 25,
   }
 
 })
