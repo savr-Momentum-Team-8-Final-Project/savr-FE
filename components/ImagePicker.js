@@ -34,9 +34,9 @@ export default function ImagePickerExample () {
 
   return (
     <View style={styles.image}>
-      <Button title='➕' onPress={pickImage} />
+      <Button title='Select Trip Image' onPress={pickImage} />
       {image && (
-        <Image source={{ uri: image }} style={{ width: 180, height: 140 }} />
+        <Image source={{ uri: image }} style={{ width: 350, height: 210 }} />
       )}
     </View>
   )
@@ -44,17 +44,13 @@ export default function ImagePickerExample () {
 
 const styles = StyleSheet.create({
   image: {
-    width: 176,
-    height: 176,
-    borderRadius: 176 / 2,
-    overflow: 'hidden',
-    borderWidth: 4,
-    borderColor: 'black',
-    resizeMode: 'contain',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    left: 85
+    display: 'flex',
+    width: 340,
+    height: 210,
+    resizeMode: 'cover',
+    borderRadius: 400 / 2,
+    paddingTop: 10,
+    alignItems: 'center'
 
   }
 })
