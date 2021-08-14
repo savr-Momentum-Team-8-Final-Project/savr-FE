@@ -16,7 +16,7 @@ import { StyleSheet,
     Alert, 
     Separator, 
     TouchableOpacity} from 'react-native';
-import { requestStates, requestCities } from '../api.js'
+import { requestStates, requestCities, createTrip } from '../api.js'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
@@ -73,6 +73,16 @@ useEffect(() => {
         setCities(names)
     })
 }, [chosenState])
+
+
+    function handleSubmit () {
+
+        const start = moment(startDate).format('YYYY-MM-DD')
+        const end = moment(endDate).format('YYYY-MM-DD')
+
+        createTrip(title, start, end, city, chosenState, budget)
+        setCreating(false)
+    }
 
 
 
@@ -162,7 +172,7 @@ useEffect(() => {
         </Picker>
 
 
-        <TouchableOpacity style={styles.submit} onPress={() => setCreating(false)}>
+        <TouchableOpacity style={styles.submit} onPress={() => handleSubmit()}>
             <Text style={styles.create}>Create Trip</Text>
         </TouchableOpacity>
         
