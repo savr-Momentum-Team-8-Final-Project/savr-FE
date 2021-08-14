@@ -110,6 +110,7 @@ useEffect(() => {
           keyboardType='numeric'
           maxLength={10}
           placeholder="Budget in USD"
+          placeholderTextColor='grey'
           style={styles.textInput}
         />
 
@@ -168,8 +169,9 @@ logo: {
     marginTop: 60,
     marginBottom: 60,
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#00D64B',
     borderRadius: 10
+
   },
   datePicker: {
       flexDirection: 'row',
@@ -185,10 +187,9 @@ logo: {
       borderRadius: 10,
       padding: 10,
       width: '100%',
+      textAlign: 'center'
   },
   create: {
-      borderWidth: 1,
-      borderRadius: 10,
       paddingTop: 15,
       paddingBottom: 15,
       paddingLeft: 50,
