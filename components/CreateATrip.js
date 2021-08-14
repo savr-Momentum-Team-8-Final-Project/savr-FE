@@ -1,6 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Keyboard, FlatList, SafeAreaView, Platform, ScrollView, Image, TextInput, Picker, DatePickerIOS, Button, Alert, Separator, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet,
+    Text,
+    View, 
+    Keyboard, 
+    FlatList, 
+    SafeAreaView, 
+    Platform, 
+    ScrollView, 
+    Image, 
+    TextInput, 
+    Picker, 
+    DatePickerIOS, 
+    Button, 
+    Alert, 
+    Separator, 
+    TouchableOpacity} from 'react-native';
 import { requestStates, requestCities } from '../api.js'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
@@ -62,7 +77,7 @@ useEffect(() => {
     <Text style={styles.logo}>s a v r</Text>
     <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
             <View style={styles.datePicker}>
-                <View style={{width:130}}>
+                <View style={{width:230}}>
                 <Text style={{fontFamily: 'GilroyLight'}}>Start Date</Text>
                 <DateTimePicker
                 style={{flex: 1}}
@@ -94,7 +109,7 @@ useEffect(() => {
           secureTextEntry={false}
           keyboardType='numeric'
           maxLength={10}
-          placeholder="Budget in USD ex. $1000"
+          placeholder="Budget in USD"
           style={styles.textInput}
         />
 
@@ -124,15 +139,11 @@ useEffect(() => {
         </Picker>
 
 
+        <TouchableOpacity style={styles.submit} onPress={() => Alert.alert('Hey! Your button works!')}>
+            <Text style={styles.create}>Create Trip</Text>
+        </TouchableOpacity>
         
-    <View style={styles.submit}>
-        <Button
-            title='Create Trip'
-            onPress={() => Alert.alert('Hey! Your button works!')}
-            color='#000000'
-            type='outline'
-          />
-        </View>
+
       </ScrollView>
       </>
   )
@@ -153,7 +164,12 @@ logo: {
   },
   submit: {
     color: 'black',
-    padding: 60
+    width: '100%',
+    marginTop: 60,
+    marginBottom: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10
   },
   datePicker: {
       flexDirection: 'row',
@@ -168,9 +184,18 @@ logo: {
       borderWidth: 1,
       borderRadius: 10,
       padding: 10,
-      width: 200,
+      width: '100%',
   },
-  container: {
-    flex: 1,
-  },
+  create: {
+      borderWidth: 1,
+      borderRadius: 10,
+      paddingTop: 15,
+      paddingBottom: 15,
+      paddingLeft: 50,
+      paddingRight: 50,
+      backgroundColor: '#00D64B',
+      color: 'white',
+      fontSize: 20,
+  }
+
 })
