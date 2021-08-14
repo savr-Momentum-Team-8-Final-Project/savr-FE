@@ -41,7 +41,7 @@ export default function Homepage ({ navigation }) {
         .then(data => {
             setTrips(data.data)
         })
-    }, [])
+    }, [creating])
 
       function tripDetails (trip) {
         setSelectedTrip(trip)
