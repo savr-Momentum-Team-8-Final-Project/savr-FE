@@ -34,14 +34,14 @@ export default function App () {
       <>
     <NavigationContainer>
         <SafeAreaView style={styles.container} />
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fffcf5' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
             <Tab.Navigator screenOptions={{
                 headerShown: false,
                 'tabBarActiveTintColor': '#00C244',
                 'tabBarStyle': [
                     {
                         display: 'flex',
-                        backgroundColor: '#fffcf5'
+                        backgroundColor: '#ffffff'
                     },
                     null
                 ]
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     backgroundColor: 'tan',
-    backgroundColor: '#fffcf5',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
     fontFamily: 'GilroyLight'
