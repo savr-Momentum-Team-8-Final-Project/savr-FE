@@ -198,13 +198,12 @@ const styles = StyleSheet.create({
     height: 50,   
     borderRadius: 30,            
     backgroundColor: '#00C244',                                                                         
-    top: 0,                                                    
+    top: 0,                                                   
     left: 290, 
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: 'center'
   },
   text1: {
       color: 'white',
-      fontSize: 50,
+      fontSize: 38,
   }
 })
