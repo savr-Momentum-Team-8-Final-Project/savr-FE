@@ -60,3 +60,16 @@ export function requestTrips () {
     return axios.get('https://savr-travel.herokuapp.com/api/trip/')
     .then(response => response)
 }
+
+export function createTrip(title, start_date, end_date, city, state, budget) {
+    return axios.post('https://savr-travel.herokuapp.com/api/trip/create/', {
+        trip_title: title,
+        city: city,
+        state: state,
+        start_date: start_date,
+        end_date: end_date,
+        guide: 1,
+        budget: budget
+    })
+    .then((response) => response)
+}

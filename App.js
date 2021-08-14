@@ -37,7 +37,7 @@ export default function App () {
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fffcf5' }}>
             <Tab.Navigator screenOptions={{
                 headerShown: false,
-                'tabBarActiveTintColor': 'black',
+                'tabBarActiveTintColor': '#00C244',
                 'tabBarStyle': [
                     {
                         display: 'flex',
@@ -46,14 +46,14 @@ export default function App () {
                     null
                 ]
                 }}>
-                <Tab.Screen name="Home" component={Homepage} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-home" size={props.size} color={props.color}/>
+                <Tab.Screen name="Trips" component={Homepage} options={{
+                    tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
                 }}/>
-                <Tab.Screen name="New Trip" component={CreateATrip} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-add-circle" size={props.size} color={props.color}/>
+                <Tab.Screen name="Current Trip" component={Profile} options={{
+                    tabBarIcon: (props) => <Ionicons name="ios-paper-plane" size={props.size} color={props.color}/>
                 }}/>
-                <Tab.Screen name="Profile" component={Profile} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-person" size={props.size} color={props.color}/>
+                <Tab.Screen name="Analytics" component={CreateATrip} options={{
+                    tabBarIcon: (props) => <Ionicons name="ios-flask" size={props.size} color={props.color}/>
                 }}/>
             </Tab.Navigator>
         </SafeAreaView>

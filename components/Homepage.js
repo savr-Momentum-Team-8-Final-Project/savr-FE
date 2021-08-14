@@ -9,20 +9,22 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  Pressable,
+  Button
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Header from './Header.js';
 import { useFonts } from 'expo-font';
 import Trip from './Trip.js'
 import {requestTrips} from '../api.js'
 import moment from 'moment';
+import CreateATrip from './CreateATrip.js';
 
 
 export default function Homepage ({ navigation }) {
 
-    const today = moment().format('MM/DD/YYYY')
+    const today = moment().format('YYYY-MM-DD')
 
     const [loaded] = useFonts({
         GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
@@ -31,13 +33,15 @@ export default function Homepage ({ navigation }) {
 
     const [selectedTrip, setSelectedTrip] = useState(null)
     const [trips, setTrips] = useState([])
+    const [creating, setCreating] = useState(false)
+    const Stack = createStackNavigator();
 
     useEffect(() => {
         requestTrips()
         .then(data => {
             setTrips(data.data)
         })
-    }, [])
+    }, [creating])
 
       function tripDetails (trip) {
         setSelectedTrip(trip)
@@ -46,6 +50,12 @@ export default function Homepage ({ navigation }) {
 
       if (!loaded) {
         return null
+      }
+
+      if (creating) {
+          return (
+              <CreateATrip setCreating={setCreating} />
+          )
       }
 
     
@@ -57,8 +67,13 @@ export default function Homepage ({ navigation }) {
         : (
       <>
       <Text style={styles.logo}>s a v r</Text>
-      <ScrollView style={styles.scrollView}>
-        
+
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+
+        <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
+            <Text style={styles.text1}>+</Text>
+        </TouchableOpacity>
+
       <View style={styles.previous}>
       <Text style={styles.current1}>Current Trip</Text>
         {trips.map((trip, index) => {
@@ -68,8 +83,8 @@ export default function Homepage ({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -88,8 +103,8 @@ export default function Homepage ({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -108,8 +123,8 @@ export default function Homepage ({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         {/* <Image source={data.photo} style={styles.image} /> */}
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM/DD/YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM/DD/YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -137,7 +152,7 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   current1: {
-    marginTop: 70,
+    marginTop: 30,
     fontFamily: 'GilroyBold',
     fontSize: 30,
     marginBottom: 30
@@ -177,5 +192,18 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: 10,
     paddingBottom: 10
+  },
+  button: {
+    width: 50,  
+    height: 50,   
+    borderRadius: 30,            
+    backgroundColor: '#00C244',                                                                         
+    top: 0,                                                   
+    left: 290, 
+    alignItems: 'center'
+  },
+  text1: {
+      color: 'white',
+      fontSize: 38,
   }
 })
