@@ -46,11 +46,11 @@ export default function CurrentTrip () {
     const [currentTrip, setCurrentTrip] = useState({})
     const [days, setDays] = useState()
     const [tripDates, setTripDates] = useState()
+    
     let dates = []
 
     const today = moment().format('YYYY-MM-DD')
 
-    console.log(tripDates)
     
 
 
