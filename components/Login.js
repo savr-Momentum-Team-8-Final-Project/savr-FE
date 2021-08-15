@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   StyleSheet,
@@ -10,8 +10,15 @@ import {
   Platform,
   KeyboardAvoidingView
 } from 'react-native';
+import RegisterForm from './Register';
+import { requestLogin } from '../api';
 
 const LoginForm = () => {
+  const [registering, setRegistering] = useState(false)
+
+  if (registering) {
+    return <RegisterForm setRegistering={setRegistering} />
+  }
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -34,16 +41,13 @@ const LoginForm = () => {
       </View>
       <View style={styles.register}>
         <Text>Don't have an account?</Text>
-        <Button
-          title='Sign Up'
-          onPress={() => Alert.alert('Hey! Cant see me!')}
-        />
+        <Button title='Sign Up' onPress={() => setRegistering(true)} />
       </View>
       <View style={styles.forgot}>
         <Button
           title='Forgot Password?'
           onPress={() => Alert.alert('Hey! Your button works!')}
-          color='blue'
+          color='#00D64B'
         />
       </View>
     </KeyboardAvoidingView>
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#00D64B',
     color: 'white'
   },
 
