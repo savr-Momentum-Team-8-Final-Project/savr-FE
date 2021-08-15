@@ -22,9 +22,9 @@ import moment from 'moment';
 
 const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
 
-export default function CreateATrip (props) {
+export default function CreateAnExpense (props) {
 
-    const { setCreating } = props 
+    const { setAddingExpense } = props 
 
     const [chosenState, setChosenState] = useState('NC')
     const [city, setCity] = useState('')
@@ -92,7 +92,7 @@ useEffect(() => {
     <Text style={styles.logo}>s a v r</Text>
     <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
 
-        <TouchableOpacity style={styles.button} onPress={() => setCreating(false)}>
+        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(false)}>
             <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
 

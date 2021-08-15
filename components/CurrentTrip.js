@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { requestTrips, requestExpenses } from '../api.js'
+import CreateAnExpense from './CreateAnExpense'
 import moment from 'moment';
 
 
@@ -82,7 +83,7 @@ export default function CurrentTrip () {
         <Text style={styles.logo}>s a v r</Text>
         <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
             <Text style={styles.text1}>+</Text>
         </TouchableOpacity>
 
