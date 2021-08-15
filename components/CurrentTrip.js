@@ -74,7 +74,7 @@ export default function CurrentTrip () {
 
     if (addingExpense) {
         return (
-            <CreateAnExpense setAddingExpense={setAddingExpense}/>
+            <CreateAnExpense setAddingExpense={setAddingExpense} currentTrip={currentTrip}/>
         )
     }
 

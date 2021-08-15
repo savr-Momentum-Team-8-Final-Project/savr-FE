@@ -16,72 +16,33 @@ import { StyleSheet,
     Alert, 
     Separator, 
     TouchableOpacity} from 'react-native';
-import { requestStates, requestCities, createTrip } from '../api.js'
+import { createExpense } from '../api.js'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import { useSafeArea } from 'react-native-safe-area-context';
 
-const stopWords = ['UM-84', 'UM-81', 'UM-89', 'UM-79', 'UM-86', 'UM-67', 'UM-71', 'UM-76', 'UM-95']
+
+
 
 export default function CreateAnExpense (props) {
 
-    const { setAddingExpense } = props 
+    const { setAddingExpense, currentTrip } = props 
 
-    const [chosenState, setChosenState] = useState('NC')
-    const [city, setCity] = useState('')
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
-    const [states, setStates] = useState([])
-    const [cities, setCities] = useState([])
     const [title, setTitle] = useState('')
-    const [budget, setBudget] = useState('')
+    const [price, setPrice] =useState('')
+    const [note, setNote] = useState('')
+    const [date, setDate] = useState(new Date())
+    const [category, setCategory] = useState('')
+    const trip = currentTrip.id
 
-    const [date, setDate] = useState(new Date(1598051730000));
-
-    const newStart = (event, selectedDate) => {
-        // setEndDate(moment(selectedDate).format('YYYY-MM-DD'))
-        setStartDate(selectedDate)
-    }
-    const newEnd = (event, selectedDate) => {
-        // setEndState(moment(selectedDate).format('YYYY-MM-DD'))
-        setEndDate(selectedDate)
-    }
-
-
-
-useEffect(() => {
-        requestStates()
-        .then(data => {
-        let names = []
-        data.data.map((st) => {
-            if (!stopWords.includes(st.iso2)) {
-                names.push(st.iso2)
-            }
-        })
-        setStates(names)
-        })
-    }, [])
-
-useEffect(() => {
-    requestCities(chosenState)
-    .then(data => {
-        let names = []
-        data.data.map((city) => {
-            if (city.name.includes("County") === false && city.name.includes("City of ") === false) {
-                names.push(city.name)
-            }
-        })
-        setCities(names)
-    })
-}, [chosenState])
 
 
     function handleSubmit () {
 
-        const start = moment(startDate).format('YYYY-MM-DD')
-        const end = moment(endDate).format('YYYY-MM-DD')
+        
 
-        createTrip(title, start, end, city, chosenState, budget)
-        setCreating(false)
+        createTrip(title, trip, price, note, date, category)
+        setAddingExpense(false)
     }
 
 
