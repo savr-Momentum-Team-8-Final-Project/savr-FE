@@ -38,10 +38,8 @@ export default function CreateAnExpense (props) {
 
 
     function handleSubmit () {
-
-        
-
-        createTrip(title, trip, price, note, date, category)
+        const formattedDate = moment(date).format('YYYY-MM-DD')
+        createExpense(title, trip, price, note, formattedDate, category)
         setAddingExpense(false)
     }
 
@@ -57,84 +55,64 @@ export default function CreateAnExpense (props) {
             <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
 
-        <TextInput
+            <TextInput
                 secureTextEntry={false}
-                maxLength={10}
-                placeholder="Name of your trip"
+                placeholder="Expense Title"
                 placeholderTextColor='grey'
                 onChangeText={text => setTitle(text)}
-                defaultValue={title}
                 style={styles.textInput}
             />
+
+            <TextInput
+                secureTextEntry={false}
+                maxLength={10}
+                placeholder="Price in USD"
+                keyboardType='numeric'
+                placeholderTextColor='grey'
+                onChangeText={text => setPrice(text)}
+                style={styles.textInput}
+            />
+
+
+            <TextInput
+                secureTextEntry={false}
+                placeholder="Add a note?"
+                placeholderTextColor='grey'
+                onChangeText={text => setNote(text)}
+                style={styles.textInput}
+            />          
     
             <View style={styles.datePicker}>
                 <View style={{width:230}}>
-                <Text style={{fontFamily: 'GilroyLight'}}>Start Date</Text>
+                <Text style={{fontFamily: 'GilroyLight'}}>Date of Expense</Text>
                 <DateTimePicker
                 style={{flex: 1}}
                 testID="dateTimePicker"
-                value={startDate}
+                value={date}
                 mode="date"
                 display="compact"
-                // textColor="#00C244"
-                onChange={newStart}
-                />
-                </View>
-
-                <View style={{width:130}}>
-                <Text style={{fontFamily: 'GilroyLight'}}>End Date</Text>
-                <DateTimePicker
-                style={{flex: 1}}
-                testID="dateTimePicker"
-                value={endDate}
-                mode="date"
-                display="compact"
-                // textColor="#00C244"
-                onChange={newEnd}
+                onChange={setDate}
                 />
                 </View>
             </View>
 
 
-        <TextInput
-            secureTextEntry={false}
-            keyboardType='numeric'
-            maxLength={10}
-            placeholder="Budget in USD"
-            placeholderTextColor='grey'
-            onChangeText={text => setBudget(text)}
-            defaultValue={budget}
-            style={styles.textInput}
-        />
-
-
     
-        <Text style={{fontFamily: 'GilroyLight'}}>Select a State</Text>
+        <Text style={{fontFamily: 'GilroyLight'}}>Select a Category</Text>
         <Picker
-        selectedValue={chosenState}
-        onValueChange={picked => setChosenState(picked)}>
-            {states.map((st, index) => {
-                return (
-                    <Picker.Item label={st} value={st} key={index} />
-                )
-            })}
-        </Picker>
-        
-
-        <Text style={{fontFamily: 'GilroyLight'}}>Select a City</Text>
-        <Picker
-        selectedValue={city}
-        onValueChange={picked => setCity(picked)}>
-            {cities.map((city, index) => {
-                return (
-                    <Picker.Item label={city} value={city} key={index} />
-                )
-            })}
+        selectedValue={category}
+        onValueChange={picked => setCategory(picked)}>
+            <Picker.Item label={'Lodging'} value={'lodging'} />
+            <Picker.Item label={'Food'} value={'food'} />
+            <Picker.Item label={'Transportation'} value={'transportation'} />
+            <Picker.Item label={'Tickets'} value={'ticket'} />
+            <Picker.Item label={'Grocery'} value={'grocery'} />
+            <Picker.Item label={'Other'} value={'other'} />
         </Picker>
 
 
         <TouchableOpacity style={styles.submit} onPress={() => handleSubmit()}>
-            <Text style={styles.create}>Create Trip</Text>
+            <Text style={styles.create}>Create Expense</Text>
         </TouchableOpacity>
         
 
