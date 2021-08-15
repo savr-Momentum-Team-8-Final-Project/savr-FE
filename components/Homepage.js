@@ -68,7 +68,7 @@ export default function Homepage ({ navigation }) {
       <>
 
 
-        <ImageBackground source={require('../assets/Untitled-4.jpg')} style={{position:'absolute', top: 0, bottom: 0}}>
+        {/* <ImageBackground source={require('../assets/Untitled-4.jpg')} style={{position:'absolute', top: 0, bottom: 0}}> */}
 
         <Text style={styles.logo}>s a v r</Text>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
@@ -137,7 +137,7 @@ export default function Homepage ({ navigation }) {
         })}
         </View>
       </ScrollView>
-      </ImageBackground>
+      {/* </ImageBackground> */}
     </>
   )
 }
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   scrollView: {
-    backgroundColor: '#00000000',
+    backgroundColor: '#ffffff',
     padding: 20
   },
   image: {
