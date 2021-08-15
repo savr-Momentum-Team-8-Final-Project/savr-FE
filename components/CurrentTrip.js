@@ -59,7 +59,7 @@ export default function CurrentTrip () {
         requestExpenses()
         .then(data => 
             setExpenses(data.data))
-    }, [])
+    }, [addingExpense])
     
 
     useEffect(() => {
