@@ -1,41 +1,12 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, TouchableOpacity} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { requestTrips, requestExpenses } from '../api.js'
 import moment from 'moment';
-
-
-const expenses = [
-    {
-        "id": 1,
-        "user": "admin",
-        "trip": 1,
-        "expense_title": "Uber",
-        "amount": 1,
-        "price": "50.00",
-        "total_cost": 50.0,
-        "category": "ticket",
-        "note": "note1",
-        "date": "2021-08-07"
-    },
-    {
-        "id": 2,
-        "user": "admin",
-        "trip": 1,
-        "expense_title": "Museum Tickets",
-        "amount": 4,
-        "price": "25.00",
-        "total_cost": 100.0,
-        "category": "grocery",
-        "note": "note2",
-        "date": "2021-08-08"
-    }
-]
-
 
 
 
@@ -68,6 +39,7 @@ export default function CurrentTrip () {
     }, [currentTrip])
 
     useEffect(() => {
+    if (days) {
         for (let step = 0; step < days; step++) {
             if (dates.length === 0) {
                 dates.push(currentTrip.start_date)
@@ -78,6 +50,7 @@ export default function CurrentTrip () {
             };
         } 
         setTripDates(dates)
+    }
     }, [days]);
 
     useEffect(() => {
@@ -99,7 +72,11 @@ export default function CurrentTrip () {
     return (
         <>
         <Text style={styles.logo}>s a v r</Text>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+
+        <TouchableOpacity style={styles.button}>
+            <Text style={styles.text1}>+</Text>
+        </TouchableOpacity>
 
             <View>
             <View>
@@ -114,7 +91,8 @@ export default function CurrentTrip () {
             <Text>60% of your budget went to food. Yum!</Text>
             </View>
 
-            {tripDates.map((date, index) => {
+            {tripDates && 
+                tripDates.map((date, index) => {
                     return (
                     <View key={index} style={styles.expense}>
                         <Text>{date}</Text>
