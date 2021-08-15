@@ -46,7 +46,7 @@ export default function CurrentTrip () {
     const [currentTrip, setCurrentTrip] = useState({})
     const [days, setDays] = useState()
     const [tripDates, setTripDates] = useState()
-    
+
     let dates = []
 
     const today = moment().format('YYYY-MM-DD')
@@ -114,26 +114,33 @@ export default function CurrentTrip () {
             <Text>60% of your budget went to food. Yum!</Text>
             </View>
 
-
-
-            {expenses.map((expense, index) => {
-            if (expense.trip === currentTrip.id) {
-                return (
+            {tripDates.map((date, index) => {
+                    return (
                     <View key={index} style={styles.expense}>
-                    <Text>{expense.expense_title}</Text>
-                    <Text>${expense.price}</Text>
+                        <Text>{date}</Text>
+                        {expenses.map((expense, index) => {
+                        if (expense.trip === currentTrip.id) {
+                            return (
+                                <View key={index}>
+                                <Text>{expense.expense_title}</Text>
+                                <Text>${expense.price}</Text>
 
-                    {/* {if (expense.category === 'food') {
-                        return (
-                            <Text>🍕</Text>
-                        )
-                    }} */}
-                    
-                    <Text>Category: {expense.category}</Text>
+                                {/* {if (expense.category === 'food') {
+                                    return (
+                                        <Text>🍕</Text>
+                                    )
+                                }} */}
+                                
+                                <Text>Category: {expense.category}</Text>
+                                </View>
+                            )
+                        }
+                        })}
                     </View>
-                )
-            }
+                    )
             })}
+
+            
 
         </ScrollView>
         </>
