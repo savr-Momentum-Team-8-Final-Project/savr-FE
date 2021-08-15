@@ -47,14 +47,14 @@ export default function App () {
                     null
                 ]
                 }}>
-                <Tab.Screen name="Trips" component={Homepage} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
-                }}/>
                 <Tab.Screen name="Current Trip" component={CurrentTrip} options={{
                     tabBarIcon: (props) => <Ionicons name="ios-paper-plane" size={props.size} color={props.color}/>
                 }}/>
                 <Tab.Screen name="Analytics" component={CreateATrip} options={{
                     tabBarIcon: (props) => <Ionicons name="ios-flask" size={props.size} color={props.color}/>
+                }}/>
+                <Tab.Screen name="Trips" component={Homepage} options={{
+                    tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
                 }}/>
             </Tab.Navigator>
         </SafeAreaView>

@@ -44,8 +44,14 @@ export default function CurrentTrip () {
     const [trips, setTrips] = useState([])
     const [expenses, setExpenses] = useState([])
     const [currentTrip, setCurrentTrip] = useState({})
+    const [days, setDays] = useState()
+    const [tripDates, setTripDates] = useState([])
 
     const today = moment().format('YYYY-MM-DD')
+
+    let dates = []
+    
+
 
     useEffect(() => {
         requestTrips()
@@ -53,6 +59,25 @@ export default function CurrentTrip () {
             setTrips(data.data)
         })
     }, [])
+
+    useEffect(() => {
+        let a = moment(currentTrip.end_date)
+        let b = moment(currentTrip.start_date)
+        setDays(a.diff(b, 'days')+1)
+    }, [currentTrip])
+
+    useEffect(() => {
+        for (let step = 0; step < days; step++) {
+            if (dates.length === 0) {
+                dates.push(currentTrip.start_date)
+                // console.log(dates[dates.length - 1])
+            } else {
+                const last = dates[dates.length -1]
+                const hey = moment(last).add(1, 'days').format('YYYY-MM-DD')
+                dates.push(hey);
+            };
+        } console.log(dates)
+    }, [days]);
 
     useEffect(() => {
         requestExpenses()
@@ -103,7 +128,7 @@ export default function CurrentTrip () {
                         )
                     }} */}
                     
-                    <Text>{expense.category}</Text>
+                    <Text>Category: {expense.category}</Text>
                     </View>
                 )
             }
