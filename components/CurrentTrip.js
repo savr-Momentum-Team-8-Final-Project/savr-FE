@@ -65,6 +65,7 @@ export default function CurrentTrip () {
         trips.map((trip, index) => {
             if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
                 setCurrentTrip(trip)
+        
             }
         })
     }, [trips])
@@ -95,44 +96,19 @@ export default function CurrentTrip () {
                     <View key={index} style={styles.expense}>
                     <Text>{expense.expense_title}</Text>
                     <Text>${expense.price}</Text>
+
+                    {/* {if (expense.category === 'food') {
+                        return (
+                            <Text>🍕</Text>
+                        )
+                    }} */}
+                    
                     <Text>{expense.category}</Text>
                     </View>
                 )
             }
             })}
 
-            
-
-        
-
-            {/* <View style={styles.expense}>
-            {expenses.map((expense, index) => {
-                if (expense.date === "2021-08-07"){
-                    return (
-                        <View key={index}>
-                        <Text>{expense.date}</Text>
-                        <Text>{expense.expense_title} ${expense.total_cost}</Text>
-                        </View>
-                    )
-                }
-            })}
-            </View>
-
-            <View style={styles.expense}>
-            {expenses.map((expense, index) => {
-                if (expense.date === "2021-08-08"){
-                    return (
-                        <View key={index}>
-                        <Text>{expense.date}</Text>
-                        <Text>{expense.expense_title} ${expense.total_cost}</Text>
-                        </View>
-                    )
-                }
-            })}
-            </View> */}
-        {/* <Pressable style={styles.button} title='go back' onPress={() => setSelectedTrip(null)}>
-            <Text style={styles.buttonText}>go back</Text>
-        </Pressable> */}
         </ScrollView>
         </>
     )
