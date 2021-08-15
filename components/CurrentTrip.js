@@ -89,14 +89,17 @@ export default function CurrentTrip () {
 
 
 
-        {/* // {expenses.map((expense, index) => {
-        //     if (expense.trip === trip.id) {
-        //         console.log('hey that worked woahhh')
-        //         return (
-        //             <Text>hey</Text>
-        //         )
-        //     }
-        // })} */}
+            {expenses.map((expense, index) => {
+            if (expense.trip === currentTrip.id) {
+                return (
+                    <View key={index} style={styles.expense}>
+                    <Text>{expense.expense_title}</Text>
+                    <Text>${expense.price}</Text>
+                    <Text>{expense.category}</Text>
+                    </View>
+                )
+            }
+            })}
 
             
 
