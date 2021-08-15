@@ -67,7 +67,7 @@ export default function CurrentTrip () {
                 setCurrentTrip(trip)
             }
         })
-    }, [])
+    }, [trips])
 
     return (
         <>
