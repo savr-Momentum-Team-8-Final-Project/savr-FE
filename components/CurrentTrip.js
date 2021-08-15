@@ -17,6 +17,7 @@ export default function CurrentTrip () {
     const [currentTrip, setCurrentTrip] = useState({})
     const [days, setDays] = useState()
     const [tripDates, setTripDates] = useState()
+    const [addingExpense, setAddingExpense] = useState(false)
 
     let dates = []
 
@@ -68,6 +69,13 @@ export default function CurrentTrip () {
             }
         })
     }, [trips])
+
+
+    if (addingExpense) {
+        return (
+            <CreateAnExpense setAddingExpense={setAddingExpense}/>
+        )
+    }
 
     return (
         <>
@@ -140,12 +148,6 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center'
       },
-      button: {
-        backgroundColor: '#fffcf5',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center'
-      },
       buttonText: {
         fontFamily: 'GilroyLight',
         fontSize: 20
@@ -163,6 +165,18 @@ const styles = StyleSheet.create({
           backgroundColor: '#f0f0f0',
           borderRadius: 10,
           padding: 10,
-
+      },
+      button: {
+        width: 50,  
+        height: 50,   
+        borderRadius: 30,            
+        backgroundColor: '#00C244',                                                                         
+        bottom: 0,                                                   
+        left: 140, 
+        alignItems: 'center'
+      },
+      text1: {
+          color: 'white',
+          fontSize: 38,
       }
   })
