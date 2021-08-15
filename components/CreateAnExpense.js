@@ -82,19 +82,19 @@ export default function CreateAnExpense (props) {
                 style={styles.textInput}
             />          
     
-            <View style={styles.datePicker}>
-                <View style={{width:230}}>
-                <Text style={{fontFamily: 'GilroyLight'}}>Date of Expense</Text>
+            {/* <View style={styles.datePicker}> */}
+                
+                {/* <Text style={{fontFamily: 'GilroyLight'}}>Date of Expense</Text> */}
                 <DateTimePicker
                 style={{flex: 1}}
                 testID="dateTimePicker"
                 value={date}
                 mode="date"
-                display="compact"
+                display="inline"
                 onChange={setDate}
                 />
-                </View>
-            </View>
+                
+            {/* </View> */}
 
 
     
