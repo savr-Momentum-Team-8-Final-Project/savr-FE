@@ -36,6 +36,11 @@ export default function CreateAnExpense (props) {
     const trip = currentTrip.id
 
 
+    function newDate(event, selectedDate) {
+        setDate(selectedDate)
+    }   
+
+
 
     function handleSubmit () {
         const formattedDate = moment(date).format('YYYY-MM-DD')
@@ -91,7 +96,7 @@ export default function CreateAnExpense (props) {
                 value={date}
                 mode="date"
                 display="inline"
-                onChange={setDate}
+                onChange={newDate}
                 />
                 
             {/* </View> */}
