@@ -10,6 +10,7 @@ import Login from './components/Login'
 import CreateATrip from './components/CreateATrip.js'
 import Register from './components/Register.js'
 import Profile from './components/Profile.js'
+import CurrentTrip from './components/CurrentTrip.js'
 import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -34,26 +35,26 @@ export default function App () {
       <>
     <NavigationContainer>
         <SafeAreaView style={styles.container} />
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fffcf5' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
             <Tab.Navigator screenOptions={{
                 headerShown: false,
                 'tabBarActiveTintColor': '#00C244',
                 'tabBarStyle': [
                     {
                         display: 'flex',
-                        backgroundColor: '#fffcf5'
+                        backgroundColor: '#ffffff'
                     },
                     null
                 ]
                 }}>
-                <Tab.Screen name="Trips" component={Homepage} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
-                }}/>
-                <Tab.Screen name="Current Trip" component={Profile} options={{
+                <Tab.Screen name="Current Trip" component={CurrentTrip} options={{
                     tabBarIcon: (props) => <Ionicons name="ios-paper-plane" size={props.size} color={props.color}/>
                 }}/>
                 <Tab.Screen name="Analytics" component={CreateATrip} options={{
                     tabBarIcon: (props) => <Ionicons name="ios-flask" size={props.size} color={props.color}/>
+                }}/>
+                <Tab.Screen name="Trips" component={Homepage} options={{
+                    tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
                 }}/>
             </Tab.Navigator>
         </SafeAreaView>
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     backgroundColor: 'tan',
-    backgroundColor: '#fffcf5',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
     fontFamily: 'GilroyLight'
