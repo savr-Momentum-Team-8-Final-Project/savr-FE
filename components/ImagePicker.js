@@ -48,8 +48,11 @@ const styles = StyleSheet.create({
     width: 340,
     height: 210,
     resizeMode: 'cover',
-    borderRadius: 400 / 2,
+    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: 50,
     paddingTop: 10,
+    paddingLeft: 17,
+    paddingRight: 10,
     alignItems: 'center'
 
   }
