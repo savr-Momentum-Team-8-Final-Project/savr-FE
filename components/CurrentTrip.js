@@ -106,7 +106,7 @@ export default function CurrentTrip () {
                     <View key={index} style={styles.expense}>
                         <Text>{date}</Text>
                         {expenses.map((expense, index) => {
-                        if (expense.trip === currentTrip.id) {
+                        if (expense.trip === currentTrip.id && expense.date === date) {
                             return (
                                 <View key={index}>
                                 <Text>{expense.expense_title}</Text>
