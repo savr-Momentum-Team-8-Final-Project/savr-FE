@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
+
 const expenses = [
   {
     id: 1,
@@ -67,7 +68,6 @@ export default function Trip (props) {
             }
           })}
         </View>
-
         <View style={styles.expense}>
           {expenses.map((expense, index) => {
             if (expense.date === '2021-08-08') {
@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
     padding: 10
-
   },
   button1: {
     width: 70,

@@ -1,9 +1,8 @@
-
-import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
-import ProfileHeader from './ProfileHeader'
-import ImagePicker from './ImagePicker'
-import { grey } from 'ansi-colors'
+import React from 'react';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import ProfileHeader from './ProfileHeader';
+import ImagePicker from './ImagePicker';
+import { grey } from 'ansi-colors';
 const previousTrips = [
   {
     city: 'Seattle',
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: 'black',
     fontWeight: '600',
-    height:  200
+    height: 200
   },
   body: {
     marginTop: 110
@@ -150,6 +149,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'grey'
-
   }
 })

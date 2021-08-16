@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View , Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,23 +13,23 @@ import Profile from './components/Profile.js'
 import CurrentTrip from './components/CurrentTrip.js'
 import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import {
+  Appearance,
+  AppearanceProvider,
+  useColorScheme
+} from 'react-native-appearance';
 
-
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
-
+const Tab = createBottomTabNavigator()
 
 export default function App () {
+  const [loaded] = useFonts({
+    GilroyLight: require('./assets/fonts/Gilroy-Light.otf'),
+    GilroyBold: require('./assets/fonts/Gilroy-ExtraBold.otf')
+  })
 
-    const [loaded] = useFonts({
-        GilroyLight: require('./assets/fonts/Gilroy-Light.otf'),
-        GilroyBold: require('./assets/fonts/Gilroy-ExtraBold.otf')
-      })
-
-      if (!loaded) {
-        return null;
-      }
-    
+  if (!loaded) {
+    return null
+  }
 
   return (
       <>
@@ -57,17 +57,9 @@ export default function App () {
                     tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
                 }}/>
             </Tab.Navigator>
-        </SafeAreaView>
-    </NavigationContainer>
-    {/* <NavigationContainer>
-    <Stack.Navigator screenOptions={{
-                headerShown: false
-            }}>
-                <Stack.Screen name="Home" component={Homepage} />
-                <Stack.Screen name="CreateATrip" component={CreateATrip} />
-                <Stack.Screen name="Profile" component={Profile} />
-            </Stack.Navigator>
-    </NavigationContainer> */}
+          </SafeAreaView>
+        </NavigationContainer>
+      </AppearanceProvider>
     </>
   )
 }
