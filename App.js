@@ -12,15 +12,20 @@ import Register from './components/Register.js';
 import Profile from './components/Profile.js';
 import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import {
+  Appearance,
+  AppearanceProvider,
+  useColorScheme
+} from 'react-native-appearance';
 
 const Tab = createBottomTabNavigator()
-const Stack = createStackNavigator()
 
 export default function App () {
   const [loaded] = useFonts({
     GilroyLight: require('./assets/fonts/Gilroy-Light.otf'),
     GilroyBold: require('./assets/fonts/Gilroy-ExtraBold.otf')
   })
+  const colorScheme = 'dark';
 
   if (!loaded) {
     return null
@@ -28,73 +33,66 @@ export default function App () {
 
   return (
     <>
-      <NavigationContainer>
-        <SafeAreaView style={styles.container} />
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fffcf5' }}>
-          <Tab.Navigator
-            screenOptions={{
-              headerShown: false,
-              tabBarActiveTintColor: '#00C244',
-              tabBarStyle: [
-                {
-                  display: 'flex',
-                  backgroundColor: '#fffcf5'
-                },
-                null
-              ]
-            }}
-          >
-            <Tab.Screen
-              name='Trips'
-              component={Login}
-              options={{
-                tabBarIcon: (props) => (
-                  <Ionicons
-                    name='ios-menu'
-                    size={props.size}
-                    color={props.color}
-                  />
-                )
+      <AppearanceProvider>
+        <NavigationContainer>
+          <SafeAreaView style={styles.container} />
+          <SafeAreaView style={{ flex: 1, backgroundColor: '#fffcf5' }}>
+            <Tab.Navigator
+              screenOptions={{
+                headerShown: false,
+                tabBarActiveTintColor: '#00C244',
+                tabBarStyle: [
+                  {
+                    display: 'flex',
+                    backgroundColor: '#fffcf5'
+                  },
+                  null
+                ]
               }}
-            />
-            <Tab.Screen
-              name='Current Trip'
-              component={Profile}
-              options={{
-                tabBarIcon: (props) => (
-                  <Ionicons
-                    name='ios-paper-plane'
-                    size={props.size}
-                    color={props.color}
-                  />
-                )
-              }}
-            />
-            <Tab.Screen
-              name='Analytics'
-              component={CreateATrip}
-              options={{
-                tabBarIcon: (props) => (
-                  <Ionicons
-                    name='ios-flask'
-                    size={props.size}
-                    color={props.color}
-                  />
-                )
-              }}
-            />
-          </Tab.Navigator>
-        </SafeAreaView>
-      </NavigationContainer>
-      {/* <NavigationContainer>
-    <Stack.Navigator screenOptions={{
-                headerShown: false
-            }}>
-                <Stack.Screen name="Home" component={Homepage} />
-                <Stack.Screen name="CreateATrip" component={CreateATrip} />
-                <Stack.Screen name="Profile" component={Profile} />
-            </Stack.Navigator>
-    </NavigationContainer> */}
+            >
+              <Tab.Screen
+                name='Trips'
+                component={Homepage}
+                options={{
+                  tabBarIcon: (props) => (
+                    <Ionicons
+                      name='ios-menu'
+                      size={props.size}
+                      color={props.color}
+                    />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Current Trip'
+                component={Profile}
+                options={{
+                  tabBarIcon: (props) => (
+                    <Ionicons
+                      name='ios-paper-plane'
+                      size={props.size}
+                      color={props.color}
+                    />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Analytics'
+                component={CreateATrip}
+                options={{
+                  tabBarIcon: (props) => (
+                    <Ionicons
+                      name='ios-flask'
+                      size={props.size}
+                      color={props.color}
+                    />
+                  )
+                }}
+              />
+            </Tab.Navigator>
+          </SafeAreaView>
+        </NavigationContainer>
+      </AppearanceProvider>
     </>
   )
 }
