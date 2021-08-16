@@ -103,27 +103,22 @@ export default function CurrentTrip () {
             {tripDates && 
                 tripDates.map((date, index) => {
                     return (
-                    <View key={index} style={styles.expense}>
-                        <Text>{date}</Text>
+                        <>
                         {expenses.map((expense, index) => {
                         if (expense.trip === currentTrip.id && expense.date === date) {
                             return (
+                                <View key={index} style={styles.expense}>
+                                <Text>{date}</Text>
                                 <View key={index}>
                                 <Text>{expense.expense_title}</Text>
                                 <Text>${expense.price}</Text>
-
-                                {/* {if (expense.category === 'food') {
-                                    return (
-                                        <Text>🍕</Text>
-                                    )
-                                }} */}
-                                
                                 <Text>Category: {expense.category}</Text>
+                                </View>
                                 </View>
                             )
                         }
                         })}
-                    </View>
+                        </>
                     )
             })}
 
