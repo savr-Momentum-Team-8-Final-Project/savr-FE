@@ -37,40 +37,47 @@ const chartConfig = {
 
 const data = [
     {
-      name: "Seoul",
-      population: 21500000,
-      color: "rgba(131, 167, 234, 1)",
+      name: "Lodging",
+      total: 10000000,
+      color: "#058082",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "Toronto",
-      population: 2800000,
-      color: "#F00",
+      name: "Food",
+      total: 2800000,
+      color: "#E28A2C",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "Beijing",
-      population: 527612,
-      color: "red",
+      name: "Transportation",
+      total: 5276120,
+      color: "#132E41",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "New York",
-      population: 8538000,
-      color: "#ffffff",
+      name: "Tickets",
+      total: 8538000,
+      color: "#E9A932",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "Moscow",
-      population: 11920000,
-      color: "rgb(0, 0, 255)",
+      name: "Grocery",
+      total: 11920000,
+      color: "#E45239",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
-    }
+      legendFontSize: 13
+    },
+    {
+        name: "Other",
+        total: 11000000,
+        color: "#FFEBC1",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 13
+      }
   ]
 
 
@@ -85,19 +92,12 @@ export default function Analytics () {
             width={screenWidth}
             height={220}
             chartConfig={chartConfig}
-            accessor={"population"}
-            backgroundColor={"transparent"}
-            // paddingLeft={"15"}
-            center={[10, 50]}
-            absolute
+            accessor={"total"}
+            backgroundColor={"#ffffff"}
+            paddingLeft={"15"}
+            // center={[10, 50]}
+            // absolute
             />
-            <Text>⚪️ ⚫️ ⚪️</Text>
-            <View style={{justifyContent: 'center', padding: 50}}>
-            <Text>🟦 - Lodging 34%</Text>
-            <Text>🟩 - Other 15%</Text>
-            <Text>🟨 - Food 12%</Text>
-            <Text>🟧 - Transportation 7%</Text>
-            </View>
         </View>
         </>
     )
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     logo: {
         fontSize: 32,
         fontWeight: '200',
-        backgroundColor: '#fffcf5',
+        backgroundColor: '#ffffff',
         paddingLeft: 150,
         paddingRight: 150,
         fontFamily: 'GilroyLight'
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         marginBottom: 60
     },
     mainView: {
-        backgroundColor: '#fffcf5',
+        backgroundColor: '#ffffff',
         padding: 20,
         alignItems: 'center'
     }
