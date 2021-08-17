@@ -89,6 +89,11 @@ export function createExpense(title, trip, price, note, date, category) {
         note: note,
         date: date,
         category: category
-    })
+    },
+    {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+      })
     .then((response) => response)
 }
