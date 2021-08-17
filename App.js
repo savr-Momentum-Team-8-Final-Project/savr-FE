@@ -9,7 +9,7 @@ import Homepage from './components/Homepage.js'
 import Login from './components/Login'
 import CreateATrip from './components/CreateATrip.js'
 import Register from './components/Register.js'
-import Profile from './components/Profile.js'
+import Analytics from './components/Analytics.js'
 import CurrentTrip from './components/CurrentTrip.js'
 import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -50,7 +50,7 @@ export default function App () {
                 <Tab.Screen name="Current Trip" component={CurrentTrip} options={{
                     tabBarIcon: (props) => <Ionicons name="ios-paper-plane" size={props.size} color={props.color}/>
                 }}/>
-                <Tab.Screen name="Analytics" component={CreateATrip} options={{
+                <Tab.Screen name="Analytics" component={Analytics} options={{
                     tabBarIcon: (props) => <Ionicons name="ios-flask" size={props.size} color={props.color}/>
                 }}/>
                 <Tab.Screen name="Trips" component={Homepage} options={{
