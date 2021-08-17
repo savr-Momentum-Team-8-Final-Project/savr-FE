@@ -46,6 +46,7 @@ export default function CurrentTrip () {
     const [tripDates, setTripDates] = useState()
     const [addingExpense, setAddingExpense] = useState(false)
     const [progress, setProgress] = useState()
+    const [budget, setBudget] = useState()
 
     let dates = []
 
@@ -60,8 +61,9 @@ export default function CurrentTrip () {
         .then(data => {
             const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
             setProgress(a)
+            setBudget(data.data.budget_left)
         })
-    }, [])
+    }, [expenses])
 
 
     useEffect(() => {
@@ -132,7 +134,7 @@ export default function CurrentTrip () {
                     <Text>{currentTrip.end_date}</Text>
                 </View>
             </View>
-            <Text style={{position: 'absolute', marginTop: 215, fontSize: 30}}>${currentTrip.budget}</Text>
+            <Text style={{position: 'absolute', marginTop: 215, fontSize: 30}}>${budget}</Text>
             <ProgressChart
             data={data}
             width={screenWidth}
