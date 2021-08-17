@@ -116,7 +116,7 @@ export default function CurrentTrip () {
             <Text style={styles.text1}>+</Text>
         </TouchableOpacity>
 
-            <View>
+        
             <View>
                 <Text>{currentTrip.city}</Text>
                 <View>
@@ -124,7 +124,7 @@ export default function CurrentTrip () {
                     <Text>{currentTrip.end_date}</Text>
                 </View>
             </View>
-            <Text style={{position: 'absolute', marginLeft: 140, marginTop: 145, fontSize: 30}}>${currentTrip.budget}</Text>
+            <Text style={{position: 'absolute', marginTop: 215, fontSize: 30}}>${currentTrip.budget}</Text>
             <ProgressChart
             data={data}
             width={screenWidth}
@@ -134,7 +134,7 @@ export default function CurrentTrip () {
             chartConfig={chartConfig}
             hideLegend={true}
             />
-            </View>
+            
 
             {tripDates && 
                 tripDates.map((date, index) => {
