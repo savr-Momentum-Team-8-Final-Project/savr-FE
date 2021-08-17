@@ -127,7 +127,6 @@ export default function CreateATrip (props) {
               value={startDate}
               mode='date'
               display='compact'
-              // textColor="#00C244"
               onChange={newStart}
             />
           </View>
@@ -140,7 +139,6 @@ export default function CreateATrip (props) {
               value={endDate}
               mode='date'
               display='compact'
-              // textColor="#00C244"
               onChange={newEnd}
             />
           </View>
@@ -163,10 +161,10 @@ export default function CreateATrip (props) {
           onValueChange={(picked) => setChosenState(picked)}
         >
           {states.map((st, index) => {
+
             return <Picker.Item label={st} value={st} key={index} />
           })}
         </Picker>
-
         <Text style={{ fontFamily: 'GilroyLight' }}>Select a City</Text>
         <Picker
           selectedValue={city}
@@ -188,19 +186,20 @@ export default function CreateATrip (props) {
 const styles = StyleSheet.create({
   logo: {
     fontSize: 32,
-    fontWeight: '200',
-    backgroundColor: '#fffcf5',
+    fontWeight: "200",
+    backgroundColor: "#fffcf5",
     paddingLeft: 150,
     paddingRight: 150,
     fontFamily: 'GilroyLight'
+
   },
   scrollView: {
-    backgroundColor: '#fffcf5',
-    padding: 20
+    backgroundColor: "#fffcf5",
+    padding: 20,
   },
   submit: {
-    color: 'black',
-    width: '100%',
+    color: "black",
+    width: "100%",
     marginTop: 60,
     marginBottom: 60,
     alignItems: 'center',
@@ -246,3 +245,4 @@ const styles = StyleSheet.create({
     fontSize: 25
   }
 })
+

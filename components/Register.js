@@ -13,8 +13,10 @@ import {
 } from 'react-native';
 import { requestRegistration } from '../api.js';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
+  const { setRegistering } = props
   return (
     <Formik
       initialValues={{
@@ -94,7 +96,8 @@ const RegisterForm = () => {
             <Text>Have an account?</Text>
             <Button
               title='Sign In'
-              onPress={() => Alert.alert('Hey! Cant see me!')}
+              onPress={() => setRegistering(false)}
+              color='#00D64B'
             />
           </View>
         </KeyboardAvoidingView>
@@ -129,12 +132,13 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#00D64B',
     color: 'white'
   },
 
   register: {
-    paddingVertical: 25
+    paddingVertical: 25,
+    color: '#00D64B'
   },
 
   logo: {
