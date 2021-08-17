@@ -102,3 +102,7 @@ export function createExpense(title, trip, price, note, date, category) {
     .then((response) => response)
 }
 
+export function getCurrentTripData () {
+    return axios.get('https://savr-travel.herokuapp.com/api/trip/1/')
+    .then(response => response)
+}

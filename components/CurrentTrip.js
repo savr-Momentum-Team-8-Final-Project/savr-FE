@@ -5,7 +5,7 @@ import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, To
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses } from '../api.js'
+import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js'
 import CreateAnExpense from './CreateAnExpense'
 import moment from 'moment';
 import {
@@ -33,10 +33,7 @@ const chartConfig = {
     useShadowColorFromDataset: false // optional
   };
 
-  const data = {
-    labels: ["Budget"], // optional
-    data: [, , 0.8]
-  };
+  
 
 
 
@@ -48,12 +45,23 @@ export default function CurrentTrip () {
     const [days, setDays] = useState()
     const [tripDates, setTripDates] = useState()
     const [addingExpense, setAddingExpense] = useState(false)
+    const [progress, setProgress] = useState()
 
     let dates = []
 
     const today = moment().format('YYYY-MM-DD')
 
-    
+    const data = {
+        data: [ , , progress]
+      };
+
+    useEffect(() => {
+        getCurrentTripData()
+        .then(data => {
+            const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
+            setProgress(a)
+        })
+    }, [])
 
 
     useEffect(() => {
