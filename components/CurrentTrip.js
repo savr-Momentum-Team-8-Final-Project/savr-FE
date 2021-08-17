@@ -8,6 +8,35 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { requestTrips, requestExpenses } from '../api.js'
 import CreateAnExpense from './CreateAnExpense'
 import moment from 'moment';
+import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+  import { Dimensions } from "react-native";
+
+
+
+const screenWidth = Dimensions.get("window").width;
+
+const chartConfig = {
+    backgroundGradientFrom: "#ffffff",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#ffffff",
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(0, 196, 69, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+  };
+
+  const data = {
+    labels: ["Budget"], // optional
+    data: [, , 0.8]
+  };
 
 
 
@@ -95,9 +124,16 @@ export default function CurrentTrip () {
                     <Text>{currentTrip.end_date}</Text>
                 </View>
             </View>
-            <Text>${currentTrip.budget}</Text>
-            <Image source={require('../assets/1024px-Donut-Chart.svg.png')} style={styles.graph}></Image>
-            <Text>60% of your budget went to food. Yum!</Text>
+            <Text style={{position: 'absolute', marginLeft: 140, marginTop: 145, fontSize: 30}}>${currentTrip.budget}</Text>
+            <ProgressChart
+            data={data}
+            width={screenWidth}
+            height={220}
+            strokeWidth={16}
+            radius={40}
+            chartConfig={chartConfig}
+            hideLegend={true}
+            />
             </View>
 
             {tripDates && 
