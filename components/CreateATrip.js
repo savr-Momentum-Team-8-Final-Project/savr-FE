@@ -107,11 +107,11 @@ export default function CreateATrip (props) {
         >
           <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
-
+        <Text style={styles.label}>Trip</Text>
         <TextInput
           secureTextEntry={false}
           maxLength={10}
-          placeholder='Name of your trip'
+          placeholder='Cancun 2021'
           placeholderTextColor='grey'
           onChangeText={(text) => setTitle(text)}
           defaultValue={title}
@@ -120,7 +120,7 @@ export default function CreateATrip (props) {
 
         <View style={styles.datePicker}>
           <View style={{ width: 230 }}>
-            <Text style={{ fontFamily: 'GilroyLight' }}>Start Date</Text>
+            <Text style={styles.label}>Start Date</Text>
             <DateTimePicker
               style={{ flex: 1 }}
               testID='dateTimePicker'
@@ -132,7 +132,7 @@ export default function CreateATrip (props) {
           </View>
 
           <View style={{ width: 130 }}>
-            <Text style={{ fontFamily: 'GilroyLight' }}>End Date</Text>
+            <Text style={styles.label}>End Date</Text>
             <DateTimePicker
               style={{ flex: 1 }}
               testID='dateTimePicker'
@@ -143,7 +143,7 @@ export default function CreateATrip (props) {
             />
           </View>
         </View>
-
+        <Text style={styles.label}>Budget</Text>
         <TextInput
           secureTextEntry={false}
           keyboardType='numeric'
@@ -155,17 +155,16 @@ export default function CreateATrip (props) {
           style={styles.textInput}
         />
 
-        <Text style={{ fontFamily: 'GilroyLight' }}>Select a State</Text>
+        <Text style={styles.label}>Select a State</Text>
         <Picker
           selectedValue={chosenState}
           onValueChange={(picked) => setChosenState(picked)}
         >
           {states.map((st, index) => {
-
             return <Picker.Item label={st} value={st} key={index} />
           })}
         </Picker>
-        <Text style={{ fontFamily: 'GilroyLight' }}>Select a City</Text>
+        <Text style={styles.label}>Select a City</Text>
         <Picker
           selectedValue={city}
           onValueChange={(picked) => setCity(picked)}
@@ -186,20 +185,20 @@ export default function CreateATrip (props) {
 const styles = StyleSheet.create({
   logo: {
     fontSize: 32,
-    fontWeight: "200",
-    backgroundColor: "#fffcf5",
+    fontWeight: '200',
+    backgroundColor: '#fffcf5',
     paddingLeft: 150,
     paddingRight: 150,
     fontFamily: 'GilroyLight'
 
   },
   scrollView: {
-    backgroundColor: "#fffcf5",
-    padding: 20,
+    backgroundColor: '#fffcf5',
+    padding: 20
   },
   submit: {
-    color: "black",
-    width: "100%",
+    color: 'black',
+    width: '100%',
     marginTop: 60,
     marginBottom: 60,
     alignItems: 'center',
@@ -209,11 +208,11 @@ const styles = StyleSheet.create({
   datePicker: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 40,
+    marginTop: -40,
     marginBottom: 60
   },
   textInput: {
-    marginTop: 50,
+    marginTop: 20,
     marginBottom: 80,
     borderColor: '#00C244',
     borderWidth: 1,
@@ -243,6 +242,14 @@ const styles = StyleSheet.create({
   text1: {
     color: 'white',
     fontSize: 25
+  },
+  label: {
+    color: 'black',
+    fontSize: 20,
+    marginBottom: 10,
+    paddingTop: 30,
+    fontFamily: 'Helvetica',
+    fontWeight: 'bold'
+
   }
 })
-
