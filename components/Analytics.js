@@ -40,7 +40,7 @@ const data = [
     {
       name: "Lodging",
       total: 10000000,
-      color: "#baffd2",
+      color: "#cfffe0",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
@@ -54,28 +54,28 @@ const data = [
     {
       name: "Transportation",
       total: 5276120,
-      color: "#0ee358",
+      color: "#00c244",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
       name: "Tickets",
       total: 8538000,
-      color: "#00C244",
+      color: "#00802d",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
       name: "Grocery",
       total: 11920000,
-      color: "#009635",
+      color: "#00521d",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
         name: "Other",
         total: 11000000,
-        color: "#005c20",
+        color: "#00290e",
         legendFontColor: "#7F7F7F",
         legendFontSize: 13
       }
@@ -120,7 +120,7 @@ export default function Analytics () {
                     </View>
                     <View style={styles.mainView}>
                                 <PieChart
-                            style={styles.pieChart}
+                            // style={styles.pieChart}
                             data={data}
                             width={355}
                             height={220}
