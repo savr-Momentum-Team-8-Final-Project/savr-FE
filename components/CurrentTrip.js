@@ -134,12 +134,12 @@ export default function CurrentTrip () {
                     <Text>{currentTrip.end_date}</Text>
                 </View>
             </View>
-            <Text style={{position: 'absolute', marginTop: 213, fontSize: 30}}>${budget}</Text>
+            <Text style={{position: 'absolute', marginTop: 213, fontSize: 30, color: 'black'}}>${budget}</Text>
             <ProgressChart
             data={data}
             width={screenWidth}
             height={220}
-            strokeWidth={16}
+            strokeWidth={20}
             radius={40}
             chartConfig={chartConfig}
             hideLegend={true}

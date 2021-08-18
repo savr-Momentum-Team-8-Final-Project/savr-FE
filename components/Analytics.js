@@ -87,6 +87,7 @@ export default function Analytics () {
         <Text style={styles.logo}>s a v r</Text>
         <View style={styles.mainView}>
             <Text>←recent                 Current trip               all time→</Text>
+            <View style={styles.donut}></View>
             <PieChart
             data={data}
             width={screenWidth}
@@ -123,5 +124,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         padding: 20,
         alignItems: 'center'
+    },
+    donut: {
+        zIndex: 999,
+        height: 80,
+        width: 80,
+        borderRadius: 50,
+        backgroundColor: "white",
+        position: 'absolute',
+        marginTop: 107,
+        right: 253
     }
   })
