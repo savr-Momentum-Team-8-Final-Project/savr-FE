@@ -93,9 +93,11 @@ export default function Analytics () {
             transitionStyle="scroll">
 
                 <View key="1" style={{backgroundColor: 'white'}}>
-                    <Text>Current Trip</Text>
+                    <View style={styles.heading}>
+                        <Text style={styles.title}>Current Trip</Text>
+                        <Text style={styles.spent}>Spent: $240.45</Text>
+                    </View>
                     <View style={styles.mainView}>
-                        <Text>Spent: $900</Text>
                         <PieChart
                         style={styles.pieChart}
                         data={data}
@@ -132,9 +134,11 @@ export default function Analytics () {
                     </View>
                 </View>
                 <View key="2" style={{backgroundColor: 'white'}}>
-                    <Text>All Time</Text>
+                    <View style={styles.heading}>
+                        <Text style={styles.title}>All Time</Text>
+                        <Text style={styles.spent}>Spent: $8053.45</Text>
+                    </View>
                     <View style={styles.mainView}>
-                        <Text>Spent: $900</Text>
                         <PieChart
                         data={data}
                         width={355}
@@ -195,7 +199,7 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%'
+        // height: '100%'
     },
     donut: {
         zIndex: 999,
@@ -224,5 +228,25 @@ const styles = StyleSheet.create({
     },
     pieChart: {
         marginBottom: 20
+    },
+    heading: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10
+    },
+    title: {
+        fontFamily: "GilroyBold",
+        fontSize: 30,
+    },
+    spent: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'black',
+        padding: 7,
+        fontFamily: "GilroyBold",
+        fontSize: 20,
     }
   })
