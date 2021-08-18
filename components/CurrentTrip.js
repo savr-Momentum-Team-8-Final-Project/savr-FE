@@ -54,7 +54,7 @@ export default function CurrentTrip () {
 
 
     const data = {
-        data: [0, 0, 0, 0]
+        data: [, , , progress]
       };
 
     useEffect(() => {
@@ -153,7 +153,7 @@ export default function CurrentTrip () {
             {tripDates && 
                 tripDates.map((date, index) => {
                     return (
-                        <>
+                        <View key={index}>
                         {expenses.map((expense, index) => {
                         if (expense.trip === currentTrip.id && expense.date === date) {
                             return (
@@ -168,7 +168,7 @@ export default function CurrentTrip () {
                             )
                         }
                         })}
-                        </>
+                        </View>
                     )
             })}
 
