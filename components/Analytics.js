@@ -24,53 +24,60 @@ import {
 const screenWidth = Dimensions.get("window").width;
 
 const chartConfig = {
-    backgroundGradientFrom: "#1E2923",
-    backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: "#08130D",
-    backgroundGradientToOpacity: 0.5,
+    // backgroundGradientFrom: "black",
+    // backgroundGradientFromOpacity: 0,
+    // backgroundGradientTo: "#08130D",
+    // backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
+    strokeWidth: 3, // optional, default 3
     barPercentage: 0.5,
-    useShadowColorFromDataset: false // optional
+    // useShadowColorFromDataset: false // optional
   };
 
 
 const data = [
     {
-      name: "Seoul",
-      population: 21500000,
-      color: "rgba(131, 167, 234, 1)",
+      name: "Lodging",
+      total: 10000000,
+      color: "#058082",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "Toronto",
-      population: 2800000,
-      color: "#F00",
+      name: "Food",
+      total: 2800000,
+      color: "#E28A2C",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "Beijing",
-      population: 527612,
-      color: "red",
+      name: "Transportation",
+      total: 5276120,
+      color: "#132E41",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "New York",
-      population: 8538000,
-      color: "#ffffff",
+      name: "Tickets",
+      total: 8538000,
+      color: "#E9A932",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
+      legendFontSize: 13
     },
     {
-      name: "Moscow",
-      population: 11920000,
-      color: "rgb(0, 0, 255)",
+      name: "Grocery",
+      total: 11920000,
+      color: "#E45239",
       legendFontColor: "#7F7F7F",
-      legendFontSize: 15
-    }
+      legendFontSize: 13
+    },
+    {
+        name: "Other",
+        total: 11000000,
+        color: "#FFEBC1",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 13
+      }
   ]
 
 
@@ -80,24 +87,18 @@ export default function Analytics () {
         <Text style={styles.logo}>s a v r</Text>
         <View style={styles.mainView}>
             <Text>←recent                 Current trip               all time→</Text>
+            <View style={styles.donut}></View>
             <PieChart
             data={data}
             width={screenWidth}
             height={220}
             chartConfig={chartConfig}
-            accessor={"population"}
+            accessor={"total"}
             backgroundColor={"transparent"}
             // paddingLeft={"15"}
-            center={[10, 50]}
-            absolute
+            // center={[10, 50]}
+            // absolute
             />
-            <Text>⚪️ ⚫️ ⚪️</Text>
-            <View style={{justifyContent: 'center', padding: 50}}>
-            <Text>🟦 - Lodging 34%</Text>
-            <Text>🟩 - Other 15%</Text>
-            <Text>🟨 - Food 12%</Text>
-            <Text>🟧 - Transportation 7%</Text>
-            </View>
         </View>
         </>
     )
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     logo: {
         fontSize: 32,
         fontWeight: '200',
-        backgroundColor: '#fffcf5',
+        backgroundColor: '#ffffff',
         paddingLeft: 150,
         paddingRight: 150,
         fontFamily: 'GilroyLight'
@@ -120,8 +121,18 @@ const styles = StyleSheet.create({
         marginBottom: 60
     },
     mainView: {
-        backgroundColor: '#fffcf5',
+        backgroundColor: '#ffffff',
         padding: 20,
         alignItems: 'center'
+    },
+    donut: {
+        zIndex: 999,
+        height: 80,
+        width: 80,
+        borderRadius: 50,
+        backgroundColor: "white",
+        position: 'absolute',
+        marginTop: 107,
+        right: 253
     }
   })

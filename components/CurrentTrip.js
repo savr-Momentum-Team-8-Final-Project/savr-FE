@@ -5,9 +5,35 @@ import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, To
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses } from '../api.js'
+import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js'
 import CreateAnExpense from './CreateAnExpense'
 import moment from 'moment';
+import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+  import { Dimensions } from "react-native";
+
+
+
+const screenWidth = Dimensions.get("window").width;
+
+const chartConfig = {
+    backgroundGradientFrom: "#ffffff",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#ffffff",
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(0, 196, 69, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+  };
+
+  
 
 
 
@@ -19,12 +45,25 @@ export default function CurrentTrip () {
     const [days, setDays] = useState()
     const [tripDates, setTripDates] = useState()
     const [addingExpense, setAddingExpense] = useState(false)
+    const [progress, setProgress] = useState()
+    const [budget, setBudget] = useState()
 
     let dates = []
 
     const today = moment().format('YYYY-MM-DD')
 
-    
+    const data = {
+        data: [ , , progress]
+      };
+
+    useEffect(() => {
+        getCurrentTripData()
+        .then(data => {
+            const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
+            setProgress(a)
+            setBudget(data.data.budget_left)
+        })
+    }, [expenses])
 
 
     useEffect(() => {
@@ -87,7 +126,7 @@ export default function CurrentTrip () {
             <Text style={styles.text1}>+</Text>
         </TouchableOpacity>
 
-            <View>
+        
             <View>
                 <Text>{currentTrip.city}</Text>
                 <View>
@@ -95,10 +134,17 @@ export default function CurrentTrip () {
                     <Text>{currentTrip.end_date}</Text>
                 </View>
             </View>
-            <Text>${currentTrip.budget}</Text>
-            <Image source={require('../assets/1024px-Donut-Chart.svg.png')} style={styles.graph}></Image>
-            <Text>60% of your budget went to food. Yum!</Text>
-            </View>
+            <Text style={{position: 'absolute', marginTop: 213, fontSize: 30, color: 'black'}}>${budget}</Text>
+            <ProgressChart
+            data={data}
+            width={screenWidth}
+            height={220}
+            strokeWidth={20}
+            radius={40}
+            chartConfig={chartConfig}
+            hideLegend={true}
+            />
+            
 
             {tripDates && 
                 tripDates.map((date, index) => {
@@ -134,13 +180,13 @@ const styles = StyleSheet.create({
     logo: {
         fontSize: 32,
         fontWeight: '200',
-        backgroundColor: '#fffcf5',
+        backgroundColor: '#ffffff',
         paddingLeft: 150,
         paddingRight: 150,
         fontFamily: 'GilroyLight'
       },
       scrollView: {
-        backgroundColor: '#fffcf5',
+        backgroundColor: '#ffffff',
         padding: 20,
         alignItems: 'center'
       },
