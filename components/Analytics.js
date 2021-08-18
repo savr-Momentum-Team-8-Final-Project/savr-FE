@@ -97,6 +97,7 @@ export default function Analytics () {
                     <View style={styles.mainView}>
                         <Text>Spent: $900</Text>
                         <PieChart
+                        style={styles.pieChart}
                         data={data}
                         width={355}
                         height={220}
@@ -105,28 +106,28 @@ export default function Analytics () {
                         backgroundColor={"transparent"}
                         />
                         <View style={styles.expense}>
-                            <Text>Lodging</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Food</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Transportation</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Tickets</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Grocery</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Other</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                     </View>
                 </View>
@@ -143,28 +144,28 @@ export default function Analytics () {
                         backgroundColor={"transparent"}
                         />
                         <View style={styles.expense}>
-                            <Text>Lodging</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Food</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Transportation</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Tickets</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Grocery</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                         <View style={styles.expense}>
-                            <Text>Other</Text>
-                            <Text>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
                     </View>
                 </View>
@@ -211,14 +212,17 @@ const styles = StyleSheet.create({
       },
     expense: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 15,
     alignItems: 'center',
     width: '100%',
-    height: 40,
+    // height: 40,
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#00C244',
     borderRadius: 10,
     padding: 10,
+    },
+    pieChart: {
+        marginBottom: 20
     }
   })
