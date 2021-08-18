@@ -5,7 +5,7 @@ import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, To
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses } from '../api.js'
+import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js'
 import CreateAnExpense from './CreateAnExpense'
 import moment from 'moment';
 import axios from 'axios';
@@ -83,6 +83,18 @@ const data = [
 
 
 export default function Analytics () {
+
+    const [currentSpent, setCurrentSpent] = useState()
+
+    useEffect(() => {
+        getCurrentTripData()
+        .then(data => {
+            const a = data.data.total_expenses.price__sum
+            setCurrentSpent(a)
+        })
+    }, [])
+
+
     return (
         <>
         <Text style={styles.logo}>s a v r</Text> 
@@ -95,7 +107,7 @@ export default function Analytics () {
                 <View key="1" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
                         <Text style={styles.title}>Current Trip</Text>
-                        <Text style={styles.spent}>Spent: $240.45</Text>
+                        <Text style={styles.spent}>Spent: ${currentSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
                         <PieChart
