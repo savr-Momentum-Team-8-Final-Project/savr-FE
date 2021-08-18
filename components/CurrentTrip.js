@@ -45,15 +45,16 @@ export default function CurrentTrip () {
     const [days, setDays] = useState()
     const [tripDates, setTripDates] = useState()
     const [addingExpense, setAddingExpense] = useState(false)
-    const [progress, setProgress] = useState()
-    const [budget, setBudget] = useState()
+    const [progress, setProgress] = useState(0)
+    const [budget, setBudget] = useState(0)
 
     let dates = []
 
     const today = moment().format('YYYY-MM-DD')
 
+
     const data = {
-        data: [ , , progress]
+        data: [, , , progress]
       };
 
     useEffect(() => {
@@ -135,21 +136,24 @@ export default function CurrentTrip () {
                 </View>
             </View>
             <Text style={{position: 'absolute', marginTop: 213, fontSize: 30, color: 'black'}}>${budget}</Text>
-            <ProgressChart
-            data={data}
-            width={screenWidth}
-            height={220}
-            strokeWidth={20}
-            radius={40}
-            chartConfig={chartConfig}
-            hideLegend={true}
-            />
+
+             
+                <ProgressChart
+                data={data}
+                width={screenWidth}
+                height={220}
+                strokeWidth={20}
+                radius={40}
+                chartConfig={chartConfig}
+                hideLegend={true}
+                />
+                
             
 
             {tripDates && 
                 tripDates.map((date, index) => {
                     return (
-                        <>
+                        <View style={{width: '100%'}} key={index}>
                         {expenses.map((expense, index) => {
                         if (expense.trip === currentTrip.id && expense.date === date) {
                             return (
@@ -164,7 +168,7 @@ export default function CurrentTrip () {
                             )
                         }
                         })}
-                        </>
+                        </View>
                     )
             })}
 
