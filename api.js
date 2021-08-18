@@ -106,3 +106,8 @@ export function getCurrentTripData () {
     return axios.get('https://savr-travel.herokuapp.com/api/trip/1/')
     .then(response => response)
 }
+
+export function getAllTimeData () {
+    return axios.get('https://savr-travel.herokuapp.com/api/accounts/summary/')
+    .then(response => response)
+}

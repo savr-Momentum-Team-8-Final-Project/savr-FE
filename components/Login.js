@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import RegisterForm from "./Register";
 import { requestLogin } from "../api";
-import Homepage from "./Homepage";
+// import Homepage from "./Homepage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginForm = (props) => {
