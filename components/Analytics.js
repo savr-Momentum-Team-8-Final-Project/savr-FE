@@ -95,7 +95,11 @@ export default function Analytics () {
         })
         getAllTimeData()
         .then(data => {
-            console.log(data.data)
+            data.data.map((summary) => {
+                if (summary.id == 1) {
+                    setAllTimeSpent(summary.alltrip_expenses.price__sum)
+                }
+            })
         })
     }, [])
 
