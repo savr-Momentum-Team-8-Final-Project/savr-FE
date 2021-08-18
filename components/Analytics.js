@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js'
+import { requestTrips, requestExpenses, getCurrentTripData, getAllTimeData } from '../api.js'
 import CreateAnExpense from './CreateAnExpense'
 import moment from 'moment';
 import axios from 'axios';
@@ -84,13 +84,18 @@ const data = [
 
 export default function Analytics () {
 
-    const [currentSpent, setCurrentSpent] = useState()
+    const [currentSpent, setCurrentSpent] = useState(0)
+    const [allTimeSpent, setAllTimeSpent] = useState(0)
 
     useEffect(() => {
         getCurrentTripData()
         .then(data => {
             const a = data.data.total_expenses.price__sum
             setCurrentSpent(a)
+        })
+        getAllTimeData()
+        .then(data => {
+            console.log(data.data)
         })
     }, [])
 
@@ -110,15 +115,16 @@ export default function Analytics () {
                         <Text style={styles.spent}>Spent: ${currentSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
-                        <PieChart
-                        style={styles.pieChart}
-                        data={data}
-                        width={355}
-                        height={220}
-                        chartConfig={chartConfig}
-                        accessor={"total"}
-                        backgroundColor={"transparent"}
-                        />
+                                <PieChart
+                            style={styles.pieChart}
+                            data={data}
+                            width={355}
+                            height={220}
+                            chartConfig={chartConfig}
+                            accessor={"total"}
+                            backgroundColor={"transparent"}
+                            />
+                        
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
@@ -148,17 +154,20 @@ export default function Analytics () {
                 <View key="2" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
                         <Text style={styles.title}>All Time</Text>
-                        <Text style={styles.spent}>Spent: $8053.45</Text>
+                        <Text style={styles.spent}>Spent: ${allTimeSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
-                        <PieChart
-                        data={data}
-                        width={355}
-                        height={220}
-                        chartConfig={chartConfig}
-                        accessor={"total"}
-                        backgroundColor={"transparent"}
-                        />
+                 
+                            <PieChart
+                            data={data}
+                            width={355}
+                            height={220}
+                            chartConfig={chartConfig}
+                            accessor={"total"}
+                            backgroundColor={"transparent"}
+                            />
+                  
+                        
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
