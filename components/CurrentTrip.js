@@ -153,7 +153,7 @@ export default function CurrentTrip () {
             {tripDates && 
                 tripDates.map((date, index) => {
                     return (
-                        <View key={index}>
+                        <View style={{width: '100%'}} key={index}>
                         {expenses.map((expense, index) => {
                         if (expense.trip === currentTrip.id && expense.date === date) {
                             return (
