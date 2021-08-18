@@ -1,11 +1,20 @@
-import 'react-native-gesture-handler'
-import { StatusBar } from 'expo-status-bar'
-import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ScrollView, TouchableOpacity } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
+import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  Button
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const expenses = [
   {
@@ -42,7 +51,10 @@ export default function Trip (props) {
       <Text style={styles.logo}>s a v r</Text>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View>
-          <Pressable style={styles.button1} onPress={() => setSelectedTrip(null)}>
+          <Pressable
+            style={styles.button1}
+            onPress={() => setSelectedTrip(null)}
+          >
             <Text style={styles.text1}>←</Text>
           </Pressable>
 
@@ -53,7 +65,10 @@ export default function Trip (props) {
           </View>
         </View>
         <Text>${selectedTrip.budget}</Text>
-        <Image source={require('../assets/1024px-Donut-Chart.svg.png')} style={styles.graph} />
+        <Image
+          source={require('../assets/1024px-Donut-Chart.svg.png')}
+          style={styles.graph}
+        />
         <Text>60% of your budget went to food. Yum!</Text>
 
         <View style={styles.expense}>
@@ -62,7 +77,9 @@ export default function Trip (props) {
               return (
                 <View key={index}>
                   <Text>{expense.date}</Text>
-                  <Text>{expense.expense_title} ${expense.total_cost}</Text>
+                  <Text>
+                    {expense.expense_title} ${expense.total_cost}
+                  </Text>
                 </View>
               )
             }
@@ -74,7 +91,9 @@ export default function Trip (props) {
               return (
                 <View key={index}>
                   <Text>{expense.date}</Text>
-                  <Text>{expense.expense_title} ${expense.total_cost}</Text>
+                  <Text>
+                    {expense.expense_title} ${expense.total_cost}
+                  </Text>
                 </View>
               )
             }

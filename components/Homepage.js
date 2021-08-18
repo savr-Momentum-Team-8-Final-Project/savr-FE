@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,54 +12,54 @@ import {
   ImageBackground,
   Pressable,
   Button,
-  AsyncStorage
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useFonts } from 'expo-font';
-import Trip from './Trip.js';
-import { requestTrips } from '../api.js';
-import moment from 'moment';
-import CreateATrip from './CreateATrip.js';
-import axios from 'axios';
+  AsyncStorage,
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useFonts } from "expo-font";
+import Trip from "./Trip.js";
+import { requestTrips } from "../api.js";
+import moment from "moment";
+import CreateATrip from "./CreateATrip.js";
+import axios from "axios";
 
-import LoginForm from './Login.js';
-import { render } from 'react-dom';
+import LoginForm from "./Login.js";
+import { render } from "react-dom";
 
-export default function Homepage ({ navigation }) {
-  const today = moment().format('YYYY-MM-DD')
+export default function Homepage({ navigation }) {
+  const today = moment().format("YYYY-MM-DD");
 
   const [loaded] = useFonts({
-    GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
-    GilroyBold: require('../assets/fonts/Gilroy-ExtraBold.otf')
-  })
+    GilroyLight: require("../assets/fonts/Gilroy-Light.otf"),
+    GilroyBold: require("../assets/fonts/Gilroy-ExtraBold.otf"),
+  });
 
-  const [selectedTrip, setSelectedTrip] = useState(null)
-  const [trips, setTrips] = useState([])
-  const [creating, setCreating] = useState(false)
-  const [token, setToken] = useState('token', '')
+  const [selectedTrip, setSelectedTrip] = useState(null);
+  const [trips, setTrips] = useState([]);
+  const [creating, setCreating] = useState(false);
+  const [token, setToken] = useState("token", "");
 
-  function setAuthToken (token) {
-    setToken(token)
+  function setAuthToken(token) {
+    setToken(token);
   }
 
   useEffect(() => {
     requestTrips().then((data) => {
-      setTrips(data.data)
-    })
-  }, [creating])
+      setTrips(data.data);
+    });
+  }, [creating]);
 
-  function tripDetails (trip) {
-    setSelectedTrip(trip)
-    console.log(trip)
+  function tripDetails(trip) {
+    setSelectedTrip(trip);
+    console.log(trip);
   }
 
   if (!loaded) {
-    return null
+    return null;
   }
 
   if (creating) {
-    return <CreateATrip setCreating={setCreating} />
+    return <CreateATrip setCreating={setCreating} />;
   }
   if (token) {
     return selectedTrip ? (
@@ -96,20 +96,20 @@ export default function Homepage ({ navigation }) {
                   >
                     <Text style={styles.text}>{trip.city}</Text>
                     <Image
-                      source={require('../assets/JL09SeattleSkylinePD.jpeg')}
+                      source={require("../assets/JL09SeattleSkylinePD.jpeg")}
                       style={styles.image}
                     />
                     <View style={styles.coverText}>
                       <Text style={styles.text}>
-                        {moment(trip.start_date).format('MM-DD-YYYY')}
+                        {moment(trip.start_date).format("MM-DD-YYYY")}
                       </Text>
                       <Text style={styles.text}>
-                        {moment(trip.end_date).format('MM-DD-YYYY')}
+                        {moment(trip.end_date).format("MM-DD-YYYY")}
                       </Text>
                       <Text style={styles.text}>${trip.budget}</Text>
                     </View>
                   </TouchableOpacity>
-                )
+                );
               }
             })}
           </View>
@@ -126,20 +126,20 @@ export default function Homepage ({ navigation }) {
                   >
                     <Text style={styles.text}>{trip.city}</Text>
                     <Image
-                      source={require('../assets/JL09SeattleSkylinePD.jpeg')}
+                      source={require("../assets/JL09SeattleSkylinePD.jpeg")}
                       style={styles.image}
                     />
                     <View style={styles.coverText}>
                       <Text style={styles.text}>
-                        {moment(trip.start_date).format('MM-DD-YYYY')}
+                        {moment(trip.start_date).format("MM-DD-YYYY")}
                       </Text>
                       <Text style={styles.text}>
-                        {moment(trip.end_date).format('MM-DD-YYYY')}
+                        {moment(trip.end_date).format("MM-DD-YYYY")}
                       </Text>
                       <Text style={styles.text}>${trip.budget}</Text>
                     </View>
                   </TouchableOpacity>
-                )
+                );
               }
             })}
           </View>
@@ -156,97 +156,97 @@ export default function Homepage ({ navigation }) {
                   >
                     <Text style={styles.text}>{trip.city}</Text>
                     <Image
-                      source={require('../assets/JL09SeattleSkylinePD.jpeg')}
+                      source={require("../assets/JL09SeattleSkylinePD.jpeg")}
                       style={styles.image}
                     />
                     <View style={styles.coverText}>
                       <Text style={styles.text}>
-                        {moment(trip.start_date).format('MM-DD-YYYY')}
+                        {moment(trip.start_date).format("MM-DD-YYYY")}
                       </Text>
                       <Text style={styles.text}>
-                        {moment(trip.end_date).format('MM-DD-YYYY')}
+                        {moment(trip.end_date).format("MM-DD-YYYY")}
                       </Text>
                       <Text style={styles.text}>${trip.budget}</Text>
                     </View>
                   </TouchableOpacity>
-                )
+                );
               }
             })}
           </View>
         </ScrollView>
         {/* </ImageBackground> */}
       </>
-    )
+    );
   } else {
-    return <LoginForm setAuthToken={setAuthToken} />
+    return <LoginForm setAuthToken={setAuthToken} />;
   }
 }
 
 const styles = StyleSheet.create({
   current: {
-    fontFamily: 'GilroyLight',
-    display: 'flex',
+    fontFamily: "GilroyLight",
+    display: "flex",
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 10,
-    backgroundColor: 'rgba(230, 230, 230, 0.5)',
+    backgroundColor: "rgba(230, 230, 230, 0.5)",
     borderRadius: 10,
-    marginBottom: 30
+    marginBottom: 30,
   },
   current1: {
     marginTop: 30,
-    fontFamily: 'GilroyBold',
+    fontFamily: "GilroyBold",
     fontSize: 30,
-    marginBottom: 30
+    marginBottom: 30,
   },
   scrollView: {
-    backgroundColor: '#ffffff',
-    padding: 20
+    backgroundColor: "#ffffff",
+    padding: 20,
   },
   image: {
-    display: 'flex',
+    display: "flex",
     width: 340,
     height: 100,
-    resizeMode: 'cover',
+    resizeMode: "cover",
     borderRadius: 11,
-    paddingTop: 10
+    paddingTop: 10,
   },
   previous: {
-    marginBottom: 60
+    marginBottom: 60,
   },
   logo: {
     fontSize: 32,
-    fontWeight: '200',
-    backgroundColor: '#ffffff',
+    fontWeight: "200",
+    backgroundColor: "#ffffff",
     paddingLeft: 150,
     paddingRight: 150,
-    fontFamily: 'GilroyLight'
+    fontFamily: "GilroyLight",
   },
   text: {
-    fontFamily: 'GilroyLight',
+    fontFamily: "GilroyLight",
     fontSize: 20,
-    padding: 10
+    padding: 10,
   },
   coverText: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   button: {
     width: 50,
     height: 50,
     borderRadius: 30,
-    backgroundColor: '#00C244',
+    backgroundColor: "#00C244",
     top: 0,
     left: 290,
-    alignItems: 'center'
+    alignItems: "center",
   },
   text1: {
-    color: 'white',
-    fontSize: 38
-  }
-})
+    color: "white",
+    fontSize: 38,
+  },
+});

@@ -11,11 +11,13 @@ import {
   KeyboardAvoidingView,
   AsyncStorage
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import RegisterForm from './Register';
 import { requestLogin } from '../api';
 import Homepage from './Homepage';
 
 const LoginForm = (props) => {
+  const navigation = useNavigation()
   const { storeData, setAuthToken } = props
   const [registering, setRegistering] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -28,7 +30,11 @@ const LoginForm = (props) => {
   function handleLogin (event) {
     console.log('logged in')
     event.preventDefault()
-    requestLogin(email, password).then((res) => storeData(res.data.auth_token))
+    requestLogin(email, password)
+    requestLogin(email, password).then((res) => {
+      storeData(res.data.auth_token)
+      setAuthToken(res.data.auth_token)
+    })
   }
 
   return (

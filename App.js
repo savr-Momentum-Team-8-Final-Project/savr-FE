@@ -33,13 +33,13 @@ import { render } from 'react-dom';
 
 const Tab = createBottomTabNavigator()
 
-export default function App () {
+export default function App ({ navigation }) {
   const [authToken, setAuthToken] = useState('')
   const [loaded] = useFonts({
     GilroyLight: require('./assets/fonts/Gilroy-Light.otf'),
     GilroyBold: require('./assets/fonts/Gilroy-ExtraBold.otf')
   })
-
+  useEffect(() => {}, [authToken])
   const storeData = async (token) => {
     try {
       await AsyncStorage.setItem('token', token)
@@ -62,6 +62,7 @@ export default function App () {
       <SafeAreaView style={styles.container} />
       <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
         <Tab.Navigator
+          initialRouteName='Current Trip'
           screenOptions={{
             headerShown: false,
             tabBarActiveTintColor: '#00C244',
@@ -76,7 +77,9 @@ export default function App () {
         >
           {!authToken ? (
             <Tab.Screen name='Login'>
-              {(props) => <Login storeData={storeData} />}
+              {(props) => (
+                <Login storeData={storeData} setAuthToken={setAuthToken} />
+              )}
             </Tab.Screen>
           ) : (
             <>
