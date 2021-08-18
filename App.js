@@ -1,16 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Button,
+  Text,
+  View,
+  Image,
+  Screen,
+  AsyncStorage
+} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Homepage from './components/Homepage.js'
-import Login from './components/Login'
-import CreateATrip from './components/CreateATrip.js'
-import Register from './components/Register.js'
-import Profile from './components/Profile.js'
-import CurrentTrip from './components/CurrentTrip.js'
+import Homepage from './components/Homepage.js';
+import Login from './components/Login';
+import CreateATrip from './components/CreateATrip.js';
+import Register from './components/Register.js';
+import Profile from './components/Profile.js';
+import CurrentTrip from './components/CurrentTrip.js';
 import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import {
@@ -18,49 +27,112 @@ import {
   AppearanceProvider,
   useColorScheme
 } from 'react-native-appearance';
+import { axios } from 'react-native-axios';
+import { requestLogout } from './api.js';
+import { render } from 'react-dom';
 
 const Tab = createBottomTabNavigator()
 
 export default function App () {
+  const [authToken, setAuthToken] = useState('')
   const [loaded] = useFonts({
     GilroyLight: require('./assets/fonts/Gilroy-Light.otf'),
     GilroyBold: require('./assets/fonts/Gilroy-ExtraBold.otf')
   })
 
+  const storeData = async (token) => {
+    try {
+      await AsyncStorage.setItem('token', token)
+    } catch (error) {
+      return error
+    }
+  }
   if (!loaded) {
     return null
   }
+  console.log(
+    AsyncStorage.getItem('token', (err, token) => {
+      token ? setAuthToken(token) : Promise.reject(err)
+    })
+  )
 
+  console.log('Auth token', authToken)
   return (
-      <>
     <NavigationContainer>
-        <SafeAreaView style={styles.container} />
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
-            <Tab.Navigator screenOptions={{
-                headerShown: false,
-                'tabBarActiveTintColor': '#00C244',
-                'tabBarStyle': [
-                    {
-                        display: 'flex',
-                        backgroundColor: '#ffffff'
-                    },
-                    null
-                ]
-                }}>
-                <Tab.Screen name="Current Trip" component={CurrentTrip} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-paper-plane" size={props.size} color={props.color}/>
-                }}/>
-                <Tab.Screen name="Analytics" component={CreateATrip} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-flask" size={props.size} color={props.color}/>
-                }}/>
-                <Tab.Screen name="Trips" component={Homepage} options={{
-                    tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
-                }}/>
-            </Tab.Navigator>
-          </SafeAreaView>
-        </NavigationContainer>
-      </AppearanceProvider>
-    </>
+      <SafeAreaView style={styles.container} />
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor: '#00C244',
+            tabBarStyle: [
+              {
+                display: 'flex',
+                backgroundColor: '#ffffff'
+              },
+              null
+            ]
+          }}
+        >
+          {!authToken ? (
+            <Tab.Screen name='Login'>
+              {(props) => <Login storeData={storeData} />}
+            </Tab.Screen>
+          ) : (
+            <>
+              <Tab.Screen
+                name='Current Trip'
+                component={CurrentTrip}
+                options={{
+                  tabBarIcon: (props) => (
+                    <Ionicons
+                      name='ios-paper-plane'
+                      size={props.size}
+                      color={props.color}
+                    />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Analytics'
+                component={CreateATrip}
+                options={{
+                  tabBarIcon: (props) => (
+                    <Ionicons
+                      name='ios-flask'
+                      size={props.size}
+                      color={props.color}
+                    />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Trips'
+                component={Homepage}
+                options={{
+                  tabBarIcon: (props) => (
+                    <Ionicons
+                      name='ios-menu'
+                      size={props.size}
+                      color={props.color}
+                    />
+                  )
+                }}
+              />
+            </>
+          )}
+        </Tab.Navigator>
+        <Button
+          title='Logout'
+          onPress={() => {
+            AsyncStorage.setItem('token', '').then(() => setAuthToken(''))
+            console.log(authToken)
+          }}
+        >
+          Test
+        </Button>
+      </SafeAreaView>
+    </NavigationContainer>
   )
 }
 

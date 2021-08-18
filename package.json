@@ -25,6 +25,8 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-appearance": "~0.3.3",
+    "react-native-axios": "^0.17.1",
     "react-native-date-picker": "^3.3.2",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~1.10.2",
@@ -34,7 +36,7 @@
     "react-native-web": "~0.13.12",
     "react-router-native": "^5.2.0",
     "yarn": "^1.22.11",
-    "react-native-appearance": "~0.3.3"
+    "@react-native-community/async-storage": "~1.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

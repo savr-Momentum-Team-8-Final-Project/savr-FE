@@ -9,11 +9,11 @@ import {
   Image,
   Alert,
   Platform,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  AsyncStorage
 } from 'react-native';
 import { requestRegistration } from '../api.js';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterForm = (props) => {
   const { setRegistering } = props

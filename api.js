@@ -78,21 +78,22 @@ export function createTrip (title, start_date, end_date, city, state, budget) {
     })
     .then((response) => response)
 }
-export function requestExpenses() {
-    return axios.get('https://savr-travel.herokuapp.com/api/expenses/')
-    .then(response => response)
-}
-
-export function createExpense(title, trip, price, note, date, category) {
-    return axios.post('https://savr-travel.herokuapp.com/api/expenses/create/', {
-        expense_title: title,
-        trip: trip,
-        amount: 1, 
-        price: price,
-        note: note,
-        date: date,
-        category: category
-    })
+export function requestExpenses () {
+  return axios
+    .get('https://savr-travel.herokuapp.com/api/expenses/')
     .then((response) => response)
 }
 
+export function createExpense (title, trip, price, note, date, category) {
+  return axios
+    .post('https://savr-travel.herokuapp.com/api/expenses/create/', {
+      expense_title: title,
+      trip: trip,
+      amount: 1,
+      price: price,
+      note: note,
+      date: date,
+      category: category
+    })
+    .then((response) => response)
+}
