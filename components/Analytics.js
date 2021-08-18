@@ -40,42 +40,42 @@ const data = [
     {
       name: "Lodging",
       total: 10000000,
-      color: "#058082",
+      color: "#baffd2",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
       name: "Food",
       total: 2800000,
-      color: "#E28A2C",
+      color: "#63ff9a",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
       name: "Transportation",
       total: 5276120,
-      color: "#132E41",
+      color: "#0ee358",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
       name: "Tickets",
       total: 8538000,
-      color: "#E9A932",
+      color: "#00C244",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
       name: "Grocery",
       total: 11920000,
-      color: "#E45239",
+      color: "#009635",
       legendFontColor: "#7F7F7F",
       legendFontSize: 13
     },
     {
         name: "Other",
         total: 11000000,
-        color: "#FFEBC1",
+        color: "#005c20",
         legendFontColor: "#7F7F7F",
         legendFontSize: 13
       }
@@ -88,6 +88,7 @@ export default function Analytics () {
         <Text style={styles.logo}>s a v r</Text> 
         <PagerView style={styles.pagerView} initialPage={0}>
                 <View key="1">
+                    <Text>Current Trip</Text>
                     <View style={styles.mainView}>
                         <PieChart
                         data={data}
@@ -100,6 +101,7 @@ export default function Analytics () {
                     </View>
                 </View>
                 <View key="2">
+                    <Text>All Time</Text>
                     <View style={styles.mainView}>
                         <PieChart
                         data={data}
