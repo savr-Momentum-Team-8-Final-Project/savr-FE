@@ -18,6 +18,7 @@ import {
     StackedBarChart
   } from "react-native-chart-kit";
   import { Dimensions } from "react-native";
+  import PagerView from 'react-native-pager-view';
 
 
 
@@ -84,22 +85,33 @@ const data = [
 export default function Analytics () {
     return (
         <>
-        <Text style={styles.logo}>s a v r</Text>
-        <View style={styles.mainView}>
-            <Text>←recent                 Current trip               all time→</Text>
-            <View style={styles.donut}></View>
-            <PieChart
-            data={data}
-            width={screenWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor={"total"}
-            backgroundColor={"transparent"}
-            // paddingLeft={"15"}
-            // center={[10, 50]}
-            // absolute
-            />
-        </View>
+        <Text style={styles.logo}>s a v r</Text> 
+        <PagerView style={styles.pagerView} initialPage={0}>
+                <View key="1">
+                    <View style={styles.mainView}>
+                        <PieChart
+                        data={data}
+                        width={screenWidth}
+                        height={220}
+                        chartConfig={chartConfig}
+                        accessor={"total"}
+                        backgroundColor={"transparent"}
+                        />
+                    </View>
+                </View>
+                <View key="2">
+                    <View style={styles.mainView}>
+                        <PieChart
+                        data={data}
+                        width={screenWidth}
+                        height={220}
+                        chartConfig={chartConfig}
+                        accessor={"total"}
+                        backgroundColor={"transparent"}
+                        />
+                    </View>
+                </View>
+        </PagerView>
         </>
     )
 }
@@ -112,7 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         paddingLeft: 150,
         paddingRight: 150,
-        fontFamily: 'GilroyLight'
+        fontFamily: 'GilroyLight',
       },
       graph: {
         width: 250,
@@ -123,7 +135,9 @@ const styles = StyleSheet.create({
     mainView: {
         backgroundColor: '#ffffff',
         padding: 20,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%'
     },
     donut: {
         zIndex: 999,
@@ -134,5 +148,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         marginTop: 107,
         right: 253
-    }
+    },
+    pagerView: {
+        flex: 1,
+      },
   })
