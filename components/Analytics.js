@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, TouchableOpacity} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -86,31 +86,86 @@ export default function Analytics () {
     return (
         <>
         <Text style={styles.logo}>s a v r</Text> 
-        <PagerView style={styles.pagerView} initialPage={0}>
-                <View key="1">
+        <PagerView 
+            style={styles.pagerView} 
+            initialPage={0}
+            showPageIndicator='true'
+            transitionStyle="scroll">
+
+                <View key="1" style={{backgroundColor: 'white'}}>
                     <Text>Current Trip</Text>
                     <View style={styles.mainView}>
+                        <Text>Spent: $900</Text>
                         <PieChart
                         data={data}
-                        width={screenWidth}
+                        width={355}
                         height={220}
                         chartConfig={chartConfig}
                         accessor={"total"}
                         backgroundColor={"transparent"}
                         />
+                        <View style={styles.expense}>
+                            <Text>Lodging</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Food</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Transportation</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Tickets</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Grocery</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Other</Text>
+                            <Text>$403.23</Text>
+                        </View>
                     </View>
                 </View>
-                <View key="2">
+                <View key="2" style={{backgroundColor: 'white'}}>
                     <Text>All Time</Text>
                     <View style={styles.mainView}>
+                        <Text>Spent: $900</Text>
                         <PieChart
                         data={data}
-                        width={screenWidth}
+                        width={355}
                         height={220}
                         chartConfig={chartConfig}
                         accessor={"total"}
                         backgroundColor={"transparent"}
                         />
+                        <View style={styles.expense}>
+                            <Text>Lodging</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Food</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Transportation</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Tickets</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Grocery</Text>
+                            <Text>$403.23</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text>Other</Text>
+                            <Text>$403.23</Text>
+                        </View>
                     </View>
                 </View>
         </PagerView>
@@ -154,4 +209,16 @@ const styles = StyleSheet.create({
     pagerView: {
         flex: 1,
       },
+    expense: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    alignItems: 'center',
+    width: '100%',
+    height: 40,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    padding: 10,
+    }
   })
