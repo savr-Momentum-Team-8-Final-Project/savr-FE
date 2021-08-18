@@ -65,17 +65,16 @@ export default function Homepage({ navigation }) {
       <Trip setSelectedTrip={setSelectedTrip} selectedTrip={selectedTrip} />
     ) : (
       <>
-        {/* <ImageBackground source={require('../assets/Untitled-4.jpg')} style={{position:'absolute', top: 0, bottom: 0}}> */}
 
         <Text style={styles.logo}>s a v r</Text>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
 
         <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
-
             <Text style={styles.text1}>+</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
 
-          <View style={styles.previous}>
+
+          {/* <View style={styles.previous}>
             <Text style={styles.current1}>Current Trip</Text>
             {trips.map((trip, index) => {
               if (
@@ -97,7 +96,7 @@ export default function Homepage({ navigation }) {
             }
             
         })}
-        </View>
+        </View> */}
 
       <View style={styles.previous}>
       <Text style={styles.current1}>Upcoming Trips</Text>
@@ -106,7 +105,7 @@ export default function Homepage({ navigation }) {
                 return (
                     <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
                         <Text style={styles.text}>{trip.city}</Text>
-                        <Image source={require('../assets/JL09SeattleSkylinePD.jpeg')} style={styles.image} />
+                        <Image source={{uri: trip.c_photo}} style={styles.image} />
                         <View style={styles.coverText}>
                             <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
@@ -126,7 +125,7 @@ export default function Homepage({ navigation }) {
                 return (
                     <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
                         <Text style={styles.text}>{trip.city}</Text>
-                        <Image source={require('../assets/JL09SeattleSkylinePD.jpeg')} style={styles.image} />
+                        <Image ssource={{uri: trip.c_photo}} style={styles.image} />
                         <View style={styles.coverText}>
                             <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
                             <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
@@ -138,8 +137,8 @@ export default function Homepage({ navigation }) {
             
         })}
         </View>
+
       </ScrollView>
-      {/* </ImageBackground> */}
     </>
     );
   } else {
@@ -209,6 +208,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 290,
     alignItems: "center",
+    margin: 0
   },
   text1: {
     color: "white",
