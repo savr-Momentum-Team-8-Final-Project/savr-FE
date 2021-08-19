@@ -50,7 +50,7 @@ export default function App () {
                 <Tab.Screen name="Current Trip" component={CurrentTrip} options={{
                     tabBarIcon: (props) => <Ionicons name="ios-paper-plane" size={props.size} color={props.color}/>
                 }}/>
-                <Tab.Screen name="Analytics" component={Analytics} options={{
+                <Tab.Screen name="Stats" component={Analytics} options={{
                     tabBarIcon: (props) => <Ionicons name="pie-chart" size={props.size} color={props.color}/>
                 }}/>
                 <Tab.Screen name="Trips" component={Homepage} options={{

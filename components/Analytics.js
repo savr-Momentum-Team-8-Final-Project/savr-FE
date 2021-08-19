@@ -193,7 +193,8 @@ export default function Analytics () {
                         <Text style={styles.spent}>${currentSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
-                                <PieChart
+                        <View style={styles.donut}></View>
+                            <PieChart
                             // style={styles.pieChart}
                             data={currentData}
                             width={355}
@@ -237,7 +238,7 @@ export default function Analytics () {
                         <Text style={styles.spent}>Spent: ${allTimeSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
-                 
+                            <View style={styles.donut}></View>
                             <PieChart
                             data={allTimeData}
                             width={355}
@@ -310,8 +311,8 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: "white",
         position: 'absolute',
-        marginTop: 107,
-        right: 253
+        top: 71,
+        right: 243
     },
     pagerView: {
         flex: 1,
