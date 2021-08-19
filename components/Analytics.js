@@ -190,7 +190,7 @@ export default function Analytics () {
                 <View key="1" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
                         <Text style={styles.title}>Current Trip</Text>
-                        <Text style={styles.spent}>Spent: ${currentSpent}</Text>
+                        <Text style={styles.spent}>${currentSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
                                 <PieChart
@@ -349,7 +349,8 @@ const styles = StyleSheet.create({
         color: 'black',
         padding: 7,
         // fontFamily: "GilroyBold",
-        fontWeight: '400',
-        fontSize: 20,
+        fontWeight: '600',
+        fontSize: 20
+        
     }
   })
