@@ -35,51 +35,6 @@ const chartConfig = {
   };
 
 
-const data = [
-    {
-      name: "Lodging",
-      total: 10000000,
-      color: "#cfffe0",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Food",
-      total: 2800000,
-      color: "#63ff9a",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Transportation",
-      total: 5276120,
-      color: "#00c244",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Tickets",
-      total: 8538000,
-      color: "#00802d",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Grocery",
-      total: 11920000,
-      color: "#00521d",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-        name: "Other",
-        total: 11000000,
-        color: "#00290e",
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 13
-      }
-  ]
-
 
 export default function Analytics () {
 
@@ -98,6 +53,97 @@ export default function Analytics () {
     const [allTimeTicket, setAllTimeTicket] = useState(0)
     const [allTimeGrocery, setAllTimeGrocery] = useState(0)
     const [allTimeOther, setAllTimeOther] = useState(0)
+
+
+    const currentData = [
+        {
+          name: "Lodging",
+          total: currentLodging,
+          color: "#cfffe0",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Food",
+          total: currentFood,
+          color: "#63ff9a",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Transportation",
+          total: currentTransportation,
+          color: "#00c244",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Tickets",
+          total: currentTicket,
+          color: "#00802d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Grocery",
+          total: currentGrocery,
+          color: "#00521d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+            name: "Other",
+            total: currentOther,
+            color: "#00290e",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 13
+          }
+      ]
+
+      const allTimeData = [
+        {
+          name: "Lodging",
+          total: allTimeSpent,
+          color: "#cfffe0",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Food",
+          total: allTimeFood,
+          color: "#63ff9a",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Transportation",
+          total: allTimeTransportation,
+          color: "#00c244",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Tickets",
+          total: allTimeTicket,
+          color: "#00802d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Grocery",
+          total: allTimeGrocery,
+          color: "#00521d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+            name: "Other",
+            total: allTimeOther,
+            color: "#00290e",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 13
+          }
+      ]
     
 
 
@@ -149,7 +195,7 @@ export default function Analytics () {
                     <View style={styles.mainView}>
                                 <PieChart
                             // style={styles.pieChart}
-                            data={data}
+                            data={currentData}
                             width={355}
                             height={220}
                             chartConfig={chartConfig}
@@ -193,7 +239,7 @@ export default function Analytics () {
                     <View style={styles.mainView}>
                  
                             <PieChart
-                            data={data}
+                            data={allTimeData}
                             width={355}
                             height={220}
                             chartConfig={chartConfig}
