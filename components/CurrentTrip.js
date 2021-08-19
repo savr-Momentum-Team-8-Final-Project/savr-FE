@@ -31,7 +31,7 @@ const chartConfig = {
   useShadowColorFromDataset: false // optional
 }
 
-  
+
 
 
 
