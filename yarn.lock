@@ -5638,6 +5638,14 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
+"react-native-viewpager@^0.2.13":
+  "integrity" "sha1-deQhrpDonvzXfSwHfAUlOCt8OcU="
+  "resolved" "https://registry.npmjs.org/react-native-viewpager/-/react-native-viewpager-0.2.13.tgz"
+  "version" "0.2.13"
+  dependencies:
+    "react-timer-mixin" "^0.13.3"
+    "warning" "^2.1.0"
+
 "react-native-web@~0.13.12":
   "integrity" "sha512-WR/0ECAmwLQ2+2cL2Ur+0/swXFAtcSM0URoADJmG6D4MnY+wGc91JO8LoOTlgY0USBOY+qG/beRrjFa+RAuOiA=="
   "resolved" "https://registry.npmjs.org/react-native-web/-/react-native-web-0.13.18.tgz"
@@ -5715,7 +5723,7 @@
     "tiny-invariant" "^1.0.2"
     "tiny-warning" "^1.0.0"
 
-"react-timer-mixin@^0.13.4":
+"react-timer-mixin@^0.13.3", "react-timer-mixin@^0.13.4":
   "integrity" "sha512-4+ow23tp/Tv7hBM5Az5/Be/eKKF7DIvJ09voz5LyHGQaqqz9WV8YMs31eFvcYQs7d451LSg7kDJV70XYN/Ug/Q=="
   "resolved" "https://registry.npmjs.org/react-timer-mixin/-/react-timer-mixin-0.13.4.tgz"
   "version" "0.13.4"
@@ -6698,6 +6706,13 @@
   "integrity" "sha512-recZTSvuaH/On5ZU5ywq66y99lImWqzP93+AiUo9LUwG8gXHW+LJjhOd6REJHm7qb0niYqrEQJvbHSQfuJtTqA=="
   "resolved" "https://registry.npmjs.org/warn-once/-/warn-once-0.1.0.tgz"
   "version" "0.1.0"
+
+"warning@^2.1.0":
+  "integrity" "sha1-ISINnGOvx3qMkhEeARr3Bc4MaQE="
+  "resolved" "https://registry.npmjs.org/warning/-/warning-2.1.0.tgz"
+  "version" "2.1.0"
+  dependencies:
+    "loose-envify" "^1.0.0"
 
 "wcwidth@^1.0.1":
   "integrity" "sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g="
