@@ -51,13 +51,12 @@ export default function CreateAnExpense (props) {
         showsVerticalScrollIndicator={false}
         stickyHeaderIndices={[0]}
       >
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setAddingExpense(false)}
-        >
+        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(false)}>
           <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.label}>Expense</Text>
+        <Text style={{fontSize: 20, fontFamily: 'GilroyBold', position: 'absolute', marginLeft: 190, width: '100%', marginTop: 30}}> Create an Expense</Text>
+
+        <Text style={styles.label}>Title</Text>
         <TextInput
           secureTextEntry={false}
           placeholder='Expense Title'
@@ -88,7 +87,7 @@ export default function CreateAnExpense (props) {
 
         {/* <Text style={{fontFamily: 'GilroyLight'}}>Date of Expense</Text> */}
         <DateTimePicker
-          style={{ flex: 1 }}
+          style={{ flex: 1, marginBottom: 0 }}
           testID='dateTimePicker'
           value={date}
           mode='date'
@@ -142,14 +141,12 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   datePicker: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 40,
-    marginBottom: 60
+    // flexDirection: 'row',
+    // justifyContent: 'space-around',
   },
   textInput: {
     marginTop: 20,
-    marginBottom: 50,
+    marginBottom: 20,
     borderColor: '#00C244',
     borderWidth: 1,
     borderRadius: 10,

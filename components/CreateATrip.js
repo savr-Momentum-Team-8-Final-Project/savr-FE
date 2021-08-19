@@ -108,6 +108,7 @@ export default function CreateATrip (props) {
         >
           <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
+        <Text style={{fontSize: 20, fontFamily: 'GilroyBold', position: 'absolute', marginLeft: 240, width: '100%', marginTop: 30}}> Create a Trip</Text>
 
         <Text style={styles.label}>Trip Name</Text>
         <TextInput
