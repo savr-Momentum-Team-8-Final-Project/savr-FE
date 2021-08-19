@@ -127,9 +127,9 @@ export default function CurrentTrip () {
         
             <View style={styles.heading}>
                 <Text style={styles.city}>{currentTrip.city}</Text>
-                <View>
-                    <Text>{currentTrip.start_date}</Text>
-                    <Text>{currentTrip.end_date}</Text>
+                <View style={{flexDirection: 'row', paddingTop: 8}}>
+                    <Text style={{fontSize: 20, fontWeight: '400'}}>{moment(currentTrip.start_date).format('Do')}-</Text>
+                    <Text style={{fontSize: 20, fontWeight: '400'}}>{moment(currentTrip.end_date).format('Do MMM')}</Text>
                 </View>
             </View>
 
@@ -147,7 +147,7 @@ export default function CurrentTrip () {
                 />
                 
 
-                <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
+        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
             <Text style={styles.text1}>+</Text>
         </TouchableOpacity>
             
@@ -229,14 +229,16 @@ const styles = StyleSheet.create({
       },
       budget: {
         position: 'absolute', 
-        marginTop: 150, 
+        marginTop: 180, 
         fontSize: 30, 
-        color: 'black'
+        color: 'black',
+        fontWeight: '500'
     },
       heading: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom: 30
       },
       city: {
         fontFamily: "GilroyBold",
