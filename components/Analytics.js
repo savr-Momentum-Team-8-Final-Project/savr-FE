@@ -271,7 +271,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         color: 'black',
         padding: 7,
-        fontFamily: "GilroyBold",
+        // fontFamily: "GilroyBold",
+        fontWeight: '400',
         fontSize: 20,
     }
   })

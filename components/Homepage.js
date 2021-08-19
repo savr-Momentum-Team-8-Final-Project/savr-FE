@@ -107,8 +107,7 @@ export default function Homepage({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         <Image source={{uri: trip.c_photo}} style={styles.image} />
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('Do')}-{moment(trip.end_date).format('Do MMMM')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -127,8 +126,7 @@ export default function Homepage({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         <Image ssource={{uri: trip.c_photo}} style={styles.image} />
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}</Text>
-                            <Text style={styles.text}>{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>{moment(trip.start_date).format('Do')}-{moment(trip.end_date).format('Do MMMM')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
