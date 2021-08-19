@@ -114,7 +114,6 @@ export default function Analytics () {
             transitionStyle="scroll">
 
                 <View key="1" style={{backgroundColor: 'white'}}>
-                    <View>
                     <View style={styles.heading}>
                         <Text style={styles.title}>Current Trip</Text>
                         <Text style={styles.spent}>Spent: ${currentSpent}</Text>
@@ -154,7 +153,6 @@ export default function Analytics () {
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
-                    </View>
                     </View>
                 </View>
                 <View key="2" style={{backgroundColor: 'white'}}>
@@ -223,7 +221,8 @@ const styles = StyleSheet.create({
     },
     mainView: {
         backgroundColor: '#ffffff',
-        padding: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
         alignItems: 'center',
         justifyContent: 'center',
         // height: '100%'
@@ -262,7 +261,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingLeft: 20,
         paddingRight: 20,
-        paddingTop: 10
+        paddingTop: 20
     },
     title: {
         fontFamily: "GilroyBold",
