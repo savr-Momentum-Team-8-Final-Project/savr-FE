@@ -62,7 +62,7 @@ export default function App ({ navigation }) {
       <SafeAreaView style={styles.container} />
       <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
         <Tab.Navigator
-          initialRouteName='Current Trip'
+          initialRouteName='Login'
           screenOptions={{
             headerShown: false,
             tabBarActiveTintColor: '#00C244',
@@ -76,7 +76,13 @@ export default function App ({ navigation }) {
           }}
         >
           {!authToken ? (
-            <Tab.Screen name='Login'>
+            <Tab.Screen
+              style={styles.login}
+              name='Powered by React Native'
+              options={{
+                tabBarIcon: (props) => <Ionicons name='logo-react' />
+              }}
+            >
               {(props) => (
                 <Login storeData={storeData} setAuthToken={setAuthToken} />
               )}
@@ -126,14 +132,13 @@ export default function App ({ navigation }) {
           )}
         </Tab.Navigator>
         <Button
+          style={styles.button1}
           title='Logout'
           onPress={() => {
-            AsyncStorage.setItem('token', '').then(() => setAuthToken(''))
+            AsyncStorage.removeItem('token', '').then(() => setAuthToken(''))
             console.log(authToken)
           }}
-        >
-          Test
-        </Button>
+        />
       </SafeAreaView>
     </NavigationContainer>
   )

@@ -14,9 +14,28 @@ import {
 } from 'react-native';
 import { requestRegistration } from '../api.js';
 import axios from 'axios';
+import { useFonts } from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+import { event } from 'react-native-reanimated';
 
 const RegisterForm = (props) => {
   const { setRegistering } = props
+  const [loaded] = useFonts({
+    GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
+    GilroyBold: require('../assets/fonts/Gilroy-ExtraBold.otf')
+  })
+  if (!loaded) {
+    return null
+  }
+  function handleLogin (event) {
+    console.log('logged in')
+    event.preventDefault()
+    requestLogin(email, password)
+    requestLogin(email, password).then((res) => {
+      storeData(res.data.auth_token)
+      setAuthToken(res.data.auth_token)
+    })
+  }
   return (
     <Formik
       initialValues={{
@@ -39,11 +58,7 @@ const RegisterForm = (props) => {
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}
         >
-          <Image
-            style={styles.logo}
-            source={require('../assets/favicon.png')}
-          />
-          <Text style={styles.formLabel}> SAVR </Text>
+          <Text style={styles.formLabel}> S A V R </Text>
           <TextInput
             placeholder='Enter User Name'
             autoCapitalize='none'
@@ -88,12 +103,12 @@ const RegisterForm = (props) => {
           <View style={styles.button}>
             <Button
               title='Create Account'
-              onPress={() => handleSubmit(values)}
+              onPress={() => handleLogin(values, event)}
               color='white'
             />
           </View>
           <View style={styles.register}>
-            <Text>Have an account?</Text>
+            <Text style={styles.register1}>Have an account?</Text>
             <Button
               title='Sign In'
               onPress={() => setRegistering(false)}
@@ -111,11 +126,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 50
+    height: 50,
+    backgroundColor: 'white',
+    fontFamily: 'GilroyLight'
   },
   formLabel: {
     fontSize: 40,
-    color: 'black'
+    color: 'black',
+    fontFamily: 'GilroyLight'
   },
   inputStyle: {
     marginTop: 20,
@@ -123,7 +141,8 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
-    backgroundColor: '#DCDCDC'
+    backgroundColor: '#DCDCDC',
+    fontFamily: 'GilroyLight'
   },
 
   button: {
@@ -133,22 +152,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 50,
     backgroundColor: '#00D64B',
-    color: 'white'
+    color: 'white',
+    fontFamily: 'GilroyLight'
   },
 
   register: {
     paddingVertical: 25,
-    color: '#00D64B'
+    color: '#00D64B',
+    fontFamily: 'GilroyLight',
+    fontSize: 15
+  },
+  register1: {
+    paddingVertical: 25,
+    color: 'black',
+    fontFamily: 'GilroyLight',
+    fontSize: 15
   },
 
   logo: {
     backgroundColor: 'blue',
     justifyContent: 'center'
-  },
-
-  forgot: {
-    position: 'absolute',
-    bottom: 30
   }
 })
 

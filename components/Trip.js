@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   Button
 } from 'react-native';
+import { requestLogout } from '../api.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

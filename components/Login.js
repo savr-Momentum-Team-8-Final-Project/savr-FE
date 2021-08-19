@@ -9,12 +9,14 @@ import {
   Alert,
   Platform,
   KeyboardAvoidingView,
-  AsyncStorage
+  AsyncStorage,
+  ImageBackground
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import RegisterForm from './Register';
 import { requestLogin } from '../api';
-import Homepage from './Homepage';
+import { useFonts } from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 
 const LoginForm = (props) => {
   const navigation = useNavigation()
@@ -23,6 +25,13 @@ const LoginForm = (props) => {
   const [submitting, setSubmitting] = useState(false)
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [loaded] = useFonts({
+    GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
+    GilroyBold: require('../assets/fonts/Gilroy-ExtraBold.otf')
+  })
+  if (!loaded) {
+    return null
+  }
 
   if (registering) {
     return <RegisterForm setRegistering={setRegistering} />
@@ -38,49 +47,54 @@ const LoginForm = (props) => {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
+    <ImageBackground
+      source='./assets/Untitled-4.jpg'
+      resizeMode='cover'
+      style={{ width: '100%', height: '100%' }}
     >
-      <Image style={styles.logo} source={require('../assets/favicon.png')} />
-      <Text style={styles.formLabel}> SAVR </Text>
-      <TextInput
-        placeholder='Enter Email'
-        autoCapitalize='none'
-        autoCorrect={false}
-        keyboardType='default'
-        name='email'
-        textContentType='emailAddress'
-        onChangeText={(text) => setEmail(text)}
-        style={styles.inputStyle}
-      />
-      <TextInput
-        placeholder='Enter Password'
-        secureTextEntry
-        autoCapitalize='none'
-        autoCorrect={false}
-        keyboardType='default'
-        name='password'
-        textContentType='password'
-        onChangeText={(text) => setPassword(text)}
-        style={styles.inputStyle}
-      />
-      <View style={styles.button}>
-        <Button
-          title='Login'
-          onPress={(event) => handleLogin(event)}
-          color='white'
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}
+      >
+        <Text style={styles.formLabel}>S A V R </Text>
+        <TextInput
+          placeholder='Enter Email'
+          autoCapitalize='none'
+          autoCorrect={false}
+          keyboardType='default'
+          name='email'
+          textContentType='emailAddress'
+          onChangeText={(text) => setEmail(text)}
+          style={styles.inputStyle}
         />
-      </View>
-      <View style={styles.register}>
-        <Text>Don't have an account?</Text>
-        <Button
-          title='Sign Up'
-          onPress={() => setRegistering(true)}
-          color='#00D64B'
+        <TextInput
+          placeholder='Enter Password'
+          secureTextEntry
+          autoCapitalize='none'
+          autoCorrect={false}
+          keyboardType='default'
+          name='password'
+          textContentType='password'
+          onChangeText={(text) => setPassword(text)}
+          style={styles.inputStyle}
         />
-      </View>
-    </KeyboardAvoidingView>
+        <View style={styles.button}>
+          <Button
+            title='Login'
+            onPress={(event) => handleLogin(event)}
+            color='white'
+          />
+        </View>
+        <View style={styles.register}>
+          <Text style={styles.register}>Don't have an account?</Text>
+          <Button
+            title='Sign Up'
+            onPress={() => setRegistering(true)}
+            color='#00D64B'
+          />
+        </View>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   )
 };
 
@@ -89,11 +103,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 50
+    height: 50,
+    backgroundColor: 'white'
   },
   formLabel: {
     fontSize: 40,
-    color: 'black'
+    color: 'black',
+    fontFamily: 'GilroyLight'
   },
   inputStyle: {
     marginTop: 20,
@@ -101,7 +117,8 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
-    backgroundColor: '#DCDCDC'
+    backgroundColor: '#DCDCDC',
+    fontFamily: 'GilroyLight'
   },
 
   button: {
@@ -111,11 +128,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 50,
     backgroundColor: '#00D64B',
-    color: 'white'
+    color: 'white',
+    fontFamily: 'GilroyLight'
   },
 
   register: {
-    paddingVertical: 25
+    paddingVertical: 25,
+    fontFamily: 'GilroyLight'
   },
 
   logo: {
