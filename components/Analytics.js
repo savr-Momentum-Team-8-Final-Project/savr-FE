@@ -19,8 +19,7 @@ import {
   } from "react-native-chart-kit";
   import { Dimensions } from "react-native";
   import PagerView from 'react-native-pager-view';
-
-
+  
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -111,7 +110,8 @@ export default function Analytics () {
             style={styles.pagerView} 
             initialPage={0}
             showPageIndicator='true'
-            transitionStyle="scroll">
+            transitionStyle="scroll"
+            >
 
                 <View key="1" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
