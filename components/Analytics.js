@@ -19,8 +19,7 @@ import {
   } from "react-native-chart-kit";
   import { Dimensions } from "react-native";
   import PagerView from 'react-native-pager-view';
-
-
+  
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -36,68 +35,142 @@ const chartConfig = {
   };
 
 
-const data = [
-    {
-      name: "Lodging",
-      total: 10000000,
-      color: "#cfffe0",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Food",
-      total: 2800000,
-      color: "#63ff9a",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Transportation",
-      total: 5276120,
-      color: "#00c244",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Tickets",
-      total: 8538000,
-      color: "#00802d",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-      name: "Grocery",
-      total: 11920000,
-      color: "#00521d",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 13
-    },
-    {
-        name: "Other",
-        total: 11000000,
-        color: "#00290e",
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 13
-      }
-  ]
-
 
 export default function Analytics () {
 
     const [currentSpent, setCurrentSpent] = useState(0)
+    const [currentLodging, setCurrentLodging] = useState(0)
+    const [currentFood, setCurrentFood] = useState(0)
+    const [currentTransportation, setCurrentTransportation] = useState(0)
+    const [currentTicket, setCurrentTicket] = useState(0)
+    const [currentGrocery, setCurrentGrocery] = useState(0)
+    const [currentOther, setCurrentOther] = useState(0)
+
     const [allTimeSpent, setAllTimeSpent] = useState(0)
+    const [allTimeLodging, setAllTimeLodging] = useState(0)
+    const [allTimeFood, setAllTimeFood] = useState(0)
+    const [allTimeTransportation, setAllTimeTransportation] = useState(0)
+    const [allTimeTicket, setAllTimeTicket] = useState(0)
+    const [allTimeGrocery, setAllTimeGrocery] = useState(0)
+    const [allTimeOther, setAllTimeOther] = useState(0)
+
+
+    const currentData = [
+        {
+          name: "Lodging",
+          total: currentLodging,
+          color: "#cfffe0",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Food",
+          total: currentFood,
+          color: "#63ff9a",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Transportation",
+          total: currentTransportation,
+          color: "#00c244",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Tickets",
+          total: currentTicket,
+          color: "#00802d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Grocery",
+          total: currentGrocery,
+          color: "#00521d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+            name: "Other",
+            total: currentOther,
+            color: "#00290e",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 13
+          }
+      ]
+
+      const allTimeData = [
+        {
+          name: "Lodging",
+          total: allTimeSpent,
+          color: "#cfffe0",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Food",
+          total: allTimeFood,
+          color: "#63ff9a",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Transportation",
+          total: allTimeTransportation,
+          color: "#00c244",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Tickets",
+          total: allTimeTicket,
+          color: "#00802d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Grocery",
+          total: allTimeGrocery,
+          color: "#00521d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+            name: "Other",
+            total: allTimeOther,
+            color: "#00290e",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 13
+          }
+      ]
+    
+
 
     useEffect(() => {
         getCurrentTripData()
         .then(data => {
-            const a = data.data.total_expenses.price__sum
-            setCurrentSpent(a)
+            setCurrentSpent(data.data.total_expenses.price__sum)
+            setCurrentLodging(data.data.lodging_expenses.price__sum)
+            setCurrentFood(data.data.food_expenses.price__sum)
+            setCurrentTransportation(data.data.trans_expenses.price__sum)
+            setCurrentTicket(data.data.ticket_expenses.price__sum)
+            setCurrentGrocery(data.data.grocery_expenses.price__sum)
+            setCurrentOther(data.data.other_expenses.price__sum)
+            
         })
         getAllTimeData()
         .then(data => {
+            console.log(data.data)
             data.data.map((summary) => {
                 if (summary.id == 1) {
                     setAllTimeSpent(summary.alltrip_expenses.price__sum)
+                    setAllTimeLodging(summary.alltrip_lodging.price__sum)
+                    setAllTimeFood(summary.alltrip_food.price__sum)
+                    setAllTimeTransportation(summary.alltrip_trans.price__sum)
+                    setAllTimeTicket(summary.alltrip_ticket.price__sum)
+                    setAllTimeGrocery(summary.alltrip_grocery.price__sum)
+                    setAllTimeOther(summary.alltrip_other.price__sum)
                 }
             })
         })
@@ -111,7 +184,8 @@ export default function Analytics () {
             style={styles.pagerView} 
             initialPage={0}
             showPageIndicator='true'
-            transitionStyle="scroll">
+            transitionStyle="scroll"
+            >
 
                 <View key="1" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
@@ -121,38 +195,40 @@ export default function Analytics () {
                     <View style={styles.mainView}>
                                 <PieChart
                             // style={styles.pieChart}
-                            data={data}
+                            data={currentData}
                             width={355}
                             height={220}
                             chartConfig={chartConfig}
                             accessor={"total"}
                             backgroundColor={"transparent"}
                             />
-                        
+                    {/* {currentData.food_expenses.price__sum} */}
+                    
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentLodging ? currentLodging : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentFood ? currentFood : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentTransportation ? currentTransportation : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentTicket ? currentTicket : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentGrocery ? currentGrocery : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentOther ? currentOther : 0}</Text>
                         </View>
+                    
                     </View>
                 </View>
                 <View key="2" style={{backgroundColor: 'white'}}>
@@ -163,7 +239,7 @@ export default function Analytics () {
                     <View style={styles.mainView}>
                  
                             <PieChart
-                            data={data}
+                            data={allTimeData}
                             width={355}
                             height={220}
                             chartConfig={chartConfig}
@@ -174,27 +250,27 @@ export default function Analytics () {
                         
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeLodging ? allTimeLodging : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeFood ? allTimeFood : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTransportation ? allTimeTransportation : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTicket ? allTimeTicket : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeGrocery ? allTimeGrocery : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeOther ? allTimeOther : 0}</Text>
                         </View>
                     </View>
                 </View>
@@ -221,7 +297,8 @@ const styles = StyleSheet.create({
     },
     mainView: {
         backgroundColor: '#ffffff',
-        padding: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
         alignItems: 'center',
         justifyContent: 'center',
         // height: '100%'
@@ -260,7 +337,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingLeft: 20,
         paddingRight: 20,
-        paddingTop: 10
+        paddingTop: 20
     },
     title: {
         fontFamily: "GilroyBold",
@@ -271,7 +348,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         color: 'black',
         padding: 7,
-        fontFamily: "GilroyBold",
+        // fontFamily: "GilroyBold",
+        fontWeight: '400',
         fontSize: 20,
     }
   })

@@ -121,21 +121,19 @@ export default function CurrentTrip () {
     return (
         <>
         <Text style={styles.logo}>s a v r</Text>
-        <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+        <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[3]}>
 
-        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
-            <Text style={styles.text1}>+</Text>
-        </TouchableOpacity>
 
         
-            <View>
-                <Text>{currentTrip.city}</Text>
-                <View>
-                    <Text>{currentTrip.start_date}</Text>
-                    <Text>{currentTrip.end_date}</Text>
+            <View style={styles.heading}>
+                <Text style={styles.city}>{currentTrip.city}</Text>
+                <View style={{flexDirection: 'row', paddingTop: 8}}>
+                    <Text style={{fontSize: 20, fontWeight: '400'}}>{moment(currentTrip.start_date).format('Do')}-</Text>
+                    <Text style={{fontSize: 20, fontWeight: '400'}}>{moment(currentTrip.end_date).format('Do MMM')}</Text>
                 </View>
             </View>
-            <Text style={{position: 'absolute', marginTop: 213, fontSize: 30, color: 'black'}}>${budget}</Text>
+
+            <Text style={styles.budget}>${budget}</Text>
 
              
                 <ProgressChart
@@ -148,6 +146,10 @@ export default function CurrentTrip () {
                 hideLegend={true}
                 />
                 
+
+        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
+            <Text style={styles.text1}>+</Text>
+        </TouchableOpacity>
             
 
             {tripDates && 
@@ -224,5 +226,22 @@ const styles = StyleSheet.create({
       text1: {
           color: 'white',
           fontSize: 38,
+      },
+      budget: {
+        position: 'absolute', 
+        marginTop: 180, 
+        fontSize: 30, 
+        color: 'black',
+        fontWeight: '500'
+    },
+      heading: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 30
+      },
+      city: {
+        fontFamily: "GilroyBold",
+        fontSize: 30
       }
   })
