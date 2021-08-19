@@ -67,7 +67,11 @@ export default function Homepage({ navigation }) {
       <>
 
         <Text style={styles.logo}>s a v r</Text>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[1]}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+
+      <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
+            <Text style={styles.text1}>+</Text>
+        </TouchableOpacity>
 
       <View style={styles.previous}>
       <Text style={styles.current1}>Upcoming Trips</Text>
@@ -87,10 +91,6 @@ export default function Homepage({ navigation }) {
             
         })}
         </View>
-
-        <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
-            <Text style={styles.text1}>+</Text>
-        </TouchableOpacity>
     
       <View style={styles.previous}>
       <Text style={styles.current1}>Previous Trips</Text>

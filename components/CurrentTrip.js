@@ -151,7 +151,7 @@ export default function CurrentTrip () {
                           if (expense.trip === currentTrip.id && expense.date === date) {
                             return (
                               <View key={index} style={styles.expense}>
-                                  <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{date}</Text>
+                                  <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{moment(date).format("MMM Do")}</Text>
                                   <View key={index} style={styles.category}>
                                 <Text style={styles.list}>{expense.expense_title}</Text>
                                 <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
