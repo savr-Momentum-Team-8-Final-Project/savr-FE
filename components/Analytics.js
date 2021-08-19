@@ -114,6 +114,7 @@ export default function Analytics () {
             transitionStyle="scroll">
 
                 <View key="1" style={{backgroundColor: 'white'}}>
+                    <View>
                     <View style={styles.heading}>
                         <Text style={styles.title}>Current Trip</Text>
                         <Text style={styles.spent}>Spent: ${currentSpent}</Text>
@@ -153,6 +154,7 @@ export default function Analytics () {
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
                         </View>
+                    </View>
                     </View>
                 </View>
                 <View key="2" style={{backgroundColor: 'white'}}>
