@@ -103,7 +103,7 @@ export default function Analytics () {
       const allTimeData = [
         {
           name: "Lodging",
-          total: allTimeSpent,
+          total: allTimeLodging,
           color: "#cfffe0",
           legendFontColor: "#7F7F7F",
           legendFontSize: 13

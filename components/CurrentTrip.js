@@ -125,7 +125,9 @@ export default function CurrentTrip () {
                 </View>
             </View>
 
-          <Text style={styles.budget}>${budget}</Text>
+
+          <Text style={styles.budget}>${budget} remaining</Text>
+         
 
           <ProgressChart
                   data={data}
@@ -227,10 +229,15 @@ const styles = StyleSheet.create({
   },
   budget: {
     position: 'absolute',
-    marginTop: 180,
+    marginTop: 160,
     fontSize: 30,
     color: 'black',
-    fontWeight: '500'
+    fontWeight: '500',
+    width: 134,
+    borderWidth: 1,
+    borderColor: 'white',
+    textAlign: 'center',
+    justifyContent: 'center'
   },
   heading: {
     width: '100%',
