@@ -110,7 +110,7 @@ export default function CreateATrip (props) {
         <Text style={styles.label}>Trip</Text>
         <TextInput
           secureTextEntry={false}
-          maxLength={10}
+          maxLength={30}
           placeholder='Cancun 2021'
           placeholderTextColor='grey'
           onChangeText={(text) => setTitle(text)}
