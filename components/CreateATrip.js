@@ -66,6 +66,7 @@ export default function CreateATrip (props) {
           names.push(st.iso2)
         }
       })
+      names.sort()
       setStates(names)
     })
   }, [])
