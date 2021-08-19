@@ -84,19 +84,47 @@ const data = [
 export default function Analytics () {
 
     const [currentSpent, setCurrentSpent] = useState(0)
+    const [currentLodging, setCurrentLodging] = useState(0)
+    const [currentFood, setCurrentFood] = useState(0)
+    const [currentTransportation, setCurrentTransportation] = useState(0)
+    const [currentTicket, setCurrentTicket] = useState(0)
+    const [currentGrocery, setCurrentGrocery] = useState(0)
+    const [currentOther, setCurrentOther] = useState(0)
+
     const [allTimeSpent, setAllTimeSpent] = useState(0)
+    const [allTimeLodging, setAllTimeLodging] = useState(0)
+    const [allTimeFood, setAllTimeFood] = useState(0)
+    const [allTimeTransportation, setAllTimeTransportation] = useState(0)
+    const [allTimeTicket, setAllTimeTicket] = useState(0)
+    const [allTimeGrocery, setAllTimeGrocery] = useState(0)
+    const [allTimeOther, setAllTimeOther] = useState(0)
+    
+
 
     useEffect(() => {
         getCurrentTripData()
         .then(data => {
-            const a = data.data.total_expenses.price__sum
-            setCurrentSpent(a)
+            setCurrentSpent(data.data.total_expenses.price__sum)
+            setCurrentLodging(data.data.lodging_expenses.price__sum)
+            setCurrentFood(data.data.food_expenses.price__sum)
+            setCurrentTransportation(data.data.trans_expenses.price__sum)
+            setCurrentTicket(data.data.ticket_expenses.price__sum)
+            setCurrentGrocery(data.data.grocery_expenses.price__sum)
+            setCurrentOther(data.data.other_expenses.price__sum)
+            
         })
         getAllTimeData()
         .then(data => {
+            console.log(data.data)
             data.data.map((summary) => {
                 if (summary.id == 1) {
                     setAllTimeSpent(summary.alltrip_expenses.price__sum)
+                    setAllTimeLodging(summary.alltrip_lodging.price__sum)
+                    setAllTimeFood(summary.alltrip_food.price__sum)
+                    setAllTimeTransportation(summary.alltrip_trans.price__sum)
+                    setAllTimeTicket(summary.alltrip_ticket.price__sum)
+                    setAllTimeGrocery(summary.alltrip_grocery.price__sum)
+                    setAllTimeOther(summary.alltrip_other.price__sum)
                 }
             })
         })
@@ -128,31 +156,33 @@ export default function Analytics () {
                             accessor={"total"}
                             backgroundColor={"transparent"}
                             />
-                        
+                    {/* {currentData.food_expenses.price__sum} */}
+                    
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentLodging ? currentLodging : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentFood ? currentFood : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentTransportation ? currentTransportation : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentTicket ? currentTicket : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentGrocery ? currentGrocery : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentOther ? currentOther : 0}</Text>
                         </View>
+                    
                     </View>
                 </View>
                 <View key="2" style={{backgroundColor: 'white'}}>
@@ -174,27 +204,27 @@ export default function Analytics () {
                         
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeLodging ? allTimeLodging : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeFood ? allTimeFood : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTransportation ? allTimeTransportation : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTicket ? allTimeTicket : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeGrocery ? allTimeGrocery : 0}</Text>
                         </View>
                         <View style={styles.expense}>
                             <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
-                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>$403.23</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeOther ? allTimeOther : 0}</Text>
                         </View>
                     </View>
                 </View>
