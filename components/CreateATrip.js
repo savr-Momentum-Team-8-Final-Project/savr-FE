@@ -108,7 +108,8 @@ export default function CreateATrip (props) {
         >
           <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.label}>Trip</Text>
+
+        <Text style={styles.label}>Trip Name</Text>
         <TextInput
           secureTextEntry={false}
           maxLength={30}
@@ -121,7 +122,7 @@ export default function CreateATrip (props) {
 
         <View style={styles.datePicker}>
           <View style={{ width: 230 }}>
-            <Text style={styles.label}>Start Date</Text>
+            <Text style={styles.label}>Start</Text>
             <DateTimePicker
               style={{ flex: 1 }}
               testID='dateTimePicker'
@@ -133,7 +134,7 @@ export default function CreateATrip (props) {
           </View>
 
           <View style={{ width: 130 }}>
-            <Text style={styles.label}>End Date</Text>
+            <Text style={styles.label}>End</Text>
             <DateTimePicker
               style={{ flex: 1 }}
               testID='dateTimePicker'
@@ -156,7 +157,7 @@ export default function CreateATrip (props) {
           style={styles.textInput}
         />
 
-        <Text style={styles.label}>Select a State</Text>
+        <Text style={styles.label}>State</Text>
         <Picker
           selectedValue={chosenState}
           onValueChange={(picked) => setChosenState(picked)}
@@ -165,7 +166,7 @@ export default function CreateATrip (props) {
             return <Picker.Item label={st} value={st} key={index} />
           })}
         </Picker>
-        <Text style={styles.label}>Select a City</Text>
+        <Text style={styles.label}>City</Text>
         <Picker
           selectedValue={city}
           onValueChange={(picked) => setCity(picked)}
@@ -209,14 +210,12 @@ const styles = StyleSheet.create({
   datePicker: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: -40,
-    marginBottom: 60
+    marginBottom: 0
   },
   textInput: {
     marginTop: 20,
-    marginBottom: 80,
     borderColor: '#00C244',
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderRadius: 10,
     padding: 10,
     width: '100%',
@@ -247,10 +246,9 @@ const styles = StyleSheet.create({
   label: {
     color: 'black',
     fontSize: 20,
-    marginBottom: 10,
     paddingTop: 30,
     fontFamily: 'Helvetica',
-    fontWeight: 'bold'
+    fontWeight: '500'
 
   }
 })
