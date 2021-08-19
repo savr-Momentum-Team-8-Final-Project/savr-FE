@@ -87,7 +87,7 @@ export function createExpense(title, trip, price, note, date, category) {
     return axios.post('https://savr-travel.herokuapp.com/api/expenses/create/', {
         expense_title: title,
         trip: trip,
-        file: null,
+        // file: null,
         amount: 1, 
         price: price,
         note: note,
@@ -96,7 +96,7 @@ export function createExpense(title, trip, price, note, date, category) {
     },
     {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "application/json"
         },
       })
     .then((response) => response)

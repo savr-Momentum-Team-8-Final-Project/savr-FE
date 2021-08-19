@@ -1,21 +1,22 @@
 import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ScrollView, TouchableOpacity , Dimensions } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js'
 import CreateAnExpense from './CreateAnExpense'
-import moment from 'moment'
+import moment from 'moment';
 import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from 'react-native-chart-kit'
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+  
 
 const screenWidth = Dimensions.get('window').width
 
@@ -29,6 +30,10 @@ const chartConfig = {
   barPercentage: 0.5,
   useShadowColorFromDataset: false // optional
 }
+
+  
+
+
 
 export default function CurrentTrip () {
   // const { setSelectedTrip, selectedTrip } = props
@@ -49,7 +54,7 @@ export default function CurrentTrip () {
     data: [, , , progress]
   }
 
-  useEffect(() => {
+    useEffect(() => {
     getCurrentTripData()
       .then(data => {
         const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
@@ -80,17 +85,18 @@ export default function CurrentTrip () {
           const last = dates[dates.length - 1]
           const hey = moment(last).add(1, 'days').format('YYYY-MM-DD')
           dates.push(hey)
-        };
+            };
       }
       setTripDates(dates)
     }
   }, [days])
 
-  useEffect(() => {
+    useEffect(() => {
     requestExpenses()
       .then(data =>
         setExpenses(data.data))
   }, [addingExpense])
+
 
   useEffect(() => {
     trips.map((trip, index) => {
@@ -102,62 +108,65 @@ export default function CurrentTrip () {
 
   if (addingExpense) {
     return (
-      <CreateAnExpense setAddingExpense={setAddingExpense} currentTrip={currentTrip} />
+          <CreateAnExpense setAddingExpense={setAddingExpense} currentTrip={currentTrip} />
     )
   }
 
   return (
-    <>
-      <Text style={styles.logo}>s a v r</Text>
-      <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+      <>
+          <Text style={styles.logo}>s a v r</Text>
+          <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[3]}>
 
-        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
+          <View style={styles.heading}>
+              <Text style={styles.city}>{currentTrip.city}</Text>
+              <View style={{ flexDirection: 'row', paddingTop: 8 }}>
+                  <Text style={{ fontSize: 20, fontWeight: '400' }}>{moment(currentTrip.start_date).format('Do')}-</Text>
+                  <Text style={{ fontSize: 20, fontWeight: '400' }}>{moment(currentTrip.end_date).format('Do MMM')}</Text>
+                </View>
+            </View>
+
+          <Text style={styles.budget}>${budget}</Text>
+
+          <ProgressChart
+                  data={data}
+                  width={screenWidth}
+                  height={220}
+                  strokeWidth={20}
+                  radius={40}
+                  chartConfig={chartConfig}
+                  hideLegend
+                />
+
+
+          <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
           <Text style={styles.text1}>+</Text>
         </TouchableOpacity>
 
-        <View>
-          <Text>{currentTrip.city}</Text>
-          <View>
-            <Text>{currentTrip.start_date}</Text>
-            <Text>{currentTrip.end_date}</Text>
-          </View>
-        </View>
-        <Text style={{ position: 'absolute', marginTop: 213, fontSize: 30, color: 'black' }}>${budget}</Text>
 
-        <ProgressChart
-          data={data}
-          width={screenWidth}
-          height={220}
-          strokeWidth={20}
-          radius={40}
-          chartConfig={chartConfig}
-          hideLegend
-        />
-
-        {tripDates &&
+          {tripDates &&
                 tripDates.map((date, index) => {
                   return (
-                    <View style={{ width: '100%' }} key={index}>
-                      {expenses.map((expense, index) => {
-                        if (expense.trip === currentTrip.id && expense.date === date) {
-                          return (
-                            <View key={index} style={styles.expense}>
-                              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{date}</Text>
-                              <View key={index}>
+                      <View style={{ width: '100%' }} key={index}>
+                          {expenses.map((expense, index) => {
+                          if (expense.trip === currentTrip.id && expense.date === date) {
+                            return (
+                              <View key={index} style={styles.expense}>
+                                  <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{date}</Text>
+                                  <View key={index} style={styles.category}>
                                 <Text style={styles.list}>{expense.expense_title}</Text>
-                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>${expense.price}</Text>
-                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{expense.category}</Text>
+                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
+                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', textAlign: 'right' }}>{expense.category}</Text>
                               </View>
-                            </View>
-                          )
-                        }
-                      })}
-                    </View>
+                                </View>
+                            )
+                          }
+                        })}
+                        </View>
                   )
                 })}
 
-      </ScrollView>
-    </>
+        </ScrollView>
+        </>
   )
 }
 
@@ -207,16 +216,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#00C244',
     bottom: 0,
     left: 140,
-    alignItems: 'center'
+    marginBottom: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   text1: {
     color: 'white',
     fontSize: 38
+
+  },
+  budget: {
+    position: 'absolute',
+    marginTop: 180,
+    fontSize: 30,
+    color: 'black',
+    fontWeight: '500'
+  },
+  heading: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 30
+  },
+  city: {
+    fontFamily: 'GilroyBold',
+    fontSize: 30
   },
   list: {
     fontWeight: '600',
     fontSize: 20,
     color: 'white',
-    textAlign: 'left'
+    textAlign: 'right'
+  },
+  category: {
+    justifyContent: 'flex-end',
+    width: '50%',
+    textAlign: 'right'
   }
 })

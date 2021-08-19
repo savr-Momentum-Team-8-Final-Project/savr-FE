@@ -46,9 +46,15 @@ export default function CreateAnExpense (props) {
   return (
     <>
       <Text style={styles.logo}>s a v r</Text>
-      <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
-
-        <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(false)}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={[0]}
+      >
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setAddingExpense(false)}
+        >
           <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
         <Text style={styles.label}>Expense</Text>
@@ -56,7 +62,7 @@ export default function CreateAnExpense (props) {
           secureTextEntry={false}
           placeholder='Expense Title'
           placeholderTextColor='grey'
-          onChangeText={text => setTitle(text)}
+          onChangeText={(text) => setTitle(text)}
           style={styles.textInput}
         />
         <Text style={styles.label}>Price</Text>
@@ -66,7 +72,7 @@ export default function CreateAnExpense (props) {
           placeholder='$17.38'
           keyboardType='numeric'
           placeholderTextColor='grey'
-          onChangeText={text => setPrice(text)}
+          onChangeText={(text) => setPrice(text)}
           style={styles.textInput}
         />
         <Text style={styles.label}>Notes</Text>
@@ -75,8 +81,7 @@ export default function CreateAnExpense (props) {
           secureTextEntry={false}
           placeholder='Add a note here'
           placeholderTextColor='grey'
-          onChangeText={text => setNote(text)}
-
+          onChangeText={(text) => setNote(text)}
         />
 
         {/* <View style={styles.datePicker}> */}
@@ -96,7 +101,7 @@ export default function CreateAnExpense (props) {
         <Text style={styles.label}>Select a Category</Text>
         <Picker
           selectedValue={category}
-          onValueChange={picked => setCategory(picked)}
+          onValueChange={(picked) => setCategory(picked)}
         >
           <Picker.Item label='Lodging' value='lodging' />
           <Picker.Item label='Food' value='food' />
@@ -109,7 +114,6 @@ export default function CreateAnExpense (props) {
         <TouchableOpacity style={styles.submit} onPress={() => handleSubmit()}>
           <Text style={styles.create}>Create Expense</Text>
         </TouchableOpacity>
-
       </ScrollView>
     </>
   )
@@ -136,7 +140,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#00D64B',
     borderRadius: 10
-
   },
   datePicker: {
     flexDirection: 'row',
@@ -183,7 +186,5 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     fontFamily: 'Helvetica',
     fontWeight: 'bold'
-
   }
-
 })
