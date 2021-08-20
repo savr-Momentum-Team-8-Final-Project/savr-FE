@@ -1,9 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Button
+} from 'react-native';
 import ProfileHeader from './ProfileHeader';
 import ImagePicker from './ImagePicker';
 import { grey } from 'ansi-colors';
-const previousTrips = [
+const Trips = [
   {
     city: 'Seattle',
     photo: require('../assets/JL09SeattleSkylinePD.jpeg'),
