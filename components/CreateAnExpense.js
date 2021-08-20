@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -16,27 +16,31 @@ import {
   Button,
   Alert,
   Separator,
-  TouchableOpacity
-} from 'react-native';
-import { createExpense } from '../api.js';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import moment from 'moment';
-import { useSafeArea } from 'react-native-safe-area-context';
+  TouchableOpacity,
+} from "react-native";
+import { createExpense } from "../api.js";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
+import { useSafeArea } from "react-native-safe-area-context";
 
-export default function CreateAnExpense (props) {
-  const { setAddingExpense, currentTrip } = props
+export default function CreateAnExpense(props) {
+  const { setAddingExpense, currentTrip } = props;
 
-  const [title, setTitle] = useState('')
-  const [price, setPrice] = useState('')
-  const [note, setNote] = useState('')
-  const [date, setDate] = useState(new Date())
-  const [category, setCategory] = useState('')
-  const trip = currentTrip.id
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [note, setNote] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [category, setCategory] = useState("");
+  const trip = currentTrip.id;
 
-  function handleSubmit () {
-    const formattedDate = moment(date).format('YYYY-MM-DD')
-    createExpense(title, trip, price, note, formattedDate, category)
-    setAddingExpense(false)
+  function newDate(event, selectedDate) {
+    setDate(selectedDate);
+  }
+
+  function handleSubmit() {
+    const formattedDate = moment(date).format("YYYY-MM-DD");
+    createExpense(title, trip, price, note, formattedDate, category);
+    setAddingExpense(false);
   }
 
   return (
@@ -53,31 +57,31 @@ export default function CreateAnExpense (props) {
         >
           <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
-
+        <Text style={styles.label}>Expense</Text>
         <TextInput
           secureTextEntry={false}
-          placeholder='Expense Title'
-          placeholderTextColor='grey'
+          placeholder="Expense Title"
+          placeholderTextColor="grey"
           onChangeText={(text) => setTitle(text)}
           style={styles.textInput}
         />
-
+        <Text style={styles.label}>Price</Text>
         <TextInput
           secureTextEntry={false}
           maxLength={10}
-          placeholder='Price in USD'
-          keyboardType='numeric'
-          placeholderTextColor='grey'
+          placeholder="$17.38"
+          keyboardType="numeric"
+          placeholderTextColor="grey"
           onChangeText={(text) => setPrice(text)}
           style={styles.textInput}
         />
-
+        <Text style={styles.label}>Notes</Text>
         <TextInput
-          secureTextEntry={false}
-          placeholder='Add a note?'
-          placeholderTextColor='grey'
-          onChangeText={(text) => setNote(text)}
           style={styles.textInput}
+          secureTextEntry={false}
+          placeholder="Add a note here"
+          placeholderTextColor="grey"
+          onChangeText={(text) => setNote(text)}
         />
 
         {/* <View style={styles.datePicker}> */}
@@ -85,16 +89,16 @@ export default function CreateAnExpense (props) {
         {/* <Text style={{fontFamily: 'GilroyLight'}}>Date of Expense</Text> */}
         <DateTimePicker
           style={{ flex: 1 }}
-          testID='dateTimePicker'
+          testID="dateTimePicker"
           value={date}
-          mode='date'
-          display='inline'
-          onChange={setDate}
+          mode="date"
+          display="inline"
+          onChange={newDate}
         />
 
         {/* </View> */}
 
-        <Text style={{ fontFamily: 'GilroyLight' }}>Select a Category</Text>
+        <Text style={styles.label}>Select a Category</Text>
         <Picker
           selectedValue={category}
           onValueChange={(picked) => setCategory(picked)}
@@ -112,67 +116,75 @@ export default function CreateAnExpense (props) {
         </TouchableOpacity>
       </ScrollView>
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   logo: {
     fontSize: 32,
-    fontWeight: '200',
-    backgroundColor: '#fffcf5',
+    fontWeight: "200",
+    backgroundColor: "#fffcf5",
     paddingLeft: 150,
     paddingRight: 150,
-    fontFamily: 'GilroyLight'
+    fontFamily: "GilroyLight",
   },
   scrollView: {
-    backgroundColor: '#fffcf5',
-    padding: 20
+    backgroundColor: "#fffcf5",
+    padding: 20,
   },
   submit: {
-    color: 'black',
-    width: '100%',
+    color: "black",
+    width: "100%",
     marginTop: 60,
     marginBottom: 60,
-    alignItems: 'center',
-    backgroundColor: '#00D64B',
-    borderRadius: 10
+    alignItems: "center",
+    backgroundColor: "#00D64B",
+    borderRadius: 10,
   },
   datePicker: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginTop: 40,
-    marginBottom: 60
+    marginBottom: 60,
   },
   textInput: {
-    marginTop: 50,
-    marginBottom: 80,
-    borderColor: '#00C244',
+    marginTop: 20,
+    marginBottom: 50,
+    borderColor: "#00C244",
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
-    width: '100%',
-    textAlign: 'center'
+    width: "100%",
+    textAlign: "center",
   },
   create: {
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 50,
     paddingRight: 50,
-    backgroundColor: '#00D64B',
-    color: 'white',
-    fontSize: 20
+    backgroundColor: "#00D64B",
+    color: "white",
+    fontSize: 20,
   },
   button: {
     width: 70,
     height: 30,
     borderRadius: 30,
-    backgroundColor: '#00D64B',
+    backgroundColor: "#00D64B",
     top: 0,
     left: 0,
-    alignItems: 'center'
+    alignItems: "center",
   },
   text1: {
-    color: 'white',
-    fontSize: 25
-  }
-})
+    color: "white",
+    fontSize: 25,
+  },
+  label: {
+    color: "black",
+    fontSize: 20,
+    marginBottom: 10,
+    paddingTop: 30,
+    fontFamily: "Helvetica",
+    fontWeight: "bold",
+  },
+});

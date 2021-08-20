@@ -18,7 +18,7 @@ import Homepage from './components/Homepage.js';
 import Login from './components/Login';
 import CreateATrip from './components/CreateATrip.js';
 import Register from './components/Register.js';
-import Profile from './components/Profile.js';
+import Analytics from './components/Analytics.js';
 import CurrentTrip from './components/CurrentTrip.js';
 import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -147,7 +147,6 @@ export default function App ({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
-    backgroundColor: 'tan',
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
