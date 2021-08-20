@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,53 +12,53 @@ import {
   ImageBackground,
   Pressable,
   Button,
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useFonts } from "expo-font";
-import Trip from "./Trip.js";
-import { requestTrips } from "../api.js";
-import moment from "moment";
-import CreateATrip from "./CreateATrip.js";
-import axios from "axios";
-import { AsyncStorage } from "@react-native-async-storage/async-storage";
-import LoginForm from "./Login.js";
-import { render } from "react-dom";
+  AsyncStorage
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useFonts } from 'expo-font';
+import Trip from './Trip.js';
+import { requestTrips } from '../api.js';
+import moment from 'moment';
+import CreateATrip from './CreateATrip.js';
+import axios from 'axios';
 
-export default function Homepage({ navigation }) {
-  const today = moment().format("YYYY-MM-DD");
+import LoginForm from './Login.js';
+import { render } from 'react-dom';
 
+export default function Homepage ({ navigation }) {
+  const today = moment().format('YYYY-MM-DD')
   const [loaded] = useFonts({
-    GilroyLight: require("../assets/fonts/Gilroy-Light.otf"),
-    GilroyBold: require("../assets/fonts/Gilroy-ExtraBold.otf"),
-  });
+    GilroyLight: require('../assets/fonts/Gilroy-Light.otf'),
+    GilroyBold: require('../assets/fonts/Gilroy-ExtraBold.otf')
+  })
 
-  const [selectedTrip, setSelectedTrip] = useState(null);
-  const [trips, setTrips] = useState([]);
-  const [creating, setCreating] = useState(false);
-  const [token, setToken] = useState("token", "");
+  const [selectedTrip, setSelectedTrip] = useState(null)
+  const [trips, setTrips] = useState([])
+  const [creating, setCreating] = useState(false)
+  const [token, setToken] = useState('token', '')
 
-  function setAuthToken(token) {
-    setToken(token);
+  function setAuthToken (token) {
+    setToken(token)
   }
 
   useEffect(() => {
     requestTrips().then((data) => {
-      setTrips(data.data);
-    });
-  }, [creating]);
+      setTrips(data.data)
+    })
+  }, [creating])
 
-  function tripDetails(trip) {
-    setSelectedTrip(trip);
-    console.log(trip);
+  function tripDetails (trip) {
+    setSelectedTrip(trip)
+    console.log(trip)
   }
 
   if (!loaded) {
-    return null;
+    return null
   }
 
   if (creating) {
-    return <CreateATrip setCreating={setCreating} />;
+    return <CreateATrip setCreating={setCreating} />
   }
   if (token) {
     return selectedTrip ? (
@@ -67,16 +67,60 @@ export default function Homepage({ navigation }) {
       <>
 
         <Text style={styles.logo}>s a v r</Text>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          stickyHeaderIndices={[0]}
+        >
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setCreating(true)}
+          >
+            <Text style={styles.text1}>+</Text>
+          </TouchableOpacity>
+
+          <View style={styles.previous}>
+            <Text style={styles.current1}>Current Trip</Text>
+            {trips.map((trip, index) => {
+              if (
+                moment(trip.start_date).isBefore(today) &&
+                moment(trip.end_date).isAfter(today)
+              ) {
+                return (
+                  <TouchableOpacity
+                    style={styles.current}
+                    key={index}
+                    onPress={() => tripDetails(trip)}
+                  >
+                    <Text style={styles.text}>{trip.city}</Text>
+                    <Image
+                      source={require('../assets/JL09SeattleSkylinePD.jpeg')}
+                      style={styles.image}
+                    />
+                    <View style={styles.coverText}>
+                      <Text style={styles.text}>
+                        {moment(trip.start_date).format('MM-DD-YYYY')}
+                      </Text>
+                      <Text style={styles.text}>
+                        {moment(trip.end_date).format('MM-DD-YYYY')}
+                      </Text>
+                      <Text style={styles.text}>${trip.budget}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )
+              }
+            })}
+          </View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
 
       <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
             <Text style={styles.text1}>+</Text>
         </TouchableOpacity>
 
-      <View style={styles.previous}>
-      <Text style={styles.current1}>Upcoming Trips</Text>
-        {trips.map((trip, index) => {
-            if (moment(trip.start_date).isAfter(today)) {
+          <View style={styles.previous}>
+            <Text style={styles.current1}>Upcoming Trips</Text>
+            {trips.map((trip, index) => {
+              if (moment(trip.start_date).isAfter(today)) {
                 return (
                     <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
                         <Text style={styles.text}>{trip.city}</Text>
@@ -115,27 +159,27 @@ export default function Homepage({ navigation }) {
     </>
     );
   } else {
-    return <LoginForm setAuthToken={setAuthToken} />;
+    return <LoginForm />
   }
 }
 
 const styles = StyleSheet.create({
   current: {
-    fontFamily: "GilroyLight",
-    display: "flex",
+    fontFamily: 'GilroyLight',
+    display: 'flex',
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 10,
     backgroundColor: 'rgba(230, 230, 230, 0.5)',
     borderRadius: 10,
-    marginBottom: 30,
+    marginBottom: 30
   },
   current1: {
     // marginTop: 30,
     fontFamily: "GilroyBold",
     fontSize: 30,
-    marginBottom: 30,
+    marginBottom: 30
   },
   scrollView: {
     backgroundColor: '#ffffff',
@@ -143,12 +187,12 @@ const styles = StyleSheet.create({
     // marginBottom: 60
   },
   image: {
-    display: "flex",
+    display: 'flex',
     width: 340,
     height: 100,
-    resizeMode: "cover",
+    resizeMode: 'cover',
     borderRadius: 11,
-    paddingTop: 10,
+    paddingTop: 10
   },
   previous: {
     // marginBottom: 60,
@@ -159,33 +203,42 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     paddingLeft: 150,
     paddingRight: 150,
-    fontFamily: 'GilroyLight',
+    fontFamily: 'GilroyLight'
   },
   text: {
-    fontFamily: "GilroyLight",
+    fontFamily: 'GilroyLight',
     fontSize: 20,
-    padding: 10,
+    padding: 10
   },
   coverText: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 10
+  },
+  button1: {
+    width: 70,
+    height: 30,
+    borderRadius: 30,
+    backgroundColor: 'red',
+    top: 0,
+    left: 0,
+    alignItems: 'center'
   },
   button: {
     width: 50,
     height: 50,
     borderRadius: 30,
-    backgroundColor: "#00C244",
+    backgroundColor: '#00C244',
     top: 0,
     left: 290,
     alignItems: "center",
     margin: 0
   },
   text1: {
-    color: "white",
-    fontSize: 38,
-  },
-});
+    color: 'white',
+    fontSize: 38
+  }
+})
