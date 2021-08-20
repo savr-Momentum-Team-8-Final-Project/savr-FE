@@ -10,7 +10,7 @@ import {
   Pressable,
   ScrollView,
   TouchableOpacity,
-  Animated
+  Animated,
  Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -65,50 +65,50 @@ export default function Analytics () {
   const [allTimeGrocery, setAllTimeGrocery] = useState(0)
   const [allTimeOther, setAllTimeOther] = useState(0)
 
-      const allTimeData = [
-        {
-          name: "Lodging",
-          total: allTimeLodging,
-          color: "#cfffe0",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 13
-        },
-        {
-          name: "Food",
-          total: allTimeFood,
-          color: "#63ff9a",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 13
-        },
-        {
-          name: "Transportation",
-          total: allTimeTransportation,
-          color: "#00c244",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 13
-        },
-        {
-          name: "Tickets",
-          total: allTimeTicket,
-          color: "#00802d",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 13
-        },
-        {
-          name: "Grocery",
-          total: allTimeGrocery,
-          color: "#00521d",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 13
-        },
-        {
-            name: "Other",
-            total: allTimeOther,
-            color: "#00290e",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 13
-          }
-      ]
+    //   const allTimeData = [
+    //     {
+    //       name: "Lodging",
+    //       total: allTimeLodging,
+    //       color: "#cfffe0",
+    //       legendFontColor: "#7F7F7F",
+    //       legendFontSize: 13
+    //     },
+    //     {
+    //       name: "Food",
+    //       total: allTimeFood,
+    //       color: "#63ff9a",
+    //       legendFontColor: "#7F7F7F",
+    //       legendFontSize: 13
+    //     },
+    //     {
+    //       name: "Transportation",
+    //       total: allTimeTransportation,
+    //       color: "#00c244",
+    //       legendFontColor: "#7F7F7F",
+    //       legendFontSize: 13
+    //     },
+    //     {
+    //       name: "Tickets",
+    //       total: allTimeTicket,
+    //       color: "#00802d",
+    //       legendFontColor: "#7F7F7F",
+    //       legendFontSize: 13
+    //     },
+    //     {
+    //       name: "Grocery",
+    //       total: allTimeGrocery,
+    //       color: "#00521d",
+    //       legendFontColor: "#7F7F7F",
+    //       legendFontSize: 13
+    //     },
+    //     {
+    //         name: "Other",
+    //         total: allTimeOther,
+    //         color: "#00290e",
+    //         legendFontColor: "#7F7F7F",
+    //         legendFontSize: 13
+    //       }
+    //   ]
     
 
   const allTimeData = [
@@ -360,7 +360,10 @@ export default function Analytics () {
                         </View>
                     </View>
                 </View>
+                </View>
+            </View>
         </PagerView>
+        
         </>
     )
 

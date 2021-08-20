@@ -84,7 +84,7 @@ export default function App ({ navigation }) {
             </Tab.Navigator>
           </SafeAreaView>
         </NavigationContainer>
-    </>
+    // </>
 
   )
 }
