@@ -190,7 +190,7 @@ export default function Analytics () {
                 <View key="1" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
                         <Text style={styles.title}>Current Trip</Text>
-                        <Text style={styles.spent}>${currentSpent}</Text>
+                        <Text style={styles.spent}>Total: ${currentSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
                         <View style={styles.donut}></View>
@@ -235,7 +235,7 @@ export default function Analytics () {
                 <View key="2" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
                         <Text style={styles.title}>All Time</Text>
-                        <Text style={styles.spent}>Spent: ${allTimeSpent}</Text>
+                        <Text style={styles.spent}>Total: ${allTimeSpent}</Text>
                     </View>
                     <View style={styles.mainView}>
                             <View style={styles.donut}></View>
