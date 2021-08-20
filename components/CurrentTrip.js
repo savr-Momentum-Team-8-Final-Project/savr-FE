@@ -31,7 +31,7 @@ const chartConfig = {
   useShadowColorFromDataset: false // optional
 }
 
-  
+
 
 
 
@@ -125,7 +125,13 @@ export default function CurrentTrip () {
                 </View>
             </View>
 
-          <Text style={styles.budget}>${budget}</Text>
+
+          <View style={styles.budget}>
+            <Text style={{fontSize: 35, color: 'black', fontWeight: '500'}}>${budget}</Text>
+            <Text style={{color: 'black', fontWeight: '300'}}>remaining budget</Text>
+          </View>
+          
+         
 
           <ProgressChart
                   data={data}
@@ -227,10 +233,15 @@ const styles = StyleSheet.create({
   },
   budget: {
     position: 'absolute',
-    marginTop: 180,
+    marginTop: 170,
     fontSize: 30,
     color: 'black',
-    fontWeight: '500'
+    fontWeight: '500',
+    // width: 'fit-content',
+    borderWidth: 1,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   heading: {
     width: '100%',

@@ -65,50 +65,51 @@ export default function Analytics () {
   const [allTimeGrocery, setAllTimeGrocery] = useState(0)
   const [allTimeOther, setAllTimeOther] = useState(0)
 
-  const currentData = [
-    {
-      name: 'Lodging',
-      total: currentLodging,
-      color: '#cfffe0',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Food',
-      total: currentFood,
-      color: '#63ff9a',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Transportation',
-      total: currentTransportation,
-      color: '#00c244',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Tickets',
-      total: currentTicket,
-      color: '#00802d',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Grocery',
-      total: currentGrocery,
-      color: '#00521d',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Other',
-      total: currentOther,
-      color: '#00290e',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    }
-  ]
+      const allTimeData = [
+        {
+          name: "Lodging",
+          total: allTimeLodging,
+          color: "#cfffe0",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Food",
+          total: allTimeFood,
+          color: "#63ff9a",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Transportation",
+          total: allTimeTransportation,
+          color: "#00c244",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Tickets",
+          total: allTimeTicket,
+          color: "#00802d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Grocery",
+          total: allTimeGrocery,
+          color: "#00521d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+            name: "Other",
+            total: allTimeOther,
+            color: "#00290e",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 13
+          }
+      ]
+    
 
   const allTimeData = [
     {
@@ -271,99 +272,138 @@ export default function Analytics () {
               accessor="total"
               backgroundColor="transparent"
             />
+                <View key="1" style={{backgroundColor: 'white'}}>
+                    <View style={styles.heading}>
+                        <Text style={styles.title}>Current Trip</Text>
+                        <Text style={styles.spent}>Total: ${currentSpent}</Text>
+                    </View>
+                    <View style={styles.mainView}>
+                        <View style={styles.donut}></View>
+                            <PieChart
+                            // style={styles.pieChart}
+                            data={currentData}
+                            width={355}
+                            height={220}
+                            chartConfig={chartConfig}
+                            accessor={"total"}
+                            backgroundColor={"transparent"}
+                            />
+                    {/* {currentData.food_expenses.price__sum} */}
+                    
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentLodging ? currentLodging : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentFood ? currentFood : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentTransportation ? currentTransportation : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentTicket ? currentTicket : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentGrocery ? currentGrocery : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${currentOther ? currentOther : 0}</Text>
+                        </View>
+                    
+                    </View>
+                </View>
+                <View key="2" style={{backgroundColor: 'white'}}>
+                    <View style={styles.heading}>
+                        <Text style={styles.title}>All Time</Text>
+                        <Text style={styles.spent}>Total: ${allTimeSpent}</Text>
+                    </View>
+                    <View style={styles.mainView}>
+                            <View style={styles.donut}></View>
+                            <PieChart
+                            data={allTimeData}
+                            width={355}
+                            height={220}
+                            chartConfig={chartConfig}
+                            accessor={"total"}
+                            backgroundColor={"transparent"}
+                            />
+                  
+                        
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeLodging ? allTimeLodging : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeFood ? allTimeFood : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTransportation ? allTimeTransportation : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTicket ? allTimeTicket : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeGrocery ? allTimeGrocery : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeOther ? allTimeOther : 0}</Text>
+                        </View>
+                    </View>
+                </View>
+        </PagerView>
+        </>
+    )
 
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Lodging
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeLodging || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Food
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeFood || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Transportation
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeTransportation || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Tickets
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeTicket || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Grocery
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeGrocery || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Other
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeOther || 0}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </PagerView>
-    </>
-  )
 }
 
 const styles = StyleSheet.create({
-  logo: {
-    fontSize: 32,
-    fontWeight: '200',
-    backgroundColor: '#ffffff',
-    paddingLeft: 150,
-    paddingRight: 150,
-    fontFamily: 'GilroyLight'
-  },
-  graph: {
-    width: 250,
-    height: 250,
-    marginTop: 30,
-    marginBottom: 60
-  },
-  mainView: {
-    backgroundColor: '#ffffff',
-    paddingLeft: 20,
-    paddingRight: 20,
-    alignItems: 'center',
-    justifyContent: 'center'
-    // height: '100%'
-  },
-  donut: {
-    zIndex: 999,
-    height: 80,
-    width: 80,
-    borderRadius: 50,
-    backgroundColor: 'white',
-    position: 'absolute',
-    marginTop: 107,
-    right: 253
-  },
-  pagerView: {
-    flex: 1
-  },
-  expense: {
+  
+    logo: {
+        fontSize: 32,
+        fontWeight: '200',
+        backgroundColor: '#ffffff',
+        paddingLeft: 150,
+        paddingRight: 150,
+        fontFamily: 'GilroyLight',
+      },
+      graph: {
+        width: 250,
+        height: 250,
+        marginTop: 30,
+        marginBottom: 60
+    },
+    mainView: {
+        backgroundColor: '#ffffff',
+        paddingLeft: 20,
+        paddingRight: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        // height: '100%'
+    },
+    donut: {
+        zIndex: 999,
+        height: 80,
+        width: 80,
+        borderRadius: 50,
+        backgroundColor: "white",
+        position: 'absolute',
+        top: 70,
+        right: 243
+    },
+    pagerView: {
+        flex: 1,
+      },
+    expense: {
     flexDirection: 'row',
     marginBottom: 15,
     alignItems: 'center',
@@ -373,30 +413,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#00C244',
     borderRadius: 10,
-    padding: 10
-  },
-  pieChart: {
-    marginBottom: 20
-  },
-  heading: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 20
-  },
-  title: {
-    fontFamily: 'GilroyBold',
-    fontSize: 30
-  },
-  spent: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-    padding: 7,
-    // fontFamily: "GilroyBold",
-    fontWeight: '400',
-    fontSize: 20
-  }
-})
+    padding: 10,
+    },
+    pieChart: {
+        marginBottom: 20
+    },
+    heading: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 20
+    },
+    title: {
+        fontFamily: "GilroyBold",
+        fontSize: 30,
+    },
+    spent: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'black',
+        padding: 7,
+        // fontFamily: "GilroyBold",
+        fontWeight: '600',
+        fontSize: 20
+        
+    }
+  })
+
