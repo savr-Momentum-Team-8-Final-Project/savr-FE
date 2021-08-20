@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: "white",
         position: 'absolute',
-        top: 71,
+        top: 70,
         right: 243
     },
     pagerView: {

@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'black',
     fontWeight: '500',
-    width: 134,
+    width: 136,
     borderWidth: 1,
     borderColor: 'white',
     textAlign: 'center',
