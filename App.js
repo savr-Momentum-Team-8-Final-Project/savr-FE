@@ -59,88 +59,33 @@ export default function App ({ navigation }) {
   console.log('Auth token', authToken)
   return (
     <NavigationContainer>
-      <SafeAreaView style={styles.container} />
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
-        <Tab.Navigator
-          initialRouteName='Login'
-          screenOptions={{
-            headerShown: false,
-            tabBarActiveTintColor: '#00C244',
-            tabBarStyle: [
-              {
-                display: 'flex',
-                backgroundColor: '#ffffff'
-              },
-              null
-            ]
-          }}
-        >
-          {!authToken ? (
-            <Tab.Screen
-              style={styles.login}
-              name='Powered by React Native'
-              options={{
-                tabBarIcon: (props) => <Ionicons name='logo-react' />
-              }}
-            >
-              {(props) => (
-                <Login storeData={storeData} setAuthToken={setAuthToken} />
-              )}
-            </Tab.Screen>
-          ) : (
-            <>
-              <Tab.Screen
-                name='Current Trip'
-                component={CurrentTrip}
-                options={{
-                  tabBarIcon: (props) => (
-                    <Ionicons
-                      name='ios-paper-plane'
-                      size={props.size}
-                      color={props.color}
-                    />
-                  )
-                }}
-              />
-              <Tab.Screen
-                name='Analytics'
-                component={CreateATrip}
-                options={{
-                  tabBarIcon: (props) => (
-                    <Ionicons
-                      name='ios-flask'
-                      size={props.size}
-                      color={props.color}
-                    />
-                  )
-                }}
-              />
-              <Tab.Screen
-                name='Trips'
-                component={Homepage}
-                options={{
-                  tabBarIcon: (props) => (
-                    <Ionicons
-                      name='ios-menu'
-                      size={props.size}
-                      color={props.color}
-                    />
-                  )
-                }}
-              />
-            </>
-          )}
-        </Tab.Navigator>
-        <Button
-          style={styles.button1}
-          title='Logout'
-          onPress={() => {
-            AsyncStorage.removeItem('token', '').then(() => setAuthToken(''))
-            console.log(authToken)
-          }}
-        />
-      </SafeAreaView>
-    </NavigationContainer>
+        <SafeAreaView style={styles.container} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            <Tab.Navigator screenOptions={{
+                headerShown: false,
+                'tabBarActiveTintColor': '#00C244',
+                'tabBarStyle': [
+                    {
+                        display: 'flex',
+                        backgroundColor: '#ffffff'
+                    },
+                    null
+                ]
+                }}>
+                <Tab.Screen name="Current Trip" component={CurrentTrip} options={{
+                    tabBarIcon: (props) => <Ionicons name="ios-paper-plane" size={props.size} color={props.color}/>
+                }}/>
+                <Tab.Screen name="Stats" component={Analytics} options={{
+                    tabBarIcon: (props) => <Ionicons name="pie-chart" size={props.size} color={props.color}/>
+                }}/>
+                <Tab.Screen name="Trips" component={Homepage} options={{
+                    tabBarIcon: (props) => <Ionicons name="ios-menu" size={props.size} color={props.color}/>
+                }}/>
+            </Tab.Navigator>
+          </SafeAreaView>
+        </NavigationContainer>
+    </>
+
   )
 }
 
