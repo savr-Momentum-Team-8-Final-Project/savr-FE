@@ -67,7 +67,6 @@ export default function Homepage ({ navigation }) {
       <>
 
         <Text style={styles.logo}>s a v r</Text>
-<<<<<<< HEAD
         <ScrollView
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
@@ -112,75 +111,15 @@ export default function Homepage ({ navigation }) {
               }
             })}
           </View>
-=======
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[1]}>
->>>>>>> d8c722210fa5d8ace7e414003e0b9bc5afd4ae0f
-
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+      <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
+            <Text style={styles.text1}>+</Text>
+        </TouchableOpacity>
           <View style={styles.previous}>
             <Text style={styles.current1}>Upcoming Trips</Text>
             {trips.map((trip, index) => {
               if (moment(trip.start_date).isAfter(today)) {
                 return (
-<<<<<<< HEAD
-                  <TouchableOpacity
-                    style={styles.current}
-                    key={index}
-                    onPress={() => tripDetails(trip)}
-                  >
-                    <Text style={styles.text}>{trip.city}</Text>
-                    <Image
-                      source={require('../assets/JL09SeattleSkylinePD.jpeg')}
-                      style={styles.image}
-                    />
-                    <View style={styles.coverText}>
-                      <Text style={styles.text}>
-                        {moment(trip.start_date).format('MM-DD-YYYY')}
-                      </Text>
-                      <Text style={styles.text}>
-                        {moment(trip.end_date).format('MM-DD-YYYY')}
-                      </Text>
-                      <Text style={styles.text}>${trip.budget}</Text>
-                    </View>
-                  </TouchableOpacity>
-                )
-              }
-            })}
-          </View>
-
-          <View style={styles.previous}>
-            <Text style={styles.current1}>Previous Trips</Text>
-            {trips.map((trip, index) => {
-              if (moment(trip.end_date).isBefore(today)) {
-                return (
-                  <TouchableOpacity
-                    style={styles.current}
-                    key={index}
-                    onPress={() => tripDetails(trip)}
-                  >
-                    <Text style={styles.text}>{trip.city}</Text>
-                    <Image
-                      source={require('../assets/JL09SeattleSkylinePD.jpeg')}
-                      style={styles.image}
-                    />
-                    <View style={styles.coverText}>
-                      <Text style={styles.text}>
-                        {moment(trip.start_date).format('MM-DD-YYYY')}
-                      </Text>
-                      <Text style={styles.text}>
-                        {moment(trip.end_date).format('MM-DD-YYYY')}
-                      </Text>
-                      <Text style={styles.text}>${trip.budget}</Text>
-                    </View>
-                  </TouchableOpacity>
-                )
-              }
-            })}
-          </View>
-        </ScrollView>
-        {/* </ImageBackground> */}
-      </>
-    )
-=======
                     <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
                         <Text style={styles.text}>{trip.city}</Text>
                         <Image source={{uri: trip.c_photo}} style={styles.image} />
@@ -194,10 +133,6 @@ export default function Homepage ({ navigation }) {
             
         })}
         </View>
-
-        <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
-            <Text style={styles.text1}>+</Text>
-        </TouchableOpacity>
     
       <View style={styles.previous}>
       <Text style={styles.current1}>Previous Trips</Text>
@@ -221,7 +156,6 @@ export default function Homepage ({ navigation }) {
       </ScrollView>
     </>
     );
->>>>>>> d8c722210fa5d8ace7e414003e0b9bc5afd4ae0f
   } else {
     return <LoginForm />
   }
