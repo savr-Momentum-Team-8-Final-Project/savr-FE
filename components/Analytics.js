@@ -1,40 +1,52 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View , Image, Pressable, ScrollView, TouchableOpacity, Animated } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses, getCurrentTripData, getAllTimeData } from '../api.js'
-import CreateAnExpense from './CreateAnExpense'
-import moment from 'moment';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-  } from "react-native-chart-kit";
-  import { Dimensions } from "react-native";
-  import PagerView from 'react-native-pager-view';
-  
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  Animated
+ Dimensions } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  requestTrips,
+  requestExpenses,
+  getCurrentTripData,
+  getAllTimeData,
+} from "../api.js";
+import CreateAnExpense from "./CreateAnExpense";
+import moment from "moment";
+import axios from "axios";
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart,
+} from "react-native-chart-kit";
 
-const screenWidth = Dimensions.get("window").width;
+import PagerView from 'react-native-pager-view';
+
+const screenWidth = Dimensions.get('window').width
 
 const chartConfig = {
-    // backgroundGradientFrom: "black",
-    // backgroundGradientFromOpacity: 0,
-    // backgroundGradientTo: "#08130D",
-    // backgroundGradientToOpacity: 0.5,
-    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 3, // optional, default 3
-    barPercentage: 0.5,
-    // useShadowColorFromDataset: false // optional
-  };
-
-
+  // backgroundGradientFrom: "black",
+  // backgroundGradientFromOpacity: 0,
+  // backgroundGradientTo: "#08130D",
+  // backgroundGradientToOpacity: 0.5,
+  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  strokeWidth: 3, // optional, default 3
+  barPercentage: 0.5
+  // useShadowColorFromDataset: false // optional
+}
 
 export default function Analytics () {
 
@@ -201,16 +213,97 @@ export default function Analytics () {
     }, [currentTrip])
 
 
-    return (
-        <>
-        <Text style={styles.logo}>s a v r</Text> 
-        <PagerView 
-            style={styles.pagerView} 
-            initialPage={0}
-            showPageIndicator='true'
-            transitionStyle="scroll"
-            >
 
+  return (
+    <>
+      <Text style={styles.logo}>s a v r</Text>
+      <PagerView
+        style={styles.pagerView}
+        initialPage={0}
+        showPageIndicator='true'
+        transitionStyle='scroll'
+      >
+        <View key='1' style={{ backgroundColor: 'white' }}>
+          <View style={styles.heading}>
+            <Text style={styles.title}>Current Trip</Text>
+            <Text style={styles.spent}>Spent: ${currentSpent}</Text>
+          </View>
+          <View style={styles.mainView}>
+            <PieChart
+              // style={styles.pieChart}
+              data={currentData}
+              width={355}
+              height={220}
+              chartConfig={chartConfig}
+              accessor="total"
+              backgroundColor="transparent"
+            />
+            {/* {currentData.food_expenses.price__sum} */}
+
+            <View style={styles.expense}>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                Lodging
+              </Text>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                ${currentLodging || 0}
+              </Text>
+            </View>
+            <View style={styles.expense}>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                Food
+              </Text>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                ${currentFood || 0}
+              </Text>
+            </View>
+            <View style={styles.expense}>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                Transportation
+              </Text>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                ${currentTransportation || 0}
+              </Text>
+            </View>
+            <View style={styles.expense}>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                Tickets
+              </Text>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                ${currentTicket || 0}
+              </Text>
+            </View>
+            <View style={styles.expense}>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                Grocery
+              </Text>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                ${currentGrocery || 0}
+              </Text>
+            </View>
+            <View style={styles.expense}>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                Other
+              </Text>
+              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
+                ${currentOther || 0}
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View key='2' style={{ backgroundColor: 'white' }}>
+          <View style={styles.heading}>
+            <Text style={styles.title}>All Time</Text>
+            <Text style={styles.spent}>Spent: ${allTimeSpent}</Text>
+          </View>
+          <View style={styles.mainView}>
+            <PieChart
+              data={allTimeData}
+              width={355}
+              height={220}
+              chartConfig={chartConfig}
+              accessor="total"
+              backgroundColor="transparent"
+            />
                 <View key="1" style={{backgroundColor: 'white'}}>
                     <View style={styles.heading}>
                         <Text style={styles.title}>Current Trip</Text>
@@ -302,10 +395,11 @@ export default function Analytics () {
         </PagerView>
         </>
     )
+
 }
 
-
 const styles = StyleSheet.create({
+  
     logo: {
         fontSize: 32,
         fontWeight: '200',
@@ -379,3 +473,4 @@ const styles = StyleSheet.create({
         
     }
   })
+
