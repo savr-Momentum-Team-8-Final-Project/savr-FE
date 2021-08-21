@@ -49,21 +49,73 @@ const chartConfig = {
 }
 
 export default function Analytics () {
-  const [currentSpent, setCurrentSpent] = useState(0)
-  const [currentLodging, setCurrentLodging] = useState(0)
-  const [currentFood, setCurrentFood] = useState(0)
-  const [currentTransportation, setCurrentTransportation] = useState(0)
-  const [currentTicket, setCurrentTicket] = useState(0)
-  const [currentGrocery, setCurrentGrocery] = useState(0)
-  const [currentOther, setCurrentOther] = useState(0)
 
-  const [allTimeSpent, setAllTimeSpent] = useState(0)
-  const [allTimeLodging, setAllTimeLodging] = useState(0)
-  const [allTimeFood, setAllTimeFood] = useState(0)
-  const [allTimeTransportation, setAllTimeTransportation] = useState(0)
-  const [allTimeTicket, setAllTimeTicket] = useState(0)
-  const [allTimeGrocery, setAllTimeGrocery] = useState(0)
-  const [allTimeOther, setAllTimeOther] = useState(0)
+    const [trips, setTrips] = useState()
+    const [currentTrip, setCurrentTrip] = useState()
+
+    const [currentSpent, setCurrentSpent] = useState(0)
+    const [currentLodging, setCurrentLodging] = useState(0)
+    const [currentFood, setCurrentFood] = useState(0)
+    const [currentTransportation, setCurrentTransportation] = useState(0)
+    const [currentTicket, setCurrentTicket] = useState(0)
+    const [currentGrocery, setCurrentGrocery] = useState(0)
+    const [currentOther, setCurrentOther] = useState(0)
+
+    const [allTimeSpent, setAllTimeSpent] = useState(0)
+    const [allTimeLodging, setAllTimeLodging] = useState(0)
+    const [allTimeFood, setAllTimeFood] = useState(0)
+    const [allTimeTransportation, setAllTimeTransportation] = useState(0)
+    const [allTimeTicket, setAllTimeTicket] = useState(0)
+    const [allTimeGrocery, setAllTimeGrocery] = useState(0)
+    const [allTimeOther, setAllTimeOther] = useState(0)
+
+    const today = moment().format('YYYY-MM-DD')
+
+
+    const currentData = [
+        {
+          name: "Lodging",
+          total: currentLodging,
+          color: "#cfffe0",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Food",
+          total: currentFood,
+          color: "#63ff9a",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Transportation",
+          total: currentTransportation,
+          color: "#00c244",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Tickets",
+          total: currentTicket,
+          color: "#00802d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+          name: "Grocery",
+          total: currentGrocery,
+          color: "#00521d",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 13
+        },
+        {
+            name: "Other",
+            total: currentOther,
+            color: "#00290e",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 13
+          }
+      ]
 
     //   const allTimeData = [
     //     {
@@ -111,76 +163,56 @@ export default function Analytics () {
     //   ]
     
 
-  const allTimeData = [
-    {
-      name: 'Lodging',
-      total: allTimeSpent,
-      color: '#cfffe0',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Food',
-      total: allTimeFood,
-      color: '#63ff9a',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Transportation',
-      total: allTimeTransportation,
-      color: '#00c244',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Tickets',
-      total: allTimeTicket,
-      color: '#00802d',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Grocery',
-      total: allTimeGrocery,
-      color: '#00521d',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    },
-    {
-      name: 'Other',
-      total: allTimeOther,
-      color: '#00290e',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 13
-    }
-  ]
+      useEffect(() => {
+        requestTrips()
+          .then(data => {
+            setTrips(data.data)
+          })
+      }, [])
 
-  useEffect(() => {
-    getCurrentTripData().then((data) => {
-      setCurrentSpent(data.data.total_expenses.price__sum)
-      setCurrentLodging(data.data.lodging_expenses.price__sum)
-      setCurrentFood(data.data.food_expenses.price__sum)
-      setCurrentTransportation(data.data.trans_expenses.price__sum)
-      setCurrentTicket(data.data.ticket_expenses.price__sum)
-      setCurrentGrocery(data.data.grocery_expenses.price__sum)
-      setCurrentOther(data.data.other_expenses.price__sum)
-    })
-    getAllTimeData().then((data) => {
-      console.log(data.data)
-      data.data.map((summary) => {
-        if (summary.id == 1) {
-          setAllTimeSpent(summary.alltrip_expenses.price__sum)
-          setAllTimeLodging(summary.alltrip_lodging.price__sum)
-          setAllTimeFood(summary.alltrip_food.price__sum)
-          setAllTimeTransportation(summary.alltrip_trans.price__sum)
-          setAllTimeTicket(summary.alltrip_ticket.price__sum)
-          setAllTimeGrocery(summary.alltrip_grocery.price__sum)
-          setAllTimeOther(summary.alltrip_other.price__sum)
+      useEffect(() => {
+          if (trips) {
+            trips.map((trip, index) => {
+                if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
+                  setCurrentTrip(trip)
+                }
+              })
+          }
+      }, [trips])
+
+
+    useEffect(() => {
+        if (currentTrip) {
+            getCurrentTripData(currentTrip.id)
+        .then(data => {
+            setCurrentSpent(data.data.total_expenses.price__sum)
+            setCurrentLodging(data.data.lodging_expenses.price__sum)
+            setCurrentFood(data.data.food_expenses.price__sum)
+            setCurrentTransportation(data.data.trans_expenses.price__sum)
+            setCurrentTicket(data.data.ticket_expenses.price__sum)
+            setCurrentGrocery(data.data.grocery_expenses.price__sum)
+            setCurrentOther(data.data.other_expenses.price__sum)
+            
+        })
         }
-      })
-    })
-  }, [])
+        getAllTimeData()
+        .then(data => {
+            // console.log(data.data)
+            data.data.map((summary) => {
+                if (summary.id == 1) {
+                    setAllTimeSpent(summary.alltrip_expenses.price__sum)
+                    setAllTimeLodging(summary.alltrip_lodging.price__sum)
+                    setAllTimeFood(summary.alltrip_food.price__sum)
+                    setAllTimeTransportation(summary.alltrip_trans.price__sum)
+                    setAllTimeTicket(summary.alltrip_ticket.price__sum)
+                    setAllTimeGrocery(summary.alltrip_grocery.price__sum)
+                    setAllTimeOther(summary.alltrip_other.price__sum)
+                }
+            })
+        })
+    }, [currentTrip])
+
+
 
   return (
     <>
