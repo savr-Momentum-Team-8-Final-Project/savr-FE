@@ -16,6 +16,7 @@ import {
     ContributionGraph,
     StackedBarChart
   } from "react-native-chart-kit";
+import { exp } from 'react-native-reanimated';
   
 
 const screenWidth = Dimensions.get('window').width
@@ -54,22 +55,6 @@ export default function CurrentTrip () {
     data: [, , , progress]
   }
 
-    useEffect(() => {
-    getCurrentTripData()
-      .then(data => {
-        const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
-        setProgress(a)
-        setBudget(data.data.budget_left)
-      })
-  }, [expenses])
-
-  useEffect(() => {
-    requestTrips()
-      .then(data => {
-        setTrips(data.data)
-      })
-  }, [])
-
   useEffect(() => {
     const a = moment(currentTrip.end_date)
     const b = moment(currentTrip.start_date)
@@ -99,12 +84,29 @@ export default function CurrentTrip () {
 
 
   useEffect(() => {
-    trips.map((trip, index) => {
-      if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
-        setCurrentTrip(trip)
-      }
+    requestTrips()
+      .then(data => {
+        data.data.map((trip, index) => {
+        if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
+            setCurrentTrip(trip)
+        }
     })
-  }, [trips])
+    })
+  }, [])
+
+  useEffect(() => {
+    if (currentTrip !== {}) {
+        getCurrentTripData(currentTrip.id)
+      .then(data => {
+        const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
+        setProgress(a)
+        setBudget(data.data.budget_left)
+      })
+    }
+  }, [currentTrip, expenses])
+
+
+
 
   if (addingExpense) {
     return (
@@ -112,6 +114,8 @@ export default function CurrentTrip () {
     )
   }
 
+
+  if (currentTrip !== {}) {
   return (
       <>
           <Text style={styles.logo}>s a v r</Text>
@@ -174,6 +178,7 @@ export default function CurrentTrip () {
         </ScrollView>
         </>
   )
+}
 }
 
 const styles = StyleSheet.create({
