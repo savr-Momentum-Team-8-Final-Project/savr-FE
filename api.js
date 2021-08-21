@@ -102,10 +102,14 @@ export function createExpense(title, trip, price, note, date, category) {
     .then((response) => response)
 }
 
-export function getCurrentTripData () {
-    return axios.get('https://savr-travel.herokuapp.com/api/trip/1/')
-    .then(response => response)
+export function getCurrentTripData (id) {
+    return axios.get(`https://savr-travel.herokuapp.com/api/trip/${id}/`)
+    .then(response => response) .catch((error)=>{
+        console.log("Api call error");
+        // alert(error.message);
+     });
 }
+
 
 export function getAllTimeData () {
     return axios.get('https://savr-travel.herokuapp.com/api/accounts/summary/')

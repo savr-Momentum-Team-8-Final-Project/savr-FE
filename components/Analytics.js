@@ -38,6 +38,9 @@ const chartConfig = {
 
 export default function Analytics () {
 
+    const [trips, setTrips] = useState()
+    const [currentTrip, setCurrentTrip] = useState()
+
     const [currentSpent, setCurrentSpent] = useState(0)
     const [currentLodging, setCurrentLodging] = useState(0)
     const [currentFood, setCurrentFood] = useState(0)
@@ -53,6 +56,8 @@ export default function Analytics () {
     const [allTimeTicket, setAllTimeTicket] = useState(0)
     const [allTimeGrocery, setAllTimeGrocery] = useState(0)
     const [allTimeOther, setAllTimeOther] = useState(0)
+
+    const today = moment().format('YYYY-MM-DD')
 
 
     const currentData = [
@@ -146,9 +151,27 @@ export default function Analytics () {
       ]
     
 
+      useEffect(() => {
+        requestTrips()
+          .then(data => {
+            setTrips(data.data)
+          })
+      }, [])
+
+      useEffect(() => {
+          if (trips) {
+            trips.map((trip, index) => {
+                if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
+                  setCurrentTrip(trip)
+                }
+              })
+          }
+      }, [trips])
+
 
     useEffect(() => {
-        getCurrentTripData()
+        if (currentTrip) {
+            getCurrentTripData(currentTrip.id)
         .then(data => {
             setCurrentSpent(data.data.total_expenses.price__sum)
             setCurrentLodging(data.data.lodging_expenses.price__sum)
@@ -159,9 +182,10 @@ export default function Analytics () {
             setCurrentOther(data.data.other_expenses.price__sum)
             
         })
+        }
         getAllTimeData()
         .then(data => {
-            console.log(data.data)
+            // console.log(data.data)
             data.data.map((summary) => {
                 if (summary.id == 1) {
                     setAllTimeSpent(summary.alltrip_expenses.price__sum)
@@ -174,7 +198,7 @@ export default function Analytics () {
                 }
             })
         })
-    }, [])
+    }, [currentTrip])
 
 
     return (
