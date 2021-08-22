@@ -10,13 +10,14 @@ import CreateAnExpense from './CreateAnExpense'
 import UploadExpense from './UploadExpense.js'
 import moment from 'moment'
 import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from 'react-native-chart-kit'
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+import { exp } from 'react-native-reanimated';
 
 const screenWidth = Dimensions.get('window').width
 
@@ -52,22 +53,6 @@ export default function CurrentTrip () {
   }
 
   useEffect(() => {
-    getCurrentTripData()
-      .then(data => {
-        const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
-        setProgress(a)
-        setBudget(data.data.budget_left)
-      })
-  }, [expenses])
-
-  useEffect(() => {
-    requestTrips()
-      .then(data => {
-        setTrips(data.data)
-      })
-  }, [])
-
-  useEffect(() => {
     const a = moment(currentTrip.end_date)
     const b = moment(currentTrip.start_date)
     setDays(a.diff(b, 'days') + 1)
@@ -95,12 +80,29 @@ export default function CurrentTrip () {
   }, [addingExpense, upload])
 
   useEffect(() => {
-    trips.map((trip, index) => {
-      if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
-        setCurrentTrip(trip)
-      }
+    requestTrips()
+      .then(data => {
+        data.data.map((trip, index) => {
+        if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
+            setCurrentTrip(trip)
+        }
     })
-  }, [trips])
+    })
+  }, [])
+
+  useEffect(() => {
+    if (currentTrip !== {}) {
+        getCurrentTripData(currentTrip.id)
+      .then(data => {
+        const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
+        setProgress(a)
+        setBudget(data.data.budget_left)
+      })
+    }
+  }, [currentTrip, expenses])
+
+
+
 
   if (addingExpense) {
     return (
@@ -112,11 +114,13 @@ export default function CurrentTrip () {
       <UploadExpense setUpload={setUpload} currentTrip={currentTrip} />
     )
   }
+
+  if (currentTrip !== {}) {
+
   return (
     <>
       <Text style={styles.logo}>s a v r</Text>
       <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[3]}>
-
         <View style={styles.heading}>
           <Text style={styles.city}>{currentTrip.city}</Text>
           <View style={{ flexDirection: 'row', paddingTop: 8 }}>
@@ -124,6 +128,12 @@ export default function CurrentTrip () {
             <Text style={{ fontSize: 20, fontWeight: '400' }}>{moment(currentTrip.end_date).format('Do MMM')}</Text>
           </View>
         </View>
+
+          <View style={styles.budget}>
+            <Text style={{fontSize: 35, color: 'black', fontWeight: '500'}}>${budget}</Text>
+            <Text style={{color: 'black', fontWeight: '300'}}>remaining budget</Text>
+          </View>
+         
 
         <Text style={styles.budget}>${budget}</Text>
 
@@ -170,6 +180,7 @@ export default function CurrentTrip () {
       </ScrollView>
     </>
   )
+}
 }
 
 const styles = StyleSheet.create({
@@ -230,10 +241,15 @@ const styles = StyleSheet.create({
   },
   budget: {
     position: 'absolute',
-    marginTop: 180,
+    marginTop: 170,
     fontSize: 30,
     color: 'black',
-    fontWeight: '500'
+    fontWeight: '500',
+    // width: 'fit-content',
+    borderWidth: 1,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   heading: {
     width: '100%',
