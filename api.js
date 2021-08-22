@@ -100,7 +100,8 @@ export function createExpense(title, trip, price, note, date, category) {
       },
       {
         headers: {
-          "Content-Type": "application/json"
+        Authorization: 'Token 5d215d9f395661e65d6dd07690b64d8add42b738',
+        "Content-Type": "application/json"
         },
       }
     )
