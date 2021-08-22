@@ -115,12 +115,14 @@ export default function CurrentTrip () {
     )
   }
 
+//   stickyHeaderIndices={[3]}
+
 
   if (currentTrip !== {}) {
   return (
       <>
           <Text style={styles.logo}>s a v r</Text>
-          <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[3]}>
+          <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} >
 
           <View style={styles.heading}>
               <Text style={styles.city}>{currentTrip.city}</Text>
@@ -163,12 +165,12 @@ export default function CurrentTrip () {
                             return (
                               <View key={index} style={styles.expense}>
                                   <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{moment(date).format("MMM Do")}</Text>
-                                  <View key={index} style={styles.category}>
-                                <Text style={styles.list}>{expense.expense_title}</Text>
-                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
-                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', textAlign: 'right' }}>{expense.category}</Text>
-                              </View>
+                                <View key={index} style={styles.category}>
+                                    <Text style={styles.list}>{expense.expense_title}</Text>
+                                    <Text style={{ fontWeight: '600', fontSize: 17, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
+                                    <Text style={{ fontWeight: '600', fontSize: 15, color: 'white', textAlign: 'right' }}>{expense.category}</Text>
                                 </View>
+                            </View>
                             )
                           }
                         })}
@@ -208,7 +210,7 @@ const styles = StyleSheet.create({
   },
   expense: {
     flexDirection: 'row',
-    marginBottom: 15,
+    marginBottom: 25,
     alignItems: 'center',
     width: '100%',
     // height: 40,
