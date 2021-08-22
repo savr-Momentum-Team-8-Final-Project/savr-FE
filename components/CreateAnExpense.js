@@ -92,6 +92,7 @@ export default function CreateAnExpense(props) {
           value={date}
           mode="date"
           display="inline"
+          themeVariant="dark"
           onChange={newDate}
         />
 
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     borderColor: '#00C244',
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderRadius: 10,
     padding: 10,
     width: "100%",

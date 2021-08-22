@@ -92,7 +92,7 @@ export function createExpense(title, trip, price, note, date, category) {
         expense_title: title,
         trip: trip,
         // file: null,
-        amount: 1,
+        content: '',
         price: price,
         note: note,
         date: date,
@@ -100,7 +100,7 @@ export function createExpense(title, trip, price, note, date, category) {
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
       }
     )

@@ -82,7 +82,7 @@ export default function Homepage({ navigation }) {
                         <Text style={styles.text}>{trip.city}</Text>
                         <Image source={{uri: trip.c_photo}} style={styles.image} />
                         <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('Do')}-{moment(trip.end_date).format('Do MMMM')}</Text>
+                            <Text style={styles.date}>{moment(trip.start_date).format('MMMM Do YYYY')} {moment(trip.end_date).format('MMMM Do YYYY')}</Text>
                             <Text style={styles.text}>${trip.budget}</Text>
                         </View>
                     </TouchableOpacity>
@@ -188,4 +188,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 38,
   },
+  date: {
+      fontFamily: "Helvetica",
+      fontSize: 18,
+      width: 170
+  }
 });
