@@ -72,6 +72,7 @@ export default function CurrentTrip () {
           dates.push(hey)
             };
       }
+      dates.reverse()
       setTripDates(dates)
     }
   }, [days])

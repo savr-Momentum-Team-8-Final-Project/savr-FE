@@ -123,13 +123,13 @@ const styles = StyleSheet.create({
   logo: {
     fontSize: 32,
     fontWeight: "200",
-    backgroundColor: "#fffcf5",
+    backgroundColor: "#ffffff",
     paddingLeft: 150,
     paddingRight: 150,
     fontFamily: "GilroyLight",
   },
   scrollView: {
-    backgroundColor: "#fffcf5",
+    backgroundColor: "#ffffff",
     padding: 20,
   },
   submit: {
