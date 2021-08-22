@@ -1,5 +1,5 @@
-import axios from 'axios';
-
+import axios from 'axios'
+import FormData from 'form-data'
 export function requestLogin (email, password) {
   return axios.post('https://savr-travel.herokuapp.com/auth/token/login', {
     email: email,
@@ -78,36 +78,52 @@ export function createTrip (title, start_date, end_date, city, state, budget) {
     })
     .then((response) => response)
 }
-export function requestExpenses() {
-    return axios.get('https://savr-travel.herokuapp.com/api/expenses/')
+export function requestExpenses () {
+  return axios.get('https://savr-travel.herokuapp.com/api/expenses/')
     .then(response => response)
 }
 
-export function createExpense(title, trip, price, note, date, category) {
-    return axios.post('https://savr-travel.herokuapp.com/api/expenses/create/', {
-        expense_title: title,
-        trip: trip,
-        // file: null,
-        amount: 1, 
-        price: price,
-        note: note,
-        date: date,
-        category: category
-    },
-    {
-        headers: {
-          "Content-Type": "application/json"
-        },
-      })
+export function createExpense (title, trip, price, note, date, category) {
+  return axios.post('https://savr-travel.herokuapp.com/api/expenses/create/', {
+    expense_title: title,
+    trip: trip,
+    // file: null,
+    amount: 1,
+    price: price,
+    note: note,
+    date: date,
+    category: category
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
     .then((response) => response)
 }
 
 export function getCurrentTripData () {
-    return axios.get('https://savr-travel.herokuapp.com/api/trip/1/')
+  return axios.get('https://savr-travel.herokuapp.com/api/trip/1/')
     .then(response => response)
 }
 
 export function getAllTimeData () {
-    return axios.get('https://savr-travel.herokuapp.com/api/accounts/summary/')
+  return axios.get('https://savr-travel.herokuapp.com/api/accounts/summary/')
+    .then(response => response)
+}
+export function receiptUpload (id, file) {
+  const data = new FormData()
+  data.append('file', file, 'test')
+  return axios.post(`https://savr-travel.herokuapp.com/api/expenses/${id}/upload/`,
+    data,
+    {
+      headers: {
+
+        'Content-Type': 'image/png',
+        'Content-Disposition': 'image/png;filename=test.png',
+        Authorization: 'Token eea0ccdd162def9cf1df5894bc801c143f05f2c9'
+      }
+    }
+  )
     .then(response => response)
 }

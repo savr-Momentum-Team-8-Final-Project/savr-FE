@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Button, Image, View, Platform, StyleSheet } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 
-export default function ImagePickerExample () {
+export default function ImagePickerExample2 (props) {
+  const { setPhoto } = props
   const [image, setImage] = useState(null)
-  console.log(image)
+
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -25,18 +26,19 @@ export default function ImagePickerExample () {
       quality: 1
     })
 
-    console.log(result)
+    // console.log(result.uri)
 
     if (!result.cancelled) {
       setImage(result.uri)
+      setPhoto(result.uri)
     }
   }
 
   return (
     <View style={styles.image}>
-      <Button title='Select Trip Image' onPress={pickImage} />
+      <Button title='Upload Receipt' onPress={pickImage} />
       {image && (
-        <Image source={{ uri: image }} style={{ width: 350, height: 210 }} />
+        <Image source={{ uri: image }} style={{ width: 350, height: 510 }} />
       )}
     </View>
   )

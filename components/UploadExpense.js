@@ -18,11 +18,11 @@ import {
   Separator,
   TouchableOpacity
 } from 'react-native'
-import { createExpense } from '../api.js'
+import { requestExpenses, createExpense, receiptUpload } from '../api.js'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment'
 import { useSafeArea } from 'react-native-safe-area-context'
-
+import ImagePickerExample2 from './ImagePicker2'
 export default function UploadExpense (props) {
   const { setUpload, currentTrip } = props
 
@@ -30,9 +30,10 @@ export default function UploadExpense (props) {
   const [price, setPrice] = useState('')
   const [note, setNote] = useState('')
   const [date, setDate] = useState(new Date())
+  const [expense, setExpense] = useState()
   const [category, setCategory] = useState('')
   const trip = currentTrip.id
-
+  const [photo, setPhoto] = useState()
   function newDate (event, selectedDate) {
     setDate(selectedDate)
   }
@@ -42,6 +43,33 @@ export default function UploadExpense (props) {
     createExpense(title, trip, price, note, formattedDate, category)
     setUpload(false)
   }
+  useEffect(() => {
+    if (category !== '') {
+      createExpense(null, trip, '', '', null, category)
+    }
+  }, [category])
+
+  useEffect(() => {
+    if (category !== '') {
+      requestExpenses()
+        .then(data => {
+          setExpense(data.data[data.data.length - 1])
+        //   console.log(data.data[data.data.length - 1])
+        })
+    }
+  }, [category])
+  if (photo) {
+    console.log(photo)
+  }
+
+  useEffect(() => {
+    if (photo && expense) {
+      receiptUpload(expense.id, photo)
+        .then(data => {
+          console.log(data)
+        })
+    }
+  }, [photo])
 
   return (
     <>
@@ -57,6 +85,19 @@ export default function UploadExpense (props) {
         >
           <Text style={styles.text1}>←</Text>
         </TouchableOpacity>
+        <Text style={styles.label}>Select a Category</Text>
+        <Picker
+          selectedValue={category}
+          onValueChange={(picked) => setCategory(picked)}
+        >
+          <Picker.Item label='Lodging' value='lodging' />
+          <Picker.Item label='Food' value='food' />
+          <Picker.Item label='Transportation' value='transportation' />
+          <Picker.Item label='Tickets' value='ticket' />
+          <Picker.Item label='Grocery' value='grocery' />
+          <Picker.Item label='Other' value='other' />
+        </Picker>
+        <ImagePickerExample2 setPhoto={setPhoto} />
         <Text style={styles.label}>Expense</Text>
         <TextInput
           secureTextEntry={false}
@@ -97,19 +138,6 @@ export default function UploadExpense (props) {
         />
 
         {/* </View> */}
-
-        <Text style={styles.label}>Select a Category</Text>
-        <Picker
-          selectedValue={category}
-          onValueChange={(picked) => setCategory(picked)}
-        >
-          <Picker.Item label='Lodging' value='lodging' />
-          <Picker.Item label='Food' value='food' />
-          <Picker.Item label='Transportation' value='transportation' />
-          <Picker.Item label='Tickets' value='ticket' />
-          <Picker.Item label='Grocery' value='grocery' />
-          <Picker.Item label='Other' value='other' />
-        </Picker>
 
         <TouchableOpacity style={styles.submit} onPress={() => handleSubmit()}>
           <Text style={styles.create}>Create Expense</Text>
