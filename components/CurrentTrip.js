@@ -56,7 +56,7 @@ export default function CurrentTrip (props) {
   const [progress, setProgress] = useState(0)
   const [budget, setBudget] = useState(0)
   const [user, setUser] = useState()
-//   const [authToken, setAuthToken] = useState('')
+
 
   const dates = []
 
@@ -196,7 +196,14 @@ export default function CurrentTrip (props) {
                                 <View key={index} style={styles.category}>
                                     <Text style={styles.list}>{expense.expense_title}</Text>
                                     <Text style={{ fontWeight: '600', fontSize: 17, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
-                                    <Text style={{ fontWeight: '600', fontSize: 15, color: 'white', textAlign: 'right' }}>{expense.category}</Text>
+                                    <Text style={{ fontWeight: '600', fontSize: 15, color: 'white', textAlign: 'right' }}>
+                                        {expense.category === 'trans' ? "Transportation" 
+                                        : expense.category === 'other' ? "Other" 
+                                        : expense.category === 'food' ? "Food" 
+                                        : expense.category === 'ticket' ? "Tickets" 
+                                        : expense.category === 'grocery' ? "Grocery" 
+                                        : expense.category === 'lodging' ? "Lodging" 
+                                        : null}</Text>
                                 </View>
                             </View>
                             )
