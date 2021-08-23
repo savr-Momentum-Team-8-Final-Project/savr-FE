@@ -53,6 +53,7 @@ export default function CurrentTrip(props) {
   const [addingExpense, setAddingExpense] = useState(false);
   const [progress, setProgress] = useState(0);
   const [budget, setBudget] = useState(0);
+  const [user, setUser] = useState()
   const { authToken, setAuthToken } = props;
 
 
@@ -321,3 +322,4 @@ const styles = StyleSheet.create({
     color: "red",
   },
 });
+
