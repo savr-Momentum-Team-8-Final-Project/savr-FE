@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field } from "formik";
+import { Formik } from "formik";
 import {
   Text,
   StyleSheet,
@@ -17,6 +17,7 @@ import axios from "axios";
 import { useFonts } from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { event } from "react-native-reanimated";
+import LoginForm from "./Login.js";
 
 const RegisterForm = (props) => {
   const { setRegistering } = props;
@@ -27,28 +28,21 @@ const RegisterForm = (props) => {
   if (!loaded) {
     return null;
   }
-  function handleLogin(event) {
-    requestRegistration(username, email, password, password2);
-    requestRegistration(username, email, password, password2).then((res) => {
-      storeData(res.data.auth_token);
-      setAuthToken(res.data.auth_token);
-    });
-  }
   return (
     <Formik
       initialValues={{
-        username: "",
+        name: "",
         email: "",
         password: "",
         password2: "",
       }}
       onSubmit={(values) => {
         requestRegistration(
-          values.username,
+          values.name,
           values.email,
           values.password,
           values.password2
-        );
+        ).then((response) => setRegistering(false));
       }}
     >
       {({ handleSubmit, values, handleChange }) => (
@@ -59,15 +53,17 @@ const RegisterForm = (props) => {
           <Text style={styles.formLabel}> S A V R </Text>
           <TextInput
             placeholder="Enter User Name"
+            placeholderTextColor="black"
             autoCapitalize="none"
             name="username"
             autoCorrect={false}
-            onChangeText={handleChange("username")}
+            onChangeText={handleChange("name")}
             value={values.username}
             style={styles.inputStyle}
           />
           <TextInput
             placeholder="Enter Email"
+            placeholderTextColor="black"
             autoCapitalize="none"
             autoCorrect={false}
             keyboardType="email-address"
@@ -80,6 +76,7 @@ const RegisterForm = (props) => {
           <TextInput
             secureTextEntry
             placeholder="Enter Password"
+            placeholderTextColor="black"
             autoCapitalize="none"
             autoCorrect={false}
             name="password"
@@ -91,9 +88,10 @@ const RegisterForm = (props) => {
           <TextInput
             secureTextEntry
             placeholder="Repeat Password"
+            placeholderTextColor="black"
             autoCapitalize="none"
             autoCorrect={false}
-            name="password"
+            name="password2"
             textContentType="password"
             onChangeText={handleChange("password2")}
             value={values.password2}
@@ -102,7 +100,7 @@ const RegisterForm = (props) => {
           <View style={styles.button}>
             <Button
               title="Create Account"
-              onPress={() => handleLogin(values, event)}
+              onPress={() => handleSubmit(values)}
               color="white"
             />
           </View>
