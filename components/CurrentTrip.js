@@ -90,21 +90,20 @@ export default function CurrentTrip (props) {
   }, [days])
 
   useEffect(() => {
-    requestExpenses().then((data) => setExpenses(data.data))
+    requestExpenses().then((data) => {
+        setExpenses(data.data)
+    })
   }, [addingExpense])
 
   useEffect(() => {
     requestTrips().then((data) => {
       data.data.map((trip, index) => {
-        if (
-          moment(trip.start_date).isBefore(today) &&
-          moment(trip.end_date).isAfter(today)
-        ) {
+        if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today) && trip.guide === user.name) {
           setCurrentTrip(trip)
         }
       })
     })
-  }, [])
+  }, [user])
 
   useEffect(() => {
     if (currentTrip !== {}) {
@@ -122,10 +121,10 @@ export default function CurrentTrip (props) {
      if (authToken) {
         requestUserInfo(authToken)
         .then(data => {
-            setUser(data.data.id)
+            setUser(data.data)
         })
      }
- })
+ }, [])
 
 
 
@@ -146,17 +145,19 @@ export default function CurrentTrip (props) {
           <Text style={styles.logo}>s a v r</Text>
           <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} >
 
-          <View style={styles.heading}>
-            <Text style={styles.city}>{currentTrip.city}</Text>
-            <View style={{ flexDirection: 'row', paddingTop: 8 }}>
-              <Text style={{ fontSize: 20, fontWeight: '400' }}>
-                {moment(currentTrip.start_date).format('Do')}-
-              </Text>
-              <Text style={{ fontSize: 20, fontWeight: '400' }}>
-                {moment(currentTrip.end_date).format('Do MMM')}
-              </Text>
+
+     <View style={styles.heading}>
+                <Text style={styles.city}>{currentTrip.city}</Text>
+                <View style={{ flexDirection: 'row', paddingTop: 8 }}>
+                <Text style={{ fontSize: 20, fontWeight: '400' }}>
+                    {moment(currentTrip.start_date).format('Do')}-
+                </Text>
+                <Text style={{ fontSize: 20, fontWeight: '400' }}>
+                    {moment(currentTrip.end_date).format('Do MMM YYYY')}
+                </Text>
+                </View>
             </View>
-          </View>
+      
 
           <View style={styles.budget}>
             <Text style={{ fontSize: 35, color: 'black', fontWeight: '500' }}>
