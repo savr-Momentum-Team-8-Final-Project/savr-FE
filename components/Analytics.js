@@ -196,7 +196,7 @@ export default function Analytics (props) {
     getAllTimeData().then((data) => {
       // console.log(data.data)
       data.data.map((summary) => {
-        if (summary.id == 1) {
+        if (summary.id == user.id) {
           setAllTimeSpent(summary.alltrip_expenses.price__sum);
           setAllTimeLodging(summary.alltrip_lodging.price__sum);
           setAllTimeFood(summary.alltrip_food.price__sum);

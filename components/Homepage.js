@@ -39,6 +39,8 @@ export default function Homepage(props) {
   const [creating, setCreating] = useState(false);
   const [token, setToken] = useState("token", "");
   const [user, setUser] = useState()
+  const [ready, setReady] = useState(false)
+//   const [userTrips, setUserTrips] = useState([])
 
   useEffect(() => {
     if (authToken) {
@@ -49,21 +51,33 @@ export default function Homepage(props) {
     }
 }, [])
 
+// const userTrips = []
 
-  useEffect(() => {
+
+// useEffect(() => {
+//     // if (trips !== []) {
+//         trips.map((trip) => {
+//             if (trip.guide === user.name) {
+//                 userTrips.push(trip)
+//                 console.log(trip)
+//             }
+//         })
+//         // setTrips(userTrips)
+//         setReady(true)
+//     // }
+// }, [trips])
+
+
+
+
+
+useEffect(() => {
     requestTrips().then((data) => {
-    data.data.map((trip) => {
-        if (trip.guide === user.name) {
-            setTrips(data.data);
-        }
+      setTrips(data.data)
     })
-    });
-  }, [creating, user]);
+  }, [creating])
 
-  function tripDetails(trip) {
-    setSelectedTrip(trip);
-    console.log(trip);
-  }
+
 
   if (!loaded) {
     return null;
@@ -73,9 +87,7 @@ export default function Homepage(props) {
     return <CreateATrip setCreating={setCreating} />;
   }
   if (token) {
-    return selectedTrip ? (
-      <Trip setSelectedTrip={setSelectedTrip} selectedTrip={selectedTrip} />
-    ) : (
+    return  (
       <>
         <Text style={styles.logo}>s a v r</Text>
         <ScrollView
@@ -92,8 +104,9 @@ export default function Homepage(props) {
 
           <View style={styles.previous}>
             <Text style={styles.current1}>Upcoming Trips</Text>
-            {trips.map((trip, index) => {
-              if (moment(trip.start_date).isAfter(today)) {
+            {trips && 
+                trips.map((trip, index) => {
+              if (moment(trip.start_date).isAfter(today) && trip.guide === user.name) {
                 return (
                   <TouchableOpacity
                     style={styles.current}
@@ -128,8 +141,8 @@ export default function Homepage(props) {
 
           <View style={styles.previous}>
             <Text style={styles.current1}>Previous Trips</Text>
-            {trips.map((trip, index) => {
-              if (moment(trip.end_date).isBefore(today)) {
+            {trips && trips.map((trip, index) => {
+              if (moment(trip.end_date).isBefore(today) && trip.guide === user.name) {
                 return (
                   <TouchableOpacity
                     style={styles.current}
@@ -157,6 +170,8 @@ export default function Homepage(props) {
         </ScrollView>
       </>
     );
+  } else {
+      return null
   }
 }
 
