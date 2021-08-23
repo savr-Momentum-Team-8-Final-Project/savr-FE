@@ -58,7 +58,6 @@ export default function CurrentTrip (props) {
   const [user, setUser] = useState()
 //   const [authToken, setAuthToken] = useState('')
 
-
   const dates = []
 
   const today = moment().format('YYYY-MM-DD')
@@ -271,7 +270,8 @@ const styles = StyleSheet.create({
   },
   text1: {
     color: 'white',
-    fontSize: 38
+    fontSize: 38,
+    marginTop: -3
   },
   budget: {
     position: 'absolute',
