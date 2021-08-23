@@ -210,11 +210,9 @@ export default function CurrentTrip(props) {
                         })}
                         </View>
                       );
-                    }
+                    
                   })}
-                </View>
-              );
-            })}
+            
           <Button
             style={styles.button1}
             title="Logout"
