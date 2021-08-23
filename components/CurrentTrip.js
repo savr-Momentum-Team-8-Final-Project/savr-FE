@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   },
   budget: {
     position: "absolute",
-    marginTop: 170,
+    marginTop: 165,
     fontSize: 30,
     color: "black",
     fontWeight: "500",
