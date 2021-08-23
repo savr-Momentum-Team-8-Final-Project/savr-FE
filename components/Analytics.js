@@ -331,59 +331,6 @@ export default function Analytics () {
         </>
     )
 
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Lodging
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeLodging || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Food
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeFood || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Transportation
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeTransportation || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Tickets
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeTicket || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Grocery
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeGrocery || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                Other
-              </Text>
-              <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>
-                ${allTimeOther || 0}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </PagerView>
-    </>
-  )
 }
 
 const styles = StyleSheet.create({
