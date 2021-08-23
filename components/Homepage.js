@@ -93,7 +93,6 @@ useEffect(() => {
         <ScrollView
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          stickyHeaderIndices={[0]}
         >
           <TouchableOpacity
             style={styles.button}
@@ -104,68 +103,38 @@ useEffect(() => {
 
           <View style={styles.previous}>
             <Text style={styles.current1}>Upcoming Trips</Text>
-            {trips && 
-                trips.map((trip, index) => {
+            {trips.map((trip, index) => {
               if (moment(trip.start_date).isAfter(today) && trip.guide === user.name) {
                 return (
-                  <TouchableOpacity
-                    style={styles.current}
-                    key={index}
-                    onPress={() => tripDetails(trip)}
-                  >
-                    <Text
-                      style={{
-                        fontFamily: "Helvetica",
-                        fontSize: 22,
-                        padding: 10,
-                      }}
-                    >
-                      {trip.city}
-                    </Text>
-                    <Image
-                      source={{ uri: trip.c_photo }}
-                      style={styles.image}
-                    />
+                  <View style={styles.current} key={index}>
+                    <Text style={styles.city}>{trip.city}</Text>
                     <View style={styles.coverText}>
-                      <Text style={styles.date}>
-                        {moment(trip.start_date).format("MM-DD-YYYY")}{" "}
-                        {moment(trip.end_date).format("MM-DD-YYYY")}
-                      </Text>
-                      <Text style={styles.text}>${trip.budget}</Text>
+                      <Text style={styles.date}>{moment(trip.start_date).format('MM-DD-YYYY')} {moment(trip.end_date).format('MM-DD-YYYY')}</Text>
+                      <Text style={styles.budget}>  Budget: ${trip.budget}</Text>
                     </View>
-                  </TouchableOpacity>
-                );
+
+                  </View>
+                )
               }
             })}
           </View>
 
-          <View style={styles.previous}>
+            <View style={styles.previous}>
             <Text style={styles.current1}>Previous Trips</Text>
-            {trips && trips.map((trip, index) => {
-              if (moment(trip.end_date).isBefore(today) && trip.guide === user.name) {
+            {trips.map((trip, index) => {
+            if (moment(trip.start_date).isAfter(today) && trip.guide === user.name) {
                 return (
-                  <TouchableOpacity
-                    style={styles.current}
-                    key={index}
-                    onPress={() => tripDetails(trip)}
-                  >
-                    <Text style={styles.text}>{trip.city}</Text>
-                    <Image
-                      ssource={{ uri: trip.c_photo }}
-                      style={styles.image}
-                    />
+                <View style={styles.current} key={index}>
+                    <Text style={styles.city}>{trip.city}</Text>
                     <View style={styles.coverText}>
-                      <Text style={styles.text}>
-                        {moment(trip.start_date).format("MM-DD-YYYY")}-
-                        {moment(trip.end_date).format("MM-DD-YYYY")}
-                      </Text>
-                      <Text style={styles.text}>${trip.budget}</Text>
+                    <Text style={styles.date}>{moment(trip.start_date).format('MM-DD-YYYY')} {moment(trip.end_date).format('MM-DD-YYYY')}</Text>
+                    <Text style={styles.budget}>  Budget: ${trip.budget}</Text>
                     </View>
-                  </TouchableOpacity>
-                );
-              }
+                </View>
+                )
+            }
             })}
-          </View>
+            </View>
           <View style={{ paddingBottom: 60 }} />
         </ScrollView>
       </>
@@ -176,77 +145,92 @@ useEffect(() => {
 }
 
 const styles = StyleSheet.create({
-  current: {
-    fontFamily: "GilroyLight",
-    display: "flex",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
-    backgroundColor: "rgba(230, 230, 230, 0.5)",
-    borderRadius: 10,
-    marginBottom: 30,
-  },
-  current1: {
-    // marginTop: 30,
-    fontFamily: "GilroyBold",
-    fontSize: 30,
-    marginBottom: 30,
-  },
-  scrollView: {
-    backgroundColor: "#ffffff",
-    padding: 20,
-    // marginBottom: 60
-  },
-  image: {
-    display: "flex",
-    width: 340,
-    height: 100,
-    resizeMode: "cover",
-    borderRadius: 11,
-    paddingTop: 10,
-  },
-  previous: {
-    // marginBottom: 60,
-  },
-  logo: {
-    fontSize: 32,
-    fontWeight: "200",
-    backgroundColor: "#ffffff",
-    paddingLeft: 150,
-    paddingRight: 150,
-    fontFamily: "GilroyLight",
-  },
-  text: {
-    fontFamily: "GilroyLight",
-    fontSize: 20,
-    padding: 10,
-  },
-  coverText: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  button: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-    backgroundColor: "#00C244",
-    top: 0,
-    left: 290,
-    alignItems: "center",
-    margin: 0,
-  },
-  text1: {
-    color: "white",
-    fontSize: 38,
-  },
-  date: {
-    fontFamily: "GilroyLight",
-    fontSize: 17,
-    width: 170,
-  },
-});
+    current: {
+      fontFamily: 'GilroyLight',
+      display: 'flex',
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginTop: 10,
+      backgroundColor: '#00C244',
+      borderRadius: 10,
+      marginBottom: 30
+    },
+    current1: {
+      // marginTop: 30,
+      fontFamily: 'GilroyBold',
+      fontSize: 30,
+      marginBottom: 30
+    },
+    scrollView: {
+      backgroundColor: '#ffffff',
+      padding: 20
+      // marginBottom: 60
+    },
+    logo: {
+      fontSize: 32,
+      fontWeight: '200',
+      backgroundColor: '#ffffff',
+      paddingLeft: 150,
+      paddingRight: 150,
+      fontFamily: 'GilroyLight'
+    },
+    city: {
+      fontFamily: 'GilroyBold',
+      fontSize: 26,
+      padding: 10,
+      color: 'white'
+    },
+    coverText: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      width: '100%',
+      paddingTop: 10,
+      paddingBottom: 10,
+      fontWeight: '600'
+    },
+    button: {
+      width: 50,
+      height: 50,
+      borderRadius: 30,
+      backgroundColor: '#00C244',
+      top: 0,
+      left: 290,
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: 0
+    },
+    AddTrip: {
+      color: 'white',
+      fontSize: 38
+    },
+    date: {
+      fontFamily: 'Helvetica',
+      fontSize: 22,
+      padding: 10,
+      color: 'white',
+      fontWeight: '400',
+      width: 170
+    },
+    budget: {
+      fontFamily: 'Helvetica',
+      fontSize: 22,
+      color: 'white',
+      fontWeight: '400',
+      width: 100,
+      textAlign: 'center'
+    },
+    estbudget: {
+      fontFamily: 'Helvetica',
+      fontSize: 22,
+      padding: 10,
+      color: 'white',
+      fontWeight: '400',
+      paddingBottom: 20
+    },
+    text1: {
+        color: 'white',
+        fontSize: 38
+    }
+  })
