@@ -104,7 +104,7 @@ export default function App ({ navigation }) {
               />
               <Tab.Screen
                 name='Stats'
-                component={Analytics}
+                children={()=><Analytics authToken={authToken}/>}
                 options={{
                   tabBarIcon: (props) => (
                     <Ionicons

@@ -19,7 +19,8 @@ import {
   requestTrips,
   requestExpenses,
   getCurrentTripData,
-  getAllTimeData
+  getAllTimeData,
+  requestUserInfo
 } from '../api.js';
 import CreateAnExpense from './CreateAnExpense';
 import moment from 'moment';
@@ -38,17 +39,17 @@ import PagerView from 'react-native-pager-view';
 const screenWidth = Dimensions.get('window').width
 
 const chartConfig = {
-  // backgroundGradientFrom: "black",
-  // backgroundGradientFromOpacity: 0,
-  // backgroundGradientTo: "#08130D",
-  // backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 3, // optional, default 3
+  strokeWidth: 3, 
   barPercentage: 0.5
-  // useShadowColorFromDataset: false // optional
 }
 
-export default function Analytics () {
+export default function Analytics (props) {
+
+
+    const { authToken } = props
+
+    const [user, setUser] = useState()
   const [trips, setTrips] = useState()
   const [currentTrip, setCurrentTrip] = useState()
 
@@ -171,7 +172,8 @@ export default function Analytics () {
       trips.map((trip, index) => {
         if (
           moment(trip.start_date).isBefore(today) &&
-          moment(trip.end_date).isAfter(today)
+          moment(trip.end_date).isAfter(today) && 
+          trip.guide === user.name
         ) {
           setCurrentTrip(trip)
         }
@@ -206,6 +208,15 @@ export default function Analytics () {
       })
     })
   }, [currentTrip])
+
+  useEffect(() => {
+    if (authToken) {
+       requestUserInfo(authToken)
+       .then(data => {
+           setUser(data.data)
+       })
+    }
+}, [])
 
   return (
     <>
