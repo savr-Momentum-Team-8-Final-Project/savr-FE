@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Pressable,
+
   Button,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -27,7 +28,6 @@ import { render } from "react-dom";
 
 export default function Homepage({ navigation }) {
   const today = moment().format("YYYY-MM-DD");
-
   const [loaded] = useFonts({
     GilroyLight: require("../assets/fonts/Gilroy-Light.otf"),
     GilroyBold: require("../assets/fonts/Gilroy-ExtraBold.otf"),
@@ -65,7 +65,6 @@ export default function Homepage({ navigation }) {
       <Trip setSelectedTrip={setSelectedTrip} selectedTrip={selectedTrip} />
     ) : (
       <>
-
         <Text style={styles.logo}>s a v r</Text>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
 
@@ -78,44 +77,35 @@ export default function Homepage({ navigation }) {
         {trips.map((trip, index) => {
             if (moment(trip.start_date).isAfter(today)) {
                 return (
-                    <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
-                        <Text style={styles.text}>{trip.city}</Text>
-                        <Image source={{uri: trip.c_photo}} style={styles.image} />
-                        <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('Do')}-{moment(trip.end_date).format('Do MMMM')}</Text>
-                            <Text style={styles.text}>${trip.budget}</Text>
-                        </View>
-                    </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.current}
+                    key={index}
+                    onPress={() => tripDetails(trip)}
+                  >
+                    <Text style={styles.text}>{trip.city}</Text>
+                    <Image
+                      ssource={{ uri: trip.c_photo }}
+                      style={styles.image}
+                    />
+                    <View style={styles.coverText}>
+                      <Text style={styles.text}>
+                        {moment(trip.start_date).format('Do')}-
+                        {moment(trip.end_date).format('Do MMMM')}
+                      </Text>
+                      <Text style={styles.text}>${trip.budget}</Text>
+                    </View>
+                  </TouchableOpacity>
                 )
-            }
-            
-        })}
-        </View>
-    
-      <View style={styles.previous}>
-      <Text style={styles.current1}>Previous Trips</Text>
-        {trips.map((trip, index) => {
-            if (moment(trip.end_date).isBefore(today)) {
-                return (
-                    <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
-                        <Text style={styles.text}>{trip.city}</Text>
-                        <Image ssource={{uri: trip.c_photo}} style={styles.image} />
-                        <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('Do')}-{moment(trip.end_date).format('Do MMMM')}</Text>
-                            <Text style={styles.text}>${trip.budget}</Text>
-                        </View>
-                    </TouchableOpacity>
-                )
-            }
-            
-        })}
-        </View>
-        <View style={{paddingBottom: 60}}></View>
-      </ScrollView>
-    </>
-    );
+              }
+            })}
+          </View>
+          <View style={{ paddingBottom: 60 }} />
+        </ScrollView>
+      </>
+    )
   } else {
-    return <LoginForm setAuthToken={setAuthToken} />;
+    return <LoginForm setAuthToken={setAuthToken} />
+
   }
 }
 
@@ -133,13 +123,13 @@ const styles = StyleSheet.create({
   },
   current1: {
     // marginTop: 30,
-    fontFamily: "GilroyBold",
+    fontFamily: 'GilroyBold',
     fontSize: 30,
     marginBottom: 30,
   },
   scrollView: {
     backgroundColor: '#ffffff',
-    padding: 20,
+    padding: 20
     // marginBottom: 60
   },
   image: {
@@ -181,7 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00C244",
     top: 0,
     left: 290,
-    alignItems: "center",
+    alignItems: 'center',
     margin: 0
   },
   text1: {

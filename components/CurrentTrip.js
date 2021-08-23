@@ -1,23 +1,34 @@
-import 'react-native-gesture-handler'
-import { StatusBar } from 'expo-status-bar'
-import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ScrollView, TouchableOpacity , Dimensions } from 'react-native';
+import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+  AsyncStorage
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js'
-import CreateAnExpense from './CreateAnExpense'
+import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js';
+import CreateAnExpense from './CreateAnExpense';
 import moment from 'moment';
 import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-  } from "react-native-chart-kit";
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from 'react-native-chart-kit';
 import { exp } from 'react-native-reanimated';
-  
 
 const screenWidth = Dimensions.get('window').width
 
@@ -32,10 +43,6 @@ const chartConfig = {
   useShadowColorFromDataset: false // optional
 }
 
-
-
-
-
 export default function CurrentTrip () {
   // const { setSelectedTrip, selectedTrip } = props
   const [trips, setTrips] = useState([])
@@ -46,6 +53,7 @@ export default function CurrentTrip () {
   const [addingExpense, setAddingExpense] = useState(false)
   const [progress, setProgress] = useState(0)
   const [budget, setBudget] = useState(0)
+  const [authToken, setAuthToken] = useState('')
 
   const dates = []
 
@@ -70,115 +78,159 @@ export default function CurrentTrip () {
           const last = dates[dates.length - 1]
           const hey = moment(last).add(1, 'days').format('YYYY-MM-DD')
           dates.push(hey)
-            };
+        }
       }
       setTripDates(dates)
     }
   }, [days])
 
-    useEffect(() => {
-    requestExpenses()
-      .then(data =>
-        setExpenses(data.data))
+  useEffect(() => {
+    requestExpenses().then((data) => setExpenses(data.data))
   }, [addingExpense])
 
-
   useEffect(() => {
-    requestTrips()
-      .then(data => {
-        data.data.map((trip, index) => {
-        if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today)) {
-            setCurrentTrip(trip)
+    requestTrips().then((data) => {
+      data.data.map((trip, index) => {
+        if (
+          moment(trip.start_date).isBefore(today) &&
+          moment(trip.end_date).isAfter(today)
+        ) {
+          setCurrentTrip(trip)
         }
-    })
+      })
     })
   }, [])
 
   useEffect(() => {
     if (currentTrip !== {}) {
-        getCurrentTripData(currentTrip.id)
-      .then(data => {
-        const a = data.data.total_expenses.price__sum / parseInt(data.data.budget)
+      getCurrentTripData(currentTrip.id).then((data) => {
+        const a =
+          data.data.total_expenses.price__sum / parseInt(data.data.budget)
         setProgress(a)
         setBudget(data.data.budget_left)
       })
     }
   }, [currentTrip, expenses])
 
-
-
-
   if (addingExpense) {
     return (
-          <CreateAnExpense setAddingExpense={setAddingExpense} currentTrip={currentTrip} />
+      <CreateAnExpense
+        setAddingExpense={setAddingExpense}
+        currentTrip={currentTrip}
+      />
     )
   }
 
-
   if (currentTrip !== {}) {
-  return (
+    return (
       <>
-          <Text style={styles.logo}>s a v r</Text>
-          <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[3]}>
-
+        <Text style={styles.logo}>s a v r</Text>
+        <ScrollView
+          contentContainerStyle={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          stickyHeaderIndices={[3]}
+        >
           <View style={styles.heading}>
-              <Text style={styles.city}>{currentTrip.city}</Text>
-              <View style={{ flexDirection: 'row', paddingTop: 8 }}>
-                  <Text style={{ fontSize: 20, fontWeight: '400' }}>{moment(currentTrip.start_date).format('Do')}-</Text>
-                  <Text style={{ fontSize: 20, fontWeight: '400' }}>{moment(currentTrip.end_date).format('Do MMM')}</Text>
-                </View>
+            <Text style={styles.city}>{currentTrip.city}</Text>
+            <View style={{ flexDirection: 'row', paddingTop: 8 }}>
+              <Text style={{ fontSize: 20, fontWeight: '400' }}>
+                {moment(currentTrip.start_date).format('Do')}-
+              </Text>
+              <Text style={{ fontSize: 20, fontWeight: '400' }}>
+                {moment(currentTrip.end_date).format('Do MMM')}
+              </Text>
             </View>
-
+          </View>
 
           <View style={styles.budget}>
-            <Text style={{fontSize: 35, color: 'black', fontWeight: '500'}}>${budget}</Text>
-            <Text style={{color: 'black', fontWeight: '300'}}>remaining budget</Text>
+            <Text style={{ fontSize: 35, color: 'black', fontWeight: '500' }}>
+              ${budget}
+            </Text>
+            <Text style={{ color: 'black', fontWeight: '300' }}>
+              remaining budget
+            </Text>
           </View>
-          
-         
 
           <ProgressChart
-                  data={data}
-                  width={screenWidth}
-                  height={220}
-                  strokeWidth={20}
-                  radius={40}
-                  chartConfig={chartConfig}
-                  hideLegend
-                />
+            data={data}
+            width={screenWidth}
+            height={220}
+            strokeWidth={20}
+            radius={40}
+            chartConfig={chartConfig}
+            hideLegend
+          />
 
-
-          <TouchableOpacity style={styles.button} onPress={() => setAddingExpense(true)}>
-          <Text style={styles.text1}>+</Text>
-        </TouchableOpacity>
-
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setAddingExpense(true)}
+          >
+            <Text style={styles.text1}>+</Text>
+          </TouchableOpacity>
 
           {tripDates &&
-                tripDates.map((date, index) => {
-                  return (
-                      <View style={{ width: '100%' }} key={index}>
-                          {expenses.map((expense, index) => {
-                          if (expense.trip === currentTrip.id && expense.date === date) {
-                            return (
-                              <View key={index} style={styles.expense}>
-                                  <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{moment(date).format("MMM Do")}</Text>
-                                  <View key={index} style={styles.category}>
-                                <Text style={styles.list}>{expense.expense_title}</Text>
-                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
-                                <Text style={{ fontWeight: '600', fontSize: 20, color: 'white', textAlign: 'right' }}>{expense.category}</Text>
-                              </View>
-                                </View>
-                            )
-                          }
-                        })}
+            tripDates.map((date, index) => {
+              return (
+                <View style={{ width: '100%' }} key={index}>
+                  {expenses.map((expense, index) => {
+                    if (
+                      expense.trip === currentTrip.id &&
+                      expense.date === date
+                    ) {
+                      return (
+                        <View key={index} style={styles.expense}>
+                          <Text
+                            style={{
+                              fontWeight: '600',
+                              fontSize: 20,
+                              color: 'white'
+                            }}
+                          >
+                            {moment(date).format('MMM Do')}
+                          </Text>
+                          <View key={index} style={styles.category}>
+                            <Text style={styles.list}>
+                              {expense.expense_title}
+                            </Text>
+                            <Text
+                              style={{
+                                fontWeight: '600',
+                                fontSize: 20,
+                                color: 'white',
+                                textAlign: 'right'
+                              }}
+                            >
+                              ${expense.price}
+                            </Text>
+                            <Text
+                              style={{
+                                fontWeight: '600',
+                                fontSize: 20,
+                                color: 'white',
+                                textAlign: 'right'
+                              }}
+                            >
+                              {expense.category}
+                            </Text>
+                          </View>
                         </View>
-                  )
-                })}
-
+                      )
+                    }
+                  })}
+                </View>
+              )
+            })}
+          <Button
+            style={styles.button1}
+            title='Logout'
+            onPress={() => {
+              AsyncStorage.setItem('token', '').then(() => setAuthToken(''))
+            }}
+          />
         </ScrollView>
-        </>
-  )
-}
+      </>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -234,7 +286,6 @@ const styles = StyleSheet.create({
   text1: {
     color: 'white',
     fontSize: 38
-
   },
   budget: {
     position: 'absolute',
