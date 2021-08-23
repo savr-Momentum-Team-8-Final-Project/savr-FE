@@ -21,10 +21,11 @@ import {
   requestExpenses,
   getCurrentTripData,
   getAllTimeData,
-} from "../api.js";
-import CreateAnExpense from "./CreateAnExpense";
-import moment from "moment";
-import axios from "axios";
+  requestUserInfo
+} from '../api.js';
+import CreateAnExpense from './CreateAnExpense';
+import moment from 'moment';
+import axios from 'axios';
 import {
   LineChart,
   BarChart,
@@ -39,20 +40,19 @@ import PagerView from "react-native-pager-view";
 const screenWidth = Dimensions.get("window").width;
 
 const chartConfig = {
-  // backgroundGradientFrom: "black",
-  // backgroundGradientFromOpacity: 0,
-  // backgroundGradientTo: "#08130D",
-  // backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 3, // optional, default 3
-  barPercentage: 0.5,
-  // useShadowColorFromDataset: false // optional
-};
+  strokeWidth: 3, 
+  barPercentage: 0.5
+}
 
-export default function Analytics() {
-  const [trips, setTrips] = useState();
-  const [currentTrip, setCurrentTrip] = useState();
+export default function Analytics (props) {
 
+
+    const { authToken } = props
+
+    const [user, setUser] = useState()
+  const [trips, setTrips] = useState()
+  const [currentTrip, setCurrentTrip] = useState()
   const [currentSpent, setCurrentSpent] = useState(0);
   const [currentLodging, setCurrentLodging] = useState(0);
   const [currentFood, setCurrentFood] = useState(0);
@@ -172,13 +172,14 @@ export default function Analytics() {
       trips.map((trip, index) => {
         if (
           moment(trip.start_date).isBefore(today) &&
-          moment(trip.end_date).isAfter(today)
+          moment(trip.end_date).isAfter(today) && 
+          trip.guide === user.name
         ) {
           setCurrentTrip(trip);
         }
       });
     }
-  }, [trips]);
+  }, [trips, user])
 
   useEffect(() => {
     if (currentTrip) {
@@ -207,6 +208,15 @@ export default function Analytics() {
       });
     });
   }, [currentTrip]);
+
+  useEffect(() => {
+    if (authToken) {
+       requestUserInfo(authToken)
+       .then(data => {
+           setUser(data.data)
+       })
+    }
+}, [])
 
   return (
     <>
@@ -300,7 +310,6 @@ export default function Analytics() {
               accessor="total"
               backgroundColor="transparent"
             />
-
             <View style={styles.expense}>
               <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
                 Lodging

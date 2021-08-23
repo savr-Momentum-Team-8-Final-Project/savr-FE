@@ -104,6 +104,7 @@ export default function App({ navigation }) {
                     setAuthToken={setAuthToken}
                   />
                 )}
+
                 options={{
                   tabBarIcon: (props) => (
                     <Ionicons
@@ -115,8 +116,9 @@ export default function App({ navigation }) {
                 }}
               />
               <Tab.Screen
-                name="Stats"
-                component={Analytics}
+
+                name='Stats'
+                children={()=><Analytics authToken={authToken}/>}
                 options={{
                   tabBarIcon: (props) => (
                     <Ionicons
@@ -128,8 +130,8 @@ export default function App({ navigation }) {
                 }}
               />
               <Tab.Screen
-                name="Trips"
-                component={Homepage}
+                name='Trips'
+                children={()=><Homepage authToken={authToken}/>}
                 options={{
                   tabBarIcon: (props) => (
                     <Ionicons
