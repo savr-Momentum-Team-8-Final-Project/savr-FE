@@ -123,3 +123,15 @@ export function getAllTimeData() {
     .get("https://savr-travel.herokuapp.com/api/accounts/summary/")
     .then((response) => response);
 }
+
+
+export function requestUserInfo (token) {
+    return axios.get('https://savr-travel.herokuapp.com/auth/users/me/',
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => response)
+  }

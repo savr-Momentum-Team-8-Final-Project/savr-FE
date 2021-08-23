@@ -17,7 +17,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js';
+import { requestTrips, requestExpenses, getCurrentTripData, requestUserInfo } from '../api.js';
 import CreateAnExpense from './CreateAnExpense';
 import moment from 'moment';
 import {
@@ -43,8 +43,10 @@ const chartConfig = {
   useShadowColorFromDataset: false // optional
 }
 
-export default function CurrentTrip () {
-  // const { setSelectedTrip, selectedTrip } = props
+export default function CurrentTrip (props) {
+  const { authToken } = props
+
+
   const [trips, setTrips] = useState([])
   const [expenses, setExpenses] = useState([])
   const [currentTrip, setCurrentTrip] = useState({})
@@ -53,7 +55,9 @@ export default function CurrentTrip () {
   const [addingExpense, setAddingExpense] = useState(false)
   const [progress, setProgress] = useState(0)
   const [budget, setBudget] = useState(0)
-  const [authToken, setAuthToken] = useState('')
+  const [user, setUser] = useState()
+//   const [authToken, setAuthToken] = useState('')
+
 
   const dates = []
 
@@ -112,6 +116,21 @@ export default function CurrentTrip () {
       })
     }
   }, [currentTrip, expenses])
+
+
+ useEffect(() => {
+     if (authToken) {
+        requestUserInfo(authToken)
+        .then(data => {
+            setUser(data.data.id)
+        })
+     }
+ })
+
+
+
+
+
 
   if (addingExpense) {
     return (
