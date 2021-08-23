@@ -117,7 +117,7 @@ export default function App ({ navigation }) {
               />
               <Tab.Screen
                 name='Trips'
-                component={Homepage}
+                children={()=><Homepage authToken={authToken}/>}
                 options={{
                   tabBarIcon: (props) => (
                     <Ionicons

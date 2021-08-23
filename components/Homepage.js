@@ -18,7 +18,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import Trip from "./Trip.js";
-import { requestTrips } from "../api.js";
+import { requestTrips, requestUserInfo } from "../api.js";
 import moment from "moment";
 import CreateATrip from "./CreateATrip.js";
 import axios from "axios";
@@ -26,7 +26,9 @@ import { AsyncStorage } from "@react-native-async-storage/async-storage";
 import LoginForm from "./Login.js";
 import { render } from "react-dom";
 
-export default function Homepage({ navigation }) {
+export default function Homepage(props) {
+    const { authToken } = props
+
   const today = moment().format("YYYY-MM-DD");
   const [loaded] = useFonts({
     GilroyLight: require("../assets/fonts/Gilroy-Light.otf"),
@@ -37,16 +39,27 @@ export default function Homepage({ navigation }) {
   const [trips, setTrips] = useState([]);
   const [creating, setCreating] = useState(false);
   const [token, setToken] = useState("token", "");
+  const [user, setUser] = useState()
 
-  function setAuthToken(token) {
-    setToken(token);
-  }
+  useEffect(() => {
+    if (authToken) {
+       requestUserInfo(authToken)
+       .then(data => {
+           setUser(data.data)
+       })
+    }
+}, [])
+
 
   useEffect(() => {
     requestTrips().then((data) => {
-      setTrips(data.data);
+    data.data.map((trip) => {
+        if (trip.guide === user.name) {
+            setTrips(data.data);
+        }
+    })
     });
-  }, [creating]);
+  }, [creating, user]);
 
   function tripDetails(trip) {
     setSelectedTrip(trip);

@@ -179,7 +179,7 @@ export default function Analytics (props) {
         }
       })
     }
-  }, [trips])
+  }, [trips, user])
 
   useEffect(() => {
     if (currentTrip) {
