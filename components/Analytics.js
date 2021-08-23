@@ -222,6 +222,7 @@ export default function Analytics () {
             <Text style={styles.spent}>Spent: ${currentSpent}</Text>
           </View>
           <View style={styles.mainView}>
+          <View style={styles.donut}></View>
             <PieChart
               // style={styles.pieChart}
               data={currentData}
