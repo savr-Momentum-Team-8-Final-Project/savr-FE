@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Pressable,
+
   Button,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -27,7 +28,6 @@ import { render } from "react-dom";
 
 export default function Homepage({ navigation }) {
   const today = moment().format("YYYY-MM-DD");
-
   const [loaded] = useFonts({
     GilroyLight: require("../assets/fonts/Gilroy-Light.otf"),
     GilroyBold: require("../assets/fonts/Gilroy-ExtraBold.otf"),
@@ -65,7 +65,6 @@ export default function Homepage({ navigation }) {
       <Trip setSelectedTrip={setSelectedTrip} selectedTrip={selectedTrip} />
     ) : (
       <>
-
         <Text style={styles.logo}>s a v r</Text>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
 
@@ -114,9 +113,7 @@ export default function Homepage({ navigation }) {
       </ScrollView>
     </>
     );
-  } else {
-    return <LoginForm setAuthToken={setAuthToken} />;
-  }
+  } 
 }
 
 const styles = StyleSheet.create({
@@ -133,13 +130,13 @@ const styles = StyleSheet.create({
   },
   current1: {
     // marginTop: 30,
-    fontFamily: "GilroyBold",
+    fontFamily: 'GilroyBold',
     fontSize: 30,
     marginBottom: 30,
   },
   scrollView: {
     backgroundColor: '#ffffff',
-    padding: 20,
+    padding: 20
     // marginBottom: 60
   },
   image: {
@@ -181,7 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00C244",
     top: 0,
     left: 290,
-    alignItems: "center",
+    alignItems: 'center',
     margin: 0
   },
   text1: {

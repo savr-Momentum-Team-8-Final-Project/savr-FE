@@ -25,7 +25,7 @@ export function requestLogout(token) {
 export function requestRegistration(username, email, password, password2) {
   // console.log(username);
   return axios
-    .post("https://savr-travel.herokuapp.com/api/accounts/signup", {
+    .post("https://savr-travel.herokuapp.com/api/accounts/signup/", {
       name: username,
       email: email,
       password: password,
@@ -108,17 +108,18 @@ export function createExpense(title, trip, price, note, date, category) {
     .then((response) => response);
 }
 
-export function getCurrentTripData (id) {
-    return axios.get(`https://savr-travel.herokuapp.com/api/trip/${id}/`)
-    .then(response => response) .catch((error)=>{
-        console.log("Api call error");
-        // alert(error.message);
-     });
+export function getCurrentTripData(id) {
+  return axios
+    .get(`https://savr-travel.herokuapp.com/api/trip/${id}/`)
+    .then((response) => response)
+    .catch((error) => {
+      console.log("Api call error");
+      // alert(error.message);
+    });
 }
 
-
-export function getAllTimeData () {
-    return axios.get('https://savr-travel.herokuapp.com/api/accounts/summary/')
-    .then(response => response)
+export function getAllTimeData() {
+  return axios
+    .get("https://savr-travel.herokuapp.com/api/accounts/summary/")
+    .then((response) => response);
 }
-

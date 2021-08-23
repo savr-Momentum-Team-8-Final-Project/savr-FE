@@ -59,6 +59,7 @@ const LoginForm = (props) => {
         <Text style={styles.formLabel}>S A V R </Text>
         <TextInput
           placeholder="Enter Email"
+          placeholderTextColor="black"
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="default"
@@ -69,6 +70,7 @@ const LoginForm = (props) => {
         />
         <TextInput
           placeholder="Enter Password"
+          placeholderTextColor="black"
           secureTextEntry
           autoCapitalize="none"
           autoCorrect={false}
