@@ -76,42 +76,42 @@ export default function Analytics (props) {
       name: "Lodging",
       total: currentLodging,
       color: "#cfffe0",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Food",
       total: currentFood,
       color: "#63ff9a",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Transportation",
       total: currentTransportation,
       color: "#00c244",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Tickets",
       total: currentTicket,
       color: "#00802d",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Grocery",
       total: currentGrocery,
       color: "#00521d",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Other",
       total: currentOther,
       color: "#00290e",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
   ];
@@ -121,42 +121,42 @@ export default function Analytics (props) {
       name: "Lodging",
       total: allTimeLodging,
       color: "#cfffe0",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Food",
       total: allTimeFood,
       color: "#63ff9a",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Transportation",
       total: allTimeTransportation,
       color: "#00c244",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Tickets",
       total: allTimeTicket,
       color: "#00802d",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Grocery",
       total: allTimeGrocery,
       color: "#00521d",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
     {
       name: "Other",
       total: allTimeOther,
       color: "#00290e",
-      legendFontColor: "#7F7F7F",
+      legendFontColor: "black",
       legendFontSize: 13,
     },
   ];
@@ -218,151 +218,157 @@ export default function Analytics (props) {
     }
 }, [])
 
-  return (
-    <>
-      <Text style={styles.logo}>s a v r</Text>
-      <PagerView
-        style={styles.pagerView}
-        initialPage={0}
-        showPageIndicator="true"
-        transitionStyle="scroll"
-      >
-        <View key="1" style={{ backgroundColor: "white" }}>
-          <View style={styles.heading}>
-            <Text style={styles.title}>Current Trip</Text>
-            <Text style={styles.spent}>Spent: ${currentSpent}</Text>
-          </View>
-          <View style={styles.mainView}>
-            <View style={styles.donut} />
-            <PieChart
-              // style={styles.pieChart}
-              data={currentData}
-              width={355}
-              height={220}
-              chartConfig={chartConfig}
-              accessor="total"
-              backgroundColor="transparent"
-            />
-            {/* {currentData.food_expenses.price__sum} */}
 
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Lodging
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${currentLodging || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Food
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${currentFood || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Transportation
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${currentTransportation || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Tickets
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${currentTicket || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Grocery
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${currentGrocery || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Other
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${currentOther || 0}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View key="2" style={{ backgroundColor: "white" }}>
-          <View style={styles.heading}>
-            <Text style={styles.title}>All Time</Text>
-            <Text style={styles.spent}>Total: ${allTimeSpent}</Text>
-          </View>
-          <View style={styles.mainView}>
-            <View style={styles.donut} />
-            <PieChart
-              data={allTimeData}
-              width={355}
-              height={220}
-              chartConfig={chartConfig}
-              accessor="total"
-              backgroundColor="transparent"
-            />
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Lodging
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${allTimeLodging || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Food
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${allTimeFood || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Transportation
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${allTimeTransportation || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Tickets
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${allTimeTicket || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Grocery
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${allTimeGrocery || 0}
-              </Text>
-            </View>
-            <View style={styles.expense}>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                Other
-              </Text>
-              <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
-                ${allTimeOther || 0}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </PagerView>
-    </>
-  );
+    if (user) {
+        return (
+            <>
+              <Text style={styles.logo}>s a v r</Text>
+              <PagerView
+                style={styles.pagerView}
+                initialPage={0}
+                showPageIndicator="true"
+                transitionStyle="scroll"
+              >
+                <View key="1" style={{ backgroundColor: "white" }}>
+                  <View style={styles.heading}>
+                    <Text style={styles.title}>Current Trip</Text>
+                    <Text style={styles.spent}>Spent: ${currentSpent}</Text>
+                  </View>
+                  <View style={styles.mainView}>
+                    <View style={styles.donut} />
+                    <PieChart
+                      // style={styles.pieChart}
+                      data={currentData}
+                      width={355}
+                      height={220}
+                      chartConfig={chartConfig}
+                      accessor="total"
+                      backgroundColor="transparent"
+                    />
+                    {/* {currentData.food_expenses.price__sum} */}
+        
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Lodging
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${currentLodging || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Food
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${currentFood || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Transportation
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${currentTransportation || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Tickets
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${currentTicket || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Grocery
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${currentGrocery || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Other
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${currentOther || 0}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View key="2" style={{ backgroundColor: "white" }}>
+                  <View style={styles.heading}>
+                    <Text style={styles.title}>All Time</Text>
+                    <Text style={styles.spent}>Total: ${allTimeSpent}</Text>
+                  </View>
+                  <View style={styles.mainView}>
+                    <View style={styles.donut} />
+                    <PieChart
+                      data={allTimeData}
+                      width={355}
+                      height={220}
+                      chartConfig={chartConfig}
+                      accessor="total"
+                      backgroundColor="transparent"
+                    />
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Lodging
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${allTimeLodging || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Food
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${allTimeFood || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Transportation
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${allTimeTransportation || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Tickets
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${allTimeTicket || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Grocery
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${allTimeGrocery || 0}
+                      </Text>
+                    </View>
+                    <View style={styles.expense}>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        Other
+                      </Text>
+                      <Text style={{ fontWeight: "600", fontSize: 20, color: "white" }}>
+                        ${allTimeOther || 0}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </PagerView>
+            </>
+          );
+    } else {
+        return null
+    }
+
 }
 
 const styles = StyleSheet.create({
