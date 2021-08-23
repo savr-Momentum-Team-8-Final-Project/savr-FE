@@ -168,7 +168,7 @@ export default function Analytics (props) {
   }, []);
 
   useEffect(() => {
-    if (trips) {
+    if (trips && user) {
       trips.map((trip, index) => {
         if (
           moment(trip.start_date).isBefore(today) &&
