@@ -80,6 +80,7 @@ export default function CurrentTrip () {
           dates.push(hey)
         }
       }
+      dates.reverse()
       setTripDates(dates)
     }
   }, [days])
@@ -120,16 +121,12 @@ export default function CurrentTrip () {
       />
     )
   }
-
   if (currentTrip !== {}) {
     return (
       <>
-        <Text style={styles.logo}>s a v r</Text>
-        <ScrollView
-          contentContainerStyle={styles.scrollView}
-          showsVerticalScrollIndicator={false}
-          stickyHeaderIndices={[3]}
-        >
+          <Text style={styles.logo}>s a v r</Text>
+          <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} >
+
           <View style={styles.heading}>
             <Text style={styles.city}>{currentTrip.city}</Text>
             <View style={{ flexDirection: 'row', paddingTop: 8 }}>
@@ -169,55 +166,24 @@ export default function CurrentTrip () {
           </TouchableOpacity>
 
           {tripDates &&
-            tripDates.map((date, index) => {
-              return (
-                <View style={{ width: '100%' }} key={index}>
-                  {expenses.map((expense, index) => {
-                    if (
-                      expense.trip === currentTrip.id &&
-                      expense.date === date
-                    ) {
-                      return (
-                        <View key={index} style={styles.expense}>
-                          <Text
-                            style={{
-                              fontWeight: '600',
-                              fontSize: 20,
-                              color: 'white'
-                            }}
-                          >
-                            {moment(date).format('MMM Do')}
-                          </Text>
-                          <View key={index} style={styles.category}>
-                            <Text style={styles.list}>
-                              {expense.expense_title}
-                            </Text>
-                            <Text
-                              style={{
-                                fontWeight: '600',
-                                fontSize: 20,
-                                color: 'white',
-                                textAlign: 'right'
-                              }}
-                            >
-                              ${expense.price}
-                            </Text>
-                            <Text
-                              style={{
-                                fontWeight: '600',
-                                fontSize: 20,
-                                color: 'white',
-                                textAlign: 'right'
-                              }}
-                            >
-                              {expense.category}
-                            </Text>
-                          </View>
+                tripDates.map((date, index) => {
+                  return (
+                      <View style={{ width: '100%' }} key={index}>
+                          {expenses.map((expense, index) => {
+                          if (expense.trip === currentTrip.id && expense.date === date) {
+                            return (
+                              <View key={index} style={styles.expense}>
+                                  <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{moment(date).format("MMM Do")}</Text>
+                                <View key={index} style={styles.category}>
+                                    <Text style={styles.list}>{expense.expense_title}</Text>
+                                    <Text style={{ fontWeight: '600', fontSize: 17, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
+                                    <Text style={{ fontWeight: '600', fontSize: 15, color: 'white', textAlign: 'right' }}>{expense.category}</Text>
+                                </View>
+                            </View>
+                            )
+                          }
+                        })}
                         </View>
-                      )
-                    }
-                  })}
-                </View>
               )
             })}
           <Button
@@ -259,7 +225,7 @@ const styles = StyleSheet.create({
   },
   expense: {
     flexDirection: 'row',
-    marginBottom: 15,
+    marginBottom: 25,
     alignItems: 'center',
     width: '100%',
     // height: 40,

@@ -92,6 +92,7 @@ export default function CreateAnExpense(props) {
           value={date}
           mode="date"
           display="inline"
+          themeVariant="dark"
           onChange={newDate}
         />
 
@@ -122,13 +123,13 @@ const styles = StyleSheet.create({
   logo: {
     fontSize: 32,
     fontWeight: "200",
-    backgroundColor: "#fffcf5",
+    backgroundColor: "#ffffff",
     paddingLeft: 150,
     paddingRight: 150,
     fontFamily: "GilroyLight",
   },
   scrollView: {
-    backgroundColor: "#fffcf5",
+    backgroundColor: "#ffffff",
     padding: 20,
   },
   submit: {
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     borderColor: '#00C244',
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderRadius: 10,
     padding: 10,
     width: "100%",

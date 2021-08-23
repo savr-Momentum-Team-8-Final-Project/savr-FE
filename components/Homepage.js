@@ -77,36 +77,43 @@ export default function Homepage({ navigation }) {
         {trips.map((trip, index) => {
             if (moment(trip.start_date).isAfter(today)) {
                 return (
-                  <TouchableOpacity
-                    style={styles.current}
-                    key={index}
-                    onPress={() => tripDetails(trip)}
-                  >
-                    <Text style={styles.text}>{trip.city}</Text>
-                    <Image
-                      ssource={{ uri: trip.c_photo }}
-                      style={styles.image}
-                    />
-                    <View style={styles.coverText}>
-                      <Text style={styles.text}>
-                        {moment(trip.start_date).format('Do')}-
-                        {moment(trip.end_date).format('Do MMMM')}
-                      </Text>
-                      <Text style={styles.text}>${trip.budget}</Text>
-                    </View>
-                  </TouchableOpacity>
+                    <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
+                        <Text style={{fontFamily: "Helvetica", fontSize: 22, padding: 10,}}>{trip.city}</Text>
+                        <Image source={{uri: trip.c_photo}} style={styles.image} />
+                        <View style={styles.coverText}>
+                            <Text style={styles.date}>{moment(trip.start_date).format('MM-DD-YYYY')} {moment(trip.end_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>${trip.budget}</Text>
+                        </View>
+                    </TouchableOpacity>
                 )
-              }
-            })}
-          </View>
-          <View style={{ paddingBottom: 60 }} />
-        </ScrollView>
-      </>
-    )
-  } else {
-    return <LoginForm setAuthToken={setAuthToken} />
-
-  }
+            }
+            
+        })}
+        </View>
+    
+      <View style={styles.previous}>
+      <Text style={styles.current1}>Previous Trips</Text>
+        {trips.map((trip, index) => {
+            if (moment(trip.end_date).isBefore(today)) {
+                return (
+                    <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
+                        <Text style={styles.text}>{trip.city}</Text>
+                        <Image ssource={{uri: trip.c_photo}} style={styles.image} />
+                        <View style={styles.coverText}>
+                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}-{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
+                            <Text style={styles.text}>${trip.budget}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )
+            }
+            
+        })}
+        </View>
+        <View style={{paddingBottom: 60}}></View>
+      </ScrollView>
+    </>
+    );
+  } 
 }
 
 const styles = StyleSheet.create({
@@ -178,4 +185,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 38,
   },
+  date: {
+      fontFamily: "GilroyLight",
+      fontSize: 17,
+      width: 170
+  }
 });
