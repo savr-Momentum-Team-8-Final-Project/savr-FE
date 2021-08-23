@@ -11,11 +11,10 @@ import {
   ScrollView,
   TouchableOpacity,
   Animated,
-  Dimensions
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+ Dimensions } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   requestTrips,
   requestExpenses,
@@ -284,21 +283,53 @@ export default function Analytics () {
             </View>
           </View>
         </View>
-        <View key='2' style={{ backgroundColor: 'white' }}>
-          <View style={styles.heading}>
-            <Text style={styles.title}>All Time</Text>
-            <Text style={styles.spent}>Total: ${allTimeSpent}</Text>
-          </View>
-          <View style={styles.mainView}>
-            <View style={styles.donut} />
-            <PieChart
-              data={allTimeData}
-              width={355}
-              height={220}
-              chartConfig={chartConfig}
-              accessor="total"
-              backgroundColor="transparent"
-            />
+                <View key="2" style={{backgroundColor: 'white'}}>
+                    <View style={styles.heading}>
+                        <Text style={styles.title}>All Time</Text>
+                        <Text style={styles.spent}>Total: ${allTimeSpent}</Text>
+                    </View>
+                    <View style={styles.mainView}>
+                            <View style={styles.donut}></View>
+                            <PieChart
+                            data={allTimeData}
+                            width={355}
+                            height={220}
+                            chartConfig={chartConfig}
+                            accessor={"total"}
+                            backgroundColor={"transparent"}
+                            />
+                  
+                        
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Lodging</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeLodging ? allTimeLodging : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Food</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeFood ? allTimeFood : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Transportation</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTransportation ? allTimeTransportation : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Tickets</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeTicket ? allTimeTicket : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Grocery</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeGrocery ? allTimeGrocery : 0}</Text>
+                        </View>
+                        <View style={styles.expense}>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>Other</Text>
+                            <Text style={{fontWeight: '600', fontSize: 20, color: 'white'}}>${allTimeOther ? allTimeOther : 0}</Text>
+                        </View>
+                    </View>
+                </View>
+        </PagerView>
+        
+        </>
+    )
 
             <View style={styles.expense}>
               <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>

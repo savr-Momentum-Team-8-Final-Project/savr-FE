@@ -141,6 +141,7 @@ export default function App ({ navigation }) {
         />
       </SafeAreaView>
     </NavigationContainer>
+
   )
 }
 
