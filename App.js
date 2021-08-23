@@ -89,7 +89,7 @@ export default function App({ navigation }) {
                   storeData={storeData}
                   setAuthToken={setAuthToken}
                   registering={registering}
-                  setRegistering={registering}
+                  setRegistering={setRegistering}
                 />
               )}
             </Tab.Screen>
