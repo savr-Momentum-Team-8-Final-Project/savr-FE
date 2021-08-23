@@ -17,7 +17,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses, getCurrentTripData } from '../api.js';
+import { requestTrips, requestExpenses, getCurrentTripData, requestUserInfo } from '../api.js';
 import CreateAnExpense from './CreateAnExpense';
 import moment from 'moment';
 import {
@@ -43,8 +43,10 @@ const chartConfig = {
   useShadowColorFromDataset: false // optional
 }
 
-export default function CurrentTrip () {
-  // const { setSelectedTrip, selectedTrip } = props
+export default function CurrentTrip (props) {
+  const { authToken } = props
+
+
   const [trips, setTrips] = useState([])
   const [expenses, setExpenses] = useState([])
   const [currentTrip, setCurrentTrip] = useState({})
@@ -53,7 +55,8 @@ export default function CurrentTrip () {
   const [addingExpense, setAddingExpense] = useState(false)
   const [progress, setProgress] = useState(0)
   const [budget, setBudget] = useState(0)
-  const [authToken, setAuthToken] = useState('')
+  const [user, setUser] = useState()
+
 
   const dates = []
 
@@ -86,21 +89,20 @@ export default function CurrentTrip () {
   }, [days])
 
   useEffect(() => {
-    requestExpenses().then((data) => setExpenses(data.data))
+    requestExpenses().then((data) => {
+        setExpenses(data.data)
+    })
   }, [addingExpense])
 
   useEffect(() => {
     requestTrips().then((data) => {
       data.data.map((trip, index) => {
-        if (
-          moment(trip.start_date).isBefore(today) &&
-          moment(trip.end_date).isAfter(today)
-        ) {
+        if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today) && trip.guide === user.name) {
           setCurrentTrip(trip)
         }
       })
     })
-  }, [])
+  }, [user])
 
   useEffect(() => {
     if (currentTrip !== {}) {
@@ -112,6 +114,21 @@ export default function CurrentTrip () {
       })
     }
   }, [currentTrip, expenses])
+
+
+ useEffect(() => {
+     if (authToken) {
+        requestUserInfo(authToken)
+        .then(data => {
+            setUser(data.data)
+        })
+     }
+ }, [])
+
+
+
+
+
 
   if (addingExpense) {
     return (
@@ -127,17 +144,19 @@ export default function CurrentTrip () {
           <Text style={styles.logo}>s a v r</Text>
           <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} >
 
-          <View style={styles.heading}>
-            <Text style={styles.city}>{currentTrip.city}</Text>
-            <View style={{ flexDirection: 'row', paddingTop: 8 }}>
-              <Text style={{ fontSize: 20, fontWeight: '400' }}>
-                {moment(currentTrip.start_date).format('Do')}-
-              </Text>
-              <Text style={{ fontSize: 20, fontWeight: '400' }}>
-                {moment(currentTrip.end_date).format('Do MMM')}
-              </Text>
+
+     <View style={styles.heading}>
+                <Text style={styles.city}>{currentTrip.city}</Text>
+                <View style={{ flexDirection: 'row', paddingTop: 8 }}>
+                <Text style={{ fontSize: 20, fontWeight: '400' }}>
+                    {moment(currentTrip.start_date).format('Do')}-
+                </Text>
+                <Text style={{ fontSize: 20, fontWeight: '400' }}>
+                    {moment(currentTrip.end_date).format('Do MMM YYYY')}
+                </Text>
+                </View>
             </View>
-          </View>
+      
 
           <View style={styles.budget}>
             <Text style={{ fontSize: 35, color: 'black', fontWeight: '500' }}>
@@ -177,7 +196,14 @@ export default function CurrentTrip () {
                                 <View key={index} style={styles.category}>
                                     <Text style={styles.list}>{expense.expense_title}</Text>
                                     <Text style={{ fontWeight: '600', fontSize: 17, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
-                                    <Text style={{ fontWeight: '600', fontSize: 15, color: 'white', textAlign: 'right' }}>{expense.category}</Text>
+                                    <Text style={{ fontWeight: '600', fontSize: 15, color: 'white', textAlign: 'right' }}>
+                                        {expense.category === 'trans' ? "Transportation" 
+                                        : expense.category === 'other' ? "Other" 
+                                        : expense.category === 'food' ? "Food" 
+                                        : expense.category === 'ticket' ? "Tickets" 
+                                        : expense.category === 'grocery' ? "Grocery" 
+                                        : expense.category === 'lodging' ? "Lodging" 
+                                        : null}</Text>
                                 </View>
                             </View>
                             )
@@ -251,7 +277,8 @@ const styles = StyleSheet.create({
   },
   text1: {
     color: 'white',
-    fontSize: 38
+    fontSize: 38,
+    marginTop: -3
   },
   budget: {
     position: 'absolute',
