@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   ImageBackground,
   Pressable,
-
   Button,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -66,54 +65,86 @@ export default function Homepage({ navigation }) {
     ) : (
       <>
         <Text style={styles.logo}>s a v r</Text>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
-
-      <TouchableOpacity style={styles.button} onPress={() => setCreating(true)}>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          stickyHeaderIndices={[0]}
+        >
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setCreating(true)}
+          >
             <Text style={styles.text1}>+</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-      <View style={styles.previous}>
-      <Text style={styles.current1}>Upcoming Trips</Text>
-        {trips.map((trip, index) => {
-            if (moment(trip.start_date).isAfter(today)) {
+          <View style={styles.previous}>
+            <Text style={styles.current1}>Upcoming Trips</Text>
+            {trips.map((trip, index) => {
+              if (moment(trip.start_date).isAfter(today)) {
                 return (
-                    <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
-                        <Text style={{fontFamily: "Helvetica", fontSize: 22, padding: 10,}}>{trip.city}</Text>
-                        <Image source={{uri: trip.c_photo}} style={styles.image} />
-                        <View style={styles.coverText}>
-                            <Text style={styles.date}>{moment(trip.start_date).format('MM-DD-YYYY')} {moment(trip.end_date).format('MM-DD-YYYY')}</Text>
-                            <Text style={styles.text}>${trip.budget}</Text>
-                        </View>
-                    </TouchableOpacity>
-                )
-            }
-            
-        })}
-        </View>
-    
-      <View style={styles.previous}>
-      <Text style={styles.current1}>Previous Trips</Text>
-        {trips.map((trip, index) => {
-            if (moment(trip.end_date).isBefore(today)) {
+                  <TouchableOpacity
+                    style={styles.current}
+                    key={index}
+                    onPress={() => tripDetails(trip)}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: "Helvetica",
+                        fontSize: 22,
+                        padding: 10,
+                      }}
+                    >
+                      {trip.city}
+                    </Text>
+                    <Image
+                      source={{ uri: trip.c_photo }}
+                      style={styles.image}
+                    />
+                    <View style={styles.coverText}>
+                      <Text style={styles.date}>
+                        {moment(trip.start_date).format("MM-DD-YYYY")}{" "}
+                        {moment(trip.end_date).format("MM-DD-YYYY")}
+                      </Text>
+                      <Text style={styles.text}>${trip.budget}</Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }
+            })}
+          </View>
+
+          <View style={styles.previous}>
+            <Text style={styles.current1}>Previous Trips</Text>
+            {trips.map((trip, index) => {
+              if (moment(trip.end_date).isBefore(today)) {
                 return (
-                    <TouchableOpacity style={styles.current} key={index} onPress={() => tripDetails(trip)}>
-                        <Text style={styles.text}>{trip.city}</Text>
-                        <Image ssource={{uri: trip.c_photo}} style={styles.image} />
-                        <View style={styles.coverText}>
-                            <Text style={styles.text}>{moment(trip.start_date).format('MM-DD-YYYY')}-{moment(trip.end_date).format('MM-DD-YYYY')}</Text>
-                            <Text style={styles.text}>${trip.budget}</Text>
-                        </View>
-                    </TouchableOpacity>
-                )
-            }
-            
-        })}
-        </View>
-        <View style={{paddingBottom: 60}}></View>
-      </ScrollView>
-    </>
+                  <TouchableOpacity
+                    style={styles.current}
+                    key={index}
+                    onPress={() => tripDetails(trip)}
+                  >
+                    <Text style={styles.text}>{trip.city}</Text>
+                    <Image
+                      ssource={{ uri: trip.c_photo }}
+                      style={styles.image}
+                    />
+                    <View style={styles.coverText}>
+                      <Text style={styles.text}>
+                        {moment(trip.start_date).format("MM-DD-YYYY")}-
+                        {moment(trip.end_date).format("MM-DD-YYYY")}
+                      </Text>
+                      <Text style={styles.text}>${trip.budget}</Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }
+            })}
+          </View>
+          <View style={{ paddingBottom: 60 }} />
+        </ScrollView>
+      </>
     );
-  } 
+  }
 }
 
 const styles = StyleSheet.create({
@@ -124,19 +155,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    backgroundColor: 'rgba(230, 230, 230, 0.5)',
+    backgroundColor: "rgba(230, 230, 230, 0.5)",
     borderRadius: 10,
     marginBottom: 30,
   },
   current1: {
     // marginTop: 30,
-    fontFamily: 'GilroyBold',
+    fontFamily: "GilroyBold",
     fontSize: 30,
     marginBottom: 30,
   },
   scrollView: {
-    backgroundColor: '#ffffff',
-    padding: 20
+    backgroundColor: "#ffffff",
+    padding: 20,
     // marginBottom: 60
   },
   image: {
@@ -152,11 +183,11 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 32,
-    fontWeight: '200',
-    backgroundColor: '#ffffff',
+    fontWeight: "200",
+    backgroundColor: "#ffffff",
     paddingLeft: 150,
     paddingRight: 150,
-    fontFamily: 'GilroyLight',
+    fontFamily: "GilroyLight",
   },
   text: {
     fontFamily: "GilroyLight",
@@ -178,16 +209,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#00C244",
     top: 0,
     left: 290,
-    alignItems: 'center',
-    margin: 0
+    alignItems: "center",
+    margin: 0,
   },
   text1: {
     color: "white",
     fontSize: 38,
   },
   date: {
-      fontFamily: "GilroyLight",
-      fontSize: 17,
-      width: 170
-  }
+    fontFamily: "GilroyLight",
+    fontSize: 17,
+    width: 170,
+  },
 });

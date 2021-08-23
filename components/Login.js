@@ -20,8 +20,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const LoginForm = (props) => {
   const navigation = useNavigation();
-  const { storeData, setAuthToken } = props;
-  const [registering, setRegistering] = useState(false);
+  const { storeData, setAuthToken, setRegistering, registering } = props;
   const [submitting, setSubmitting] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
