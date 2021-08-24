@@ -12,14 +12,19 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
-  AsyncStorage
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { requestTrips, requestExpenses, getCurrentTripData, requestUserInfo } from '../api.js';
-import CreateAnExpense from './CreateAnExpense';
-import moment from 'moment';
+  AsyncStorage,
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  requestTrips,
+  requestExpenses,
+  getCurrentTripData,
+  requestUserInfo,
+} from "../api.js";
+import CreateAnExpense from "./CreateAnExpense";
+import moment from "moment";
 import {
   LineChart,
   BarChart,
@@ -53,9 +58,8 @@ export default function CurrentTrip(props) {
   const [addingExpense, setAddingExpense] = useState(false);
   const [progress, setProgress] = useState(0);
   const [budget, setBudget] = useState(0);
-  const [user, setUser] = useState()
+  const [user, setUser] = useState();
   const { authToken, setAuthToken } = props;
-
 
   const dates = [];
 
@@ -89,20 +93,23 @@ export default function CurrentTrip(props) {
 
   useEffect(() => {
     requestExpenses().then((data) => {
-        setExpenses(data.data)
-    })
-  }, [addingExpense])
+      setExpenses(data.data);
+    });
+  }, [addingExpense]);
 
   useEffect(() => {
     requestTrips().then((data) => {
       data.data.map((trip, index) => {
-
-        if (moment(trip.start_date).isBefore(today) && moment(trip.end_date).isAfter(today) && trip.guide === user.name) {
-          setCurrentTrip(trip)
+        if (
+          moment(trip.start_date).isBefore(today) &&
+          moment(trip.end_date).isAfter(today) &&
+          trip.guide === user.name
+        ) {
+          setCurrentTrip(trip);
         }
-      })
-    })
-  }, [user])
+      });
+    });
+  }, [user]);
 
   useEffect(() => {
     if (currentTrip !== {}) {
@@ -115,48 +122,43 @@ export default function CurrentTrip(props) {
     }
   }, [currentTrip, expenses]);
 
-
- useEffect(() => {
-     if (authToken) {
-        requestUserInfo(authToken)
-        .then(data => {
-            setUser(data.data)
-        })
-     }
- }, [])
-
-
-
-
-
+  useEffect(() => {
+    if (authToken) {
+      requestUserInfo(authToken).then((data) => {
+        setUser(data.data);
+      });
+    }
+  }, []);
 
   if (addingExpense) {
     return (
       <CreateAnExpense
         setAddingExpense={setAddingExpense}
         currentTrip={currentTrip}
+        authToken={authToken}
+        user={user}
       />
     );
   }
   if (currentTrip !== {}) {
     return (
       <>
-          <Text style={styles.logo}>s a v r</Text>
-          <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} >
-
-
-     <View style={styles.heading}>
-                <Text style={styles.city}>{currentTrip.city}</Text>
-                <View style={{ flexDirection: 'row', paddingTop: 8 }}>
-                <Text style={{ fontSize: 20, fontWeight: '400' }}>
-                    {moment(currentTrip.start_date).format('Do')}-
-                </Text>
-                <Text style={{ fontSize: 20, fontWeight: '400' }}>
-                    {moment(currentTrip.end_date).format('Do MMM YYYY')}
-                </Text>
-                </View>
+        <Text style={styles.logo}>s a v r</Text>
+        <ScrollView
+          contentContainerStyle={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.heading}>
+            <Text style={styles.city}>{currentTrip.city}</Text>
+            <View style={{ flexDirection: "row", paddingTop: 8 }}>
+              <Text style={{ fontSize: 20, fontWeight: "400" }}>
+                {moment(currentTrip.start_date).format("Do")}-
+              </Text>
+              <Text style={{ fontSize: 20, fontWeight: "400" }}>
+                {moment(currentTrip.end_date).format("Do MMM YYYY")}
+              </Text>
             </View>
-      
+          </View>
 
           <View style={styles.budget}>
             <Text style={{ fontSize: 35, color: "black", fontWeight: "500" }}>
@@ -185,35 +187,70 @@ export default function CurrentTrip(props) {
           </TouchableOpacity>
 
           {tripDates &&
-                tripDates.map((date, index) => {
-                  return (
-                      <View style={{ width: '100%' }} key={index}>
-                          {expenses.map((expense, index) => {
-                          if (expense.trip === currentTrip.id && expense.date === date) {
-                            return (
-                              <View key={index} style={styles.expense}>
-                                  <Text style={{ fontWeight: '600', fontSize: 20, color: 'white' }}>{moment(date).format("MMM Do")}</Text>
-                                <View key={index} style={styles.category}>
-                                    <Text style={styles.list}>{expense.expense_title}</Text>
-                                    <Text style={{ fontWeight: '600', fontSize: 17, color: 'white', textAlign: 'right' }}>${expense.price}</Text>
-                                    <Text style={{ fontWeight: '600', fontSize: 15, color: 'white', textAlign: 'right' }}>
-                                        {expense.category === 'trans' ? "Transportation" 
-                                        : expense.category === 'other' ? "Other" 
-                                        : expense.category === 'food' ? "Food" 
-                                        : expense.category === 'ticket' ? "Tickets" 
-                                        : expense.category === 'grocery' ? "Grocery" 
-                                        : expense.category === 'lodging' ? "Lodging" 
-                                        : null}</Text>
-                                </View>
-                            </View>
-                            )
-                          }
-                        })}
+            tripDates.map((date, index) => {
+              return (
+                <View style={{ width: "100%" }} key={index}>
+                  {expenses.map((expense, index) => {
+                    if (
+                      expense.trip === currentTrip.id &&
+                      expense.date === date
+                    ) {
+                      return (
+                        <View key={index} style={styles.expense}>
+                          <Text
+                            style={{
+                              fontWeight: "600",
+                              fontSize: 20,
+                              color: "white",
+                            }}
+                          >
+                            {moment(date).format("MMM Do")}
+                          </Text>
+                          <View key={index} style={styles.category}>
+                            <Text style={styles.list}>
+                              {expense.expense_title}
+                            </Text>
+                            <Text
+                              style={{
+                                fontWeight: "600",
+                                fontSize: 17,
+                                color: "white",
+                                textAlign: "right",
+                              }}
+                            >
+                              ${expense.price}
+                            </Text>
+                            <Text
+                              style={{
+                                fontWeight: "600",
+                                fontSize: 15,
+                                color: "white",
+                                textAlign: "right",
+                              }}
+                            >
+                              {expense.category === "trans"
+                                ? "Transportation"
+                                : expense.category === "other"
+                                ? "Other"
+                                : expense.category === "food"
+                                ? "Food"
+                                : expense.category === "ticket"
+                                ? "Tickets"
+                                : expense.category === "grocery"
+                                ? "Grocery"
+                                : expense.category === "lodging"
+                                ? "Lodging"
+                                : null}
+                            </Text>
+                          </View>
                         </View>
                       );
-                    
+                    }
                   })}
-            
+                </View>
+              );
+            })}
+
           <Button
             style={styles.button1}
             title="Logout"
@@ -280,9 +317,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text1: {
-    color: 'white',
+    color: "white",
     fontSize: 38,
-    marginTop: -3
+    marginTop: -3,
   },
   budget: {
     position: "absolute",
@@ -322,4 +359,3 @@ const styles = StyleSheet.create({
     color: "red",
   },
 });
-
