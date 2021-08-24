@@ -31,7 +31,13 @@ export function requestRegistration(username, email, password, password2) {
       password: password,
       password2: password2,
     })
-    .then((response) => console.log(response.data));
+    .then((response) => {
+      if (response.data.error) {
+        return response.data.error;
+      } else if (response.data.success) {
+        return response.data.success;
+      }
+    });
 }
 
 export function requestStates() {
@@ -65,17 +71,35 @@ export function requestTrips() {
     .then((response) => response);
 }
 
-export function createTrip(title, start_date, end_date, city, state, budget) {
+export function createTrip(
+  title,
+  start_date,
+  end_date,
+  city,
+  state,
+  budget,
+  token,
+  guide
+) {
   return axios
-    .post("https://savr-travel.herokuapp.com/api/trip/create/", {
-      trip_title: title,
-      city: city,
-      state: state,
-      start_date: start_date,
-      end_date: end_date,
-      guide: 1,
-      budget: budget,
-    })
+    .post(
+      "https://savr-travel.herokuapp.com/api/trip/create/",
+      {
+        trip_title: title,
+        city: city,
+        state: state,
+        start_date: start_date,
+        end_date: end_date,
+        guide: guide,
+        budget: budget,
+      },
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
     .then((response) => response);
 }
 export function requestExpenses() {
@@ -84,15 +108,13 @@ export function requestExpenses() {
     .then((response) => response);
 }
 
-export function createExpense(title, trip, price, note, date, category) {
+export function createExpense(title, trip, price, note, date, category, token) {
   return axios
     .post(
       "https://savr-travel.herokuapp.com/api/expenses/create/",
       {
         expense_title: title,
         trip: trip,
-        // file: null,
-        content: "",
         price: price,
         note: note,
         date: date,
@@ -100,7 +122,7 @@ export function createExpense(title, trip, price, note, date, category) {
       },
       {
         headers: {
-          Authorization: "Token 5d215d9f395661e65d6dd07690b64d8add42b738",
+          Authorization: `Token ${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -124,14 +146,13 @@ export function getAllTimeData() {
     .then((response) => response);
 }
 
-
-export function requestUserInfo (token) {
-    return axios.get('https://savr-travel.herokuapp.com/auth/users/me/',
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      .then((response) => response)
-  }
+export function requestUserInfo(token) {
+  return axios
+    .get("https://savr-travel.herokuapp.com/auth/users/me/", {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response);
+}
